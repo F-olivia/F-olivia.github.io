@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+        <title>红薯的技术博客</title>
+        <description>红薯的技术博客 - 红薯</description>
+        <link>http://F-olivia.github.io</link>
+        <link>http://F-olivia.github.io</link>
+        <lastBuildDate>2015-03-30T16:50:57+08:00</lastBuildDate>
+        <pubDate>2015-03-30T16:50:57+08:00</pubDate>
+        <ttl>1800</ttl>
+
+
+        <item>
+                <title>你好，世界</title>
+                <description>&lt;h2&gt;你好，世界&lt;/h2&gt;
+
+&lt;p&gt;我的第一篇文章&lt;/p&gt;
+
+&lt;p&gt;28 Mar 2015&lt;/p&gt;
+</description>
+                <link>http://F-olivia.github.io/%E6%97%A5%E5%BF%97/2015/03/28/markdonnote</link>
+                <guid>http://F-olivia.github.io/%E6%97%A5%E5%BF%97/2015/03/28/markdonnote</guid>
+                <pubDate>2015-03-28T00:00:00+08:00</pubDate>
+        </item>
+
+
+</channel>
+</rss>
