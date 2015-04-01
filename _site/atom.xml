@@ -4,7 +4,7 @@
     <title>红薯的技术博客</title>
     <link href="http://F-olivia.github.io/" rel="self"/>
     <link href="http://F-olivia.github.io"/>
-    <updated>2015-03-30T16:50:57+08:00</updated>
+    <updated>2015-04-01T10:02:00+08:00</updated>
     <id>http://F-olivia.github.io</id>
     <author>
     <name>红薯</name>
@@ -12,6 +12,55 @@
     </author>
 
 
+    <entry>
+        <title>git+github+markdown+jekyll blog系列（一）</title>
+        <link href="http://F-olivia.github.io/ruby/2015/03/31/jekyll"/>
+        <updated>2015-03-31T00:00:00+08:00</updated>
+        <id>http://F-olivia.github.io/ruby/2015/03/31/jekyll</id>
+        <content type="html">
+&lt;ul&gt;
+    &lt;li&gt;作者：&lt;a href=&quot;http://weibo.com/Polivia&quot; target=&quot;blank&quot;&gt;tomfans&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;本文地址：http://f-olivia.github.io/ruby/2015/03/31/jekyll/&lt;/li&gt;
+    &lt;li&gt;转载请注明出处&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;目录：&lt;/h1&gt;
+&lt;lo&gt;
+&lt;li&gt;一、起因&lt;/li&gt;
+&lt;li&gt;二、目标&lt;/li&gt;
+&lt;li&gt;三、准备工作&lt;/li&gt;
+&lt;li&gt;四、实现&lt;/li&gt;
+&lt;li&gt;五、参考&lt;/li&gt;
+&lt;/lo&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;一、起因&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;缘起2012年看了一篇关于如何写简历的文章，介绍了Markdown文本编辑，还讲了&lt;a href=&quot;https://github.com/&quot;&gt;GitHub&lt;/a&gt; 上建立自己的技术blog，给自己加分项目；这时我才知道git以及github是什么东东，markdown又是啥东西？但我没有太多的关注这些东西。&lt;/li&gt;
+  &lt;li&gt;2013年开始学习nosql的知识，发现很多关于git以及github的东西，这引起了我极大的好奇，怎么这些东西无处不在，原来他是开源的&lt;/li&gt;
+  &lt;li&gt;这种冲动与日俱增，2013-1-24我给自己申请了github账号，准备着手建立自己blog，这样不用在qq上偶尔写写画画了。但是，对一个跟开源基本上不沾边的it民工，又不做互联网行当，自己搭建blog何其难啊？html、css、js等等，头大……&lt;/li&gt;
+  &lt;li&gt;自从看了阮一峰的文章《[搭建一个免费的，无限流量的Blog—-github Pages和Jekyll入门]
+(http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)》是使用
+GitHub 和 Jekyll 搭建独立博客非常好的入门文章，&lt;strong&gt;强烈建议先阅读并操作一遍&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;发现搭建一个blog这么容易啊。于是，我开始着手实施这件事情，但还是历史悠久啊！&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;二、目标&lt;/h2&gt;
+
+&lt;p&gt;期待的blog要至少满足以下要求：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;易写易读：使用者可以方便的编辑、管理文章，用户获取信息；&lt;/li&gt;
+  &lt;li&gt;极简：尽量少的安装软件，使用少的命令，接触少的概念；&lt;/li&gt;
+  &lt;li&gt;可用性：适应不同设备、浏览器访问，支持无障碍访问，只是关闭javascript访问&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;好了，就到这里吧，请看下回继续&lt;/p&gt;
+
+</content>
+    </entry>
+ 
     <entry>
         <title>你好，世界</title>
         <link href="http://F-olivia.github.io/%E6%97%A5%E5%BF%97/2015/03/28/markdonnote"/>
