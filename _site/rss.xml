@@ -5,8 +5,8 @@
         <description>红薯的技术博客 - 红薯</description>
         <link>http://F-olivia.github.io</link>
         <link>http://F-olivia.github.io</link>
-        <lastBuildDate>2015-04-01T10:02:00+08:00</lastBuildDate>
-        <pubDate>2015-04-01T10:02:00+08:00</pubDate>
+        <lastBuildDate>2015-04-01T10:17:55+08:00</lastBuildDate>
+        <pubDate>2015-04-01T10:17:55+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -20,13 +20,13 @@
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;section&quot;&gt;目录：&lt;/h1&gt;
-&lt;lo&gt;
-&lt;li&gt;一、起因&lt;/li&gt;
-&lt;li&gt;二、目标&lt;/li&gt;
-&lt;li&gt;三、准备工作&lt;/li&gt;
-&lt;li&gt;四、实现&lt;/li&gt;
-&lt;li&gt;五、参考&lt;/li&gt;
-&lt;/lo&gt;
+&lt;ol&gt;
+&lt;li&gt;起因&lt;/li&gt;
+&lt;li&gt;目标&lt;/li&gt;
+&lt;li&gt;准备工作&lt;/li&gt;
+&lt;li&gt;实现&lt;/li&gt;
+&lt;li&gt;参考&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h2 id=&quot;section-1&quot;&gt;一、起因&lt;/h2&gt;
 
