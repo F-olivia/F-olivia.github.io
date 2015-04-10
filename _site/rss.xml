@@ -5,8 +5,8 @@
         <description>红薯的技术博客 - 红薯</description>
         <link>http://F-olivia.github.io</link>
         <link>http://F-olivia.github.io</link>
-        <lastBuildDate>2015-04-10T14:55:53+08:00</lastBuildDate>
-        <pubDate>2015-04-10T14:55:53+08:00</pubDate>
+        <lastBuildDate>2015-04-10T15:12:53+08:00</lastBuildDate>
+        <pubDate>2015-04-10T15:12:53+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -139,12 +139,30 @@
  http://ruby.taobao.org/
 &lt;/code&gt;&lt;/pre&gt;
 
-    &lt;p&gt;3）、&lt;/p&gt;
+    &lt;p&gt;3）、安装jekyll，命令：gem install jekyll&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; ---
+ C:\Sites&amp;gt;gem install jekyll
+ Fetching: liquid-2.6.1.gem (100%)
+ Successfully installed liquid-2.6.1
+ Fetching: kramdown-1.5.0.gem (100%)
+ Successfully installed kramdown-1.5.0
+ ......
+ Installing ri documentation for yajl-ruby-1.1.0-x86-mingw32
+ Done installing documentation for blankslate, celluloid, classifier-reborn, colorator, fast-stemmer, ffi, hitimes, jekyll, jekyll-coffeescript, jekyll-gist, jekyll-paginate, jekyll-sass-converter, jekyll-watch, kramdown, liquid, listen, mercenary, parslet, posix-spawn, pygments.rb, rb-fsevent, rb-in
+ otify, redcarpet, safe_yaml, timers, toml, yajl-ruby after 9 seconds
+ 27 gems installed
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;根据安装成功列表，可以和上面需要的包对照一下，如需安装的，用命令gem install 包名执行。&lt;/p&gt;
+
+    &lt;p&gt;ok，&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;的设计师大奖&lt;/p&gt;
+    &lt;p&gt;markdown安装，windows下只能用MarkdownPad，这个更简单了，百度一个，一路next下去。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
+
 </description>
                 <link>http://F-olivia.github.io/ruby/2015/04/09/jekyll</link>
                 <guid>http://F-olivia.github.io/ruby/2015/04/09/jekyll</guid>
