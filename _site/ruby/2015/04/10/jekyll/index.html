@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>git+github+markdown+jekyll blog系列（三）</title>
+        <meta name="description" content="利用github jekyll 创建 blog">
+        <meta name="author" content="红薯">
+
+        <!-- Enable responsive viewport -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- Le styles -->
+        <link href="/assets/themes/twitter/bootstrap/css/bootstrap.2.2.2.min.css" rel="stylesheet">
+        <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+        <script src="/assets/themes/twitter/google-code-prettify/jquery.js"></script>
+        <script src="/assets/themes/twitter/google-code-prettify/prettify.js"></script>
+        <link href="/assets/themes/twitter/google-code-prettify/sunburst.css" rel="stylesheet" type="text/css" media="all">
+        <!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata"> -->
+        <script type="text/javascript">
+            $(function(){
+                $("pre").addClass("prettyprint");
+                prettyPrint();
+
+                // hide #back-top first
+                $("#back-top").hide();
+
+                // fade in #back-top
+                $(function () {
+                    $(window).scroll(function () {
+                        if ($(this).scrollTop() > 400) {
+                            $('#back-top').fadeIn();
+                        } else {
+                            $('#back-top').fadeOut();
+                        }
+                });
+
+                // scroll body to 0px on click
+                $('#back-top a').click(function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                        }, 800);
+                    return false;
+                    });
+                });
+
+            });
+        </script>
+        <!-- Le fav and touch icons -->
+    <!-- Update these with your own images
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+        <!-- atom & rss feed -->
+        <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+        <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+    </head>
+
+    <body>
+        <p id="back-top"><a href="#top"><i class="fa fa-chevron-circle-up fa-3x"></i> <br> </a> </p>
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container-narrow">
+                    <a class="brand" href="/">红薯的技术博客</a>
+                    <ul class="nav">
+                        
+                        
+                        
+
+
+  
+    
+      
+      	
+      	<li><a href="/aboutMe.html">关于我</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">存档</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">分类</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">页面</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-narrow">
+
+            <div class="content">
+                
+<div class="page-header">
+    <h1>git+github+markdown+jekyll blog系列（三） </h1>
+</div>
+
+<div class="row-fluid post-full">
+    <div class="span12">
+        <div class="date">
+            <span>2015-04-10</span>
+        </div>
+        <div class="content">
+            
+<ul>
+    <li>作者：<a href="http://weibo.com/Polivia" target="blank">tomfans</a></li>
+    <li>本文地址：http://f-olivia.github.io/ruby/2015/04/10/jekyll/</li>
+    <li>转载请注明出处</li>
+</ul>
+
+<h5 id="section">三、实现</h5>
+
+<p><a href="http://f-olivia.github.io/ruby/2015/03/31/jekyll/">系列(一)</a>学习完阮一峰同学的文章后，你就已经有能力搭建自己的独立博客了，但是这个博客 只有最基本的功能，并且也不好看。想想，有几种方式打造自己的blog：</p>
+<ul>
+    <li>完全自己定制博客</li>
+    <li>找一份框架，修改后使用</li>
+    <li>从GitHub上fork别人的博客代码，在其中添加自己的文章</li>
+</ul>
+
+<p>遵从简单原则，我选择第三种方式，fork了<a href="http://xpmozong.github.io/">寞踪</a>，做了简单的修改，然后发表自己的文章。
+好，开工吧。</p>
+
+<ol>
+  <li>
+    <p>使用GitHub Pages建立博客；阮一峰是通过本地创建自己blog，然后推送到github。我呢，利用github Pages自动生成一个blog，然后clone到本地。具体怎么做呢？还是建议参考<a href="http://yanping.me/cn/blog/2012/03/18/github-pages-step-by-step/">Github Pages极简教程 - 雁起平沙的网络日志</a>；这里就罗列一下步骤：</p>
+
+    <p>1）、创建代码库：登录github，选择New repository，输入项目名称xxxx.github.io</p>
+
+    <p>2）、点击按钮create repository</p>
+
+    <p>3）、点击按钮admin，选择按钮Automatic page generator，生成静态网页</p>
+
+    <p>ok，你所创建的xxxx.github.io的blog已经生成</p>
+  </li>
+  <li>
+    <p>clone上面所创建的库，命令：git clone git@github.com:F-olivia/F-olivia.git 或者 git clone https://github.com/F-olivia/F-olivia.github.io.git；</p>
+
+    <p>在开始菜单里找到RailsInstaller –&gt; Git Bash，执行上面的命令，
+ 然后就在本地目录，C:\Sites\F-olivia.github.io生成一个文件夹F-olivia.github.io，保留文件夹.git</p>
+  </li>
+  <li>
+    <p>clone别人的库，git clone https://github.com/xpmozong/xpmozong.github.io.git；删除其目录下文件夹.git</p>
+  </li>
+  <li>
+    <p>简单修改：主要是针对文件夹xpmozong.github.io内容进行调整，</p>
+
+    <p>1）、删除文件夹.site</p>
+
+    <p>2）、清空文件夹.post下的所有文件</p>
+
+    <p>3）、全文搜索一下关键字xpmozong，用自己的库名替换</p>
+
+    <p>ok，感觉做贼一样，偷了别人的劳动成果。那没办法谁让我web方面一窍不通，还不想太多浪费时间。</p>
+  </li>
+  <li>
+    <p>拷贝xpmozong.github.io下所有内容，复制到自己库目录下</p>
+  </li>
+  <li>
+    <p>用markdownpad2 创建一个文件2015-03-28-markdonnote.md，内容：</p>
+
+    <pre><code> ---
+ layout: default
+ title: 你好，世界
+ category: 日志
+ comments: true
+	
+ ---
+	
+ &lt;h2&gt;git+github+markdown+jekyll blog系列（三）&lt;/h2&gt;
+	
+ &lt;p&gt;我的第一篇文章&lt;/p&gt;
+	
+ &lt;p&gt;10 Apr 2015&lt;/p&gt;
+</code></pre>
+  </li>
+  <li>
+    <p>发布自己的库，命令：</p>
+
+    <pre><code> jekyll build    #编译生成静态网页
+ git init    #--初始化本地库
+ git add -A    #--添加本地库新增文件
+ git commit -m "first commit"    #--提交
+ git push -u origin master    #--推送到github远程库
+</code></pre>
+  </li>
+  <li>
+    <p>介绍一下jekyll的结构，</p>
+  </li>
+</ol>
+
+<p><code>
+.
+├── index.html
+├── _config.yml
+├── assets
+│   ├── blog-images
+│   ├── css
+│   ├── fonts
+│   ├── images
+│   └── javascripts
+├── _includes
+├── _layouts
+├── _plugins
+├── _posts
+└── _site
+</code></p>
+
+<ul>
+  <li>_config.yml</li>
+</ul>
+
+<p>这是针对 Jekyll 的<a href="http://jekyllrb.com/docs/configuration/">配置文件</a>，
+决定了 Jekyll 如何解析网站的源代码,下面是一个示例：</p>
+
+<p><code>
+baseurl: /StrayBirds
+markdown: redcarpet
+safe: false
+pygments: true
+excerpt_separator: "\n\n\n"
+paginate: 5
+</code></p>
+
+<p>我的网站建立在 <code>StrayBirds</code> 项目中，所以 <code>baseurl</code> 设置成 <code>StrayBirds</code>，
+我的文章采用 Markdown 格式写成，可以指定 Markdown 的解析器 <code>redcarpet</code>。
+另外，安全模式需要关闭，以便 Jekyll 解析时会运行插件。
+<code>pygments</code> 可以使得Jekyll解析文章中源代码时加入特殊标记，例如指定代码类型，
+这可以被很多 javascript 代码高度库使用。
+<code>excerpt_separator</code> 指定了一个摘要分割符号，这样 Jekyll 可以在解析文章时，
+将文章的提要提取出来。
+paginate 指定了一页有几篇文章，页数太多时，我们可以将文章列表分页，我们在
+后文还会提到。</p>
+
+<ul>
+  <li>_layouts</li>
+</ul>
+
+<p>这个目录存放着一些网页模板文件，为网站所有网页提供一个基本模板，这样
+每个网页只需要关心自己的内容就好，其它的都由模板决定。例如，这个目录下的
+default.html 文件：</p>
+
+<p>```html</p>
+
+<p>&lt;!DOCTYPE html&gt;</p>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ page.title }}</title>
+  </head>
+  <body>
+    <header>
+    </header>
+
+    <aside>
+    </aside>
+
+    <article>
+{{ content }}
+    </article>
+
+    <footer>
+    </footer>
+  </body>
+</html>
+
+<p>```</p>
+
+<p>可以看出，这个文件就是所有页面共有的东西，每个页面的具体内容会被填充在
+`` 中，注意这个 content 两边的标记，这是一种叫 
+<a href="https://github.com/Shopify/liquid">liquid</a> 的标记语言。
+另外，还有那个 <code>git+github+markdown+jekyll blog系列（三）</code> ，其中 <code>page</code> 表示引用 <code>default.html</code>的
+那个页面，这个页面的 <code>title</code> 值会在 <code>page</code> 相应页面中被设置，例如
+下面的 <code>index.html</code> 文件，开头部分就设置了 <code>title</code> 值。</p>
+
+<ul>
+  <li>index.html </li>
+</ul>
+
+<p>这是网站的首页，访问 <code>http://username.github.io</code> 时，会指向 
+<code>http://username.github.io/index.html</code>，我们看一下基本内容：</p>
+
+<p>```html
+	—
+	layout: default
+	title: 首页
+	—</p>
+
+<ul class="post-list">
+    {% for post in site.posts %}
+        <a href="{{site.baseurl}}{{post.url}}"> {{ post.title }}  </a> <br />
+        {{ post.date | date: "%F" }} <br />
+        {{ post.category }} <br />
+        {{ post.excerpt }} 
+    {% endfor %}
+
+</ul>
+<p>```</p>
+
+<p>注意，文件开头的描述，我们称之为 <a href="http://jekyllrb.com/docs/frontmatter/">front-matter</a>，
+是对当前文件的一种描述，这里
+设置的变量可以在解析时被引用，例如这里的 <code>layout</code>就会告诉 Jekyll, 生成 <code>index.html</code>
+文件时，去 <code>_layouts</code> 目录下找 <code>default.html</code> 文件，然后把当前文件解析后，添加到
+<code>default.html</code> 的 <code>content</code> 部分，组成最终的 <code>index.html</code> 文件。还有<code>title</code> 设置好的
+值，会在 <code>default.html</code> 中通过 <code>page.title</code> 被引用。</p>
+
+<p>文件的主体部分遍历了站点的所有文章，并将他们显示出来，这些语法都是 <code>liquid</code> 语法，
+其中的变量，例如 <code>site</code>, 由 Jekyll 设置我们只需要引用就可以了。而 <code>post</code> 中的变量，
+如 <code>post.title</code>, <code>post.category</code> 是由 <code>post</code> 文件中的 front-matter 决定，后面马上就会看到。</p>
+
+<ul>
+  <li>_posts</li>
+</ul>
+
+<p>这个目录存放我们的所有博客文章，他们的名字有统一的格式：</p>
+
+<p><code>
+YEAR-MONTH-DAY-title.MARKUP
+</code></p>
+
+<p>例如，2014-02-15-github-jeklly.md，这个文件名会被解析，前面的 <code>index.html</code> 中，
+<code>post.date</code> 的值就由这里文件名中的日期而来。下面，我们看看一篇文章的内容示例：</p>
+
+<p>```</p>
+
+        </div>
+
+    
+        <ul class="tag_box inline">
+            <li><i class="icon-folder-open"></i></li>
+            
+            
+
+
+  
+     
+    	<li><a href="/categories.html#ruby-ref">
+    		ruby <span>3</span>
+    	</a></li>
+    
+  
+
+
+        </ul>
+        
+
+    
+        <ul class="tag_box inline">
+            <li><i class="icon-tags"></i></li>
+            
+            
+
+
+  
+     
+    	<li><a href="/tags.html#ruby-ref">ruby <span>3</span></a></li>
+     
+    	<li><a href="/tags.html#jekyll-ref">jekyll <span>3</span></a></li>
+    
+  
+
+
+
+        </ul>
+        
+
+        <hr>
+        <div class="pagination">
+            <ul>
+            
+                <li class="prev"><a href="/ruby/2015/04/09/jekyll" title="git+github+markdown+jekyll blog系列（二）">&larr; Previous</a></li>
+            
+                <li><a href="/archive.html">Archive</a></li>
+            
+                <li class="next disabled"><a>Next &rarr;</a>
+            
+            </ul>
+        </div>
+        <hr>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+    </div>
+</div>
+
+
+            </div>
+            <footer>
+                <p>&copy; 2015 红薯
+                    with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+                    and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+                </p>
+            </footer>
+
+        </div>
+
+        
+    </body>
+</html>
+
