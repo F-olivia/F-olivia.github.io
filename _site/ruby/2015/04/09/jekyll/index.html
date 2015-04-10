@@ -205,60 +205,59 @@
  DL is deprecated, please use Fiddle
 	
  git:
-  			user.name:  F-olivia
-  			user.email: xxxx@163.com
-  			version:    git version 1.9.4.msysgit.2
+     user.name:  F-olivia
+     user.email: xxxx@163.com
+     version:    git version 1.9.4.msysgit.2
 
  ruby:
-  			bin:        D:/RailsInstaller/Ruby2.0.0/bin/ruby.exe
-  			version:    ruby 2.1.5p273 (2014-11-13 revision 48405) [i386-mingw32]
+     bin:        D:/RailsInstaller/Ruby2.0.0/bin/ruby.exe
+     version:    ruby 2.1.5p273 (2014-11-13 revision 48405) [i386-mingw32]
 
  rails:
-  			bin:        D:/RailsInstaller/Ruby2.0.0/bin/rails.bat
-  			version:    Rails 4.1.8
+     bin:        D:/RailsInstaller/Ruby2.0.0/bin/rails.bat
+     version:    Rails 4.1.8
 </code></pre>
 
     <p>4）、填写github注册时的用户名和邮箱，就完成了公钥和密钥的生成，在C:\Documents and Settings\用户名下(C:\Users\xieax.ssh)，有个隐藏目录名为.ssh，id_rsa.pub文件就是公钥，id_rsa就是密钥。</p>
 
     <pre><code> ---
  ssh:
-  		public_key_location: C:\Users\xieax/.ssh/id_rsa.pub
-  		public_key_contents: ssh-rsa AAAAB3NzaC1yc2E........
+ public_key_location: C:\Users\xieax/.ssh/id_rsa.pub
+ public_key_contents: ssh-rsa AAAAB3NzaC1yc2E........
  .............lGB3Nz F-olivia &lt;xxxx@163.com&gt;
 
 
  NOTES:
+  		
+ Your public ssh key (id_rsa.pub) has been automatically generated and copied to your clipboard.
 </code></pre>
+
+    <p>5）、ssh密钥与github账户做关联，把4）步骤中文件id_rsa.pub复制，然后登录github找到“Account Settings” &gt; Click “SSH Keys” &gt; Click “Add SSH key”，把密钥串粘贴，如图1：
+ <img src="/assets/blog-images/20150410134022.png" alt="Alt text" /></p>
+
+    <p>6）、验证git连接，在开始菜单里找到RailsInstaller –&gt; Git Bash，执行它，就打开了下面的命令窗口，以后的操作都是在这个窗口下进行的；输入命令：ssh -T git@github.com</p>
+
+    <pre><code> ---
+ $ ssh -T git@github.com
+ 1.The authenticity of host 'github.com (207.97.227.239)' can't be established.
+ 2.RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+ 3.Are you sure you want to continue connecting (yes/no)?
+</code></pre>
+
+    <p>选择yes</p>
+
+    <pre><code> Hi F-olivia! You've successfully authenticated, but GitHub does not provide shell access.
+</code></pre>
+
+    <p>后续设置账户信息，看个人意愿了，我没有做这一步</p>
+
+    <pre><code> ---
+ 1. git config --global user.name "你的名字"
+ 2. git config --global user.email "your_email@youremail.com"
+</code></pre>
+
+    <p>好了，git与github连接成功了，革命的道路走了一半了，继续加油！	</p>
   </li>
-</ol>
-
-  		Your public ssh key (id_rsa.pub) has been automatically generated and copied to your clipboard.
-
-<pre><code>5）、ssh密钥与github账户做关联，把4）步骤中文件id_rsa.pub复制，然后登录github找到 “Account Settings” &gt; Click “SSH Keys” &gt; Click “Add SSH key”，把密钥串粘贴，如图1：
-![Alt text](/assets/blog-images/20150410134022.png)
-
-6) 、验证git连接，在开始菜单里找到RailsInstaller –&gt; Git Bash，执行它，就打开了下面的命令窗口，以后的操作都是在这个窗口下进行的；输入命令：ssh -T git@github.com
-
-	---
-	$ ssh -T git@github.com
-	1.The authenticity of host 'github.com (207.97.227.239)' can't be established.
-	2.RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
-	3.Are you sure you want to continue connecting (yes/no)?
-
-选择yes
-	
-	Hi F-olivia! You've successfully authenticated, but GitHub does not provide shell access.
-
-后续设置账户信息，看个人意愿了，我没有做这一步
-	
-	---
-	1. git config --global user.name "你的名字"
-	2. git config --global user.email "your_email@youremail.com"
-
-好了，git与github连接成功了，革命的道路走了一半了，继续加油！	
-</code></pre>
-
-<ol>
   <li>
     <p>安装jekyll，这个比较繁琐，要安装一堆包（directory_watcher、liquid、open4、maruku和classifier，由于jekyll默认包是maruku来解析markdown，这里用kramdown），具体如下：</p>
 
@@ -308,6 +307,7 @@
   </li>
 </ol>
 
+<p>好了，今天就到这里，明天继续，开始创建自己的blog。</p>
 
         </div>
 

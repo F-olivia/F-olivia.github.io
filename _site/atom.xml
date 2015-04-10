@@ -4,7 +4,7 @@
     <title>红薯的技术博客</title>
     <link href="http://F-olivia.github.io/" rel="self"/>
     <link href="http://F-olivia.github.io"/>
-    <updated>2015-04-10T15:12:53+08:00</updated>
+    <updated>2015-04-10T15:23:02+08:00</updated>
     <id>http://F-olivia.github.io</id>
     <author>
     <name>红薯</name>
@@ -65,60 +65,59 @@
  DL is deprecated, please use Fiddle
 	
  git:
-  			user.name:  F-olivia
-  			user.email: xxxx@163.com
-  			version:    git version 1.9.4.msysgit.2
+     user.name:  F-olivia
+     user.email: xxxx@163.com
+     version:    git version 1.9.4.msysgit.2
 
  ruby:
-  			bin:        D:/RailsInstaller/Ruby2.0.0/bin/ruby.exe
-  			version:    ruby 2.1.5p273 (2014-11-13 revision 48405) [i386-mingw32]
+     bin:        D:/RailsInstaller/Ruby2.0.0/bin/ruby.exe
+     version:    ruby 2.1.5p273 (2014-11-13 revision 48405) [i386-mingw32]
 
  rails:
-  			bin:        D:/RailsInstaller/Ruby2.0.0/bin/rails.bat
-  			version:    Rails 4.1.8
+     bin:        D:/RailsInstaller/Ruby2.0.0/bin/rails.bat
+     version:    Rails 4.1.8
 &lt;/code&gt;&lt;/pre&gt;
 
     &lt;p&gt;4）、填写github注册时的用户名和邮箱，就完成了公钥和密钥的生成，在C:\Documents and Settings\用户名下(C:\Users\xieax.ssh)，有个隐藏目录名为.ssh，id_rsa.pub文件就是公钥，id_rsa就是密钥。&lt;/p&gt;
 
     &lt;pre&gt;&lt;code&gt; ---
  ssh:
-  		public_key_location: C:\Users\xieax/.ssh/id_rsa.pub
-  		public_key_contents: ssh-rsa AAAAB3NzaC1yc2E........
+ public_key_location: C:\Users\xieax/.ssh/id_rsa.pub
+ public_key_contents: ssh-rsa AAAAB3NzaC1yc2E........
  .............lGB3Nz F-olivia &amp;lt;xxxx@163.com&amp;gt;
 
 
  NOTES:
+  		
+ Your public ssh key (id_rsa.pub) has been automatically generated and copied to your clipboard.
 &lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;5）、ssh密钥与github账户做关联，把4）步骤中文件id_rsa.pub复制，然后登录github找到“Account Settings” &amp;gt; Click “SSH Keys” &amp;gt; Click “Add SSH key”，把密钥串粘贴，如图1：
+ &lt;img src=&quot;/assets/blog-images/20150410134022.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;6）、验证git连接，在开始菜单里找到RailsInstaller –&amp;gt; Git Bash，执行它，就打开了下面的命令窗口，以后的操作都是在这个窗口下进行的；输入命令：ssh -T git@github.com&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; ---
+ $ ssh -T git@github.com
+ 1.The authenticity of host &#39;github.com (207.97.227.239)&#39; can&#39;t be established.
+ 2.RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+ 3.Are you sure you want to continue connecting (yes/no)?
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;选择yes&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; Hi F-olivia! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;后续设置账户信息，看个人意愿了，我没有做这一步&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; ---
+ 1. git config --global user.name &quot;你的名字&quot;
+ 2. git config --global user.email &quot;your_email@youremail.com&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;好了，git与github连接成功了，革命的道路走了一半了，继续加油！	&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;
-
-  		Your public ssh key (id_rsa.pub) has been automatically generated and copied to your clipboard.
-
-&lt;pre&gt;&lt;code&gt;5）、ssh密钥与github账户做关联，把4）步骤中文件id_rsa.pub复制，然后登录github找到 “Account Settings” &amp;gt; Click “SSH Keys” &amp;gt; Click “Add SSH key”，把密钥串粘贴，如图1：
-![Alt text](/assets/blog-images/20150410134022.png)
-
-6) 、验证git连接，在开始菜单里找到RailsInstaller –&amp;gt; Git Bash，执行它，就打开了下面的命令窗口，以后的操作都是在这个窗口下进行的；输入命令：ssh -T git@github.com
-
-	---
-	$ ssh -T git@github.com
-	1.The authenticity of host &#39;github.com (207.97.227.239)&#39; can&#39;t be established.
-	2.RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
-	3.Are you sure you want to continue connecting (yes/no)?
-
-选择yes
-	
-	Hi F-olivia! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
-
-后续设置账户信息，看个人意愿了，我没有做这一步
-	
-	---
-	1. git config --global user.name &quot;你的名字&quot;
-	2. git config --global user.email &quot;your_email@youremail.com&quot;
-
-好了，git与github连接成功了，革命的道路走了一半了，继续加油！	
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;安装jekyll，这个比较繁琐，要安装一堆包（directory_watcher、liquid、open4、maruku和classifier，由于jekyll默认包是maruku来解析markdown，这里用kramdown），具体如下：&lt;/p&gt;
 
@@ -168,6 +167,7 @@
   &lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;p&gt;好了，今天就到这里，明天继续，开始创建自己的blog。&lt;/p&gt;
 </content>
     </entry>
  
