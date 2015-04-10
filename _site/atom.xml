@@ -4,7 +4,7 @@
     <title>红薯的技术博客</title>
     <link href="http://F-olivia.github.io/" rel="self"/>
     <link href="http://F-olivia.github.io"/>
-    <updated>2015-04-01T10:17:55+08:00</updated>
+    <updated>2015-04-10T14:55:53+08:00</updated>
     <id>http://F-olivia.github.io</id>
     <author>
     <name>红薯</name>
@@ -12,6 +12,147 @@
     </author>
 
 
+    <entry>
+        <title>git+github+markdown+jekyll blog系列（二）</title>
+        <link href="http://F-olivia.github.io/ruby/2015/04/09/jekyll"/>
+        <updated>2015-04-09T00:00:00+08:00</updated>
+        <id>http://F-olivia.github.io/ruby/2015/04/09/jekyll</id>
+        <content type="html">
+&lt;ul&gt;
+    &lt;li&gt;作者：&lt;a href=&quot;http://weibo.com/Polivia&quot; target=&quot;blank&quot;&gt;tomfans&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;本文地址：http://f-olivia.github.io/ruby/2015/04/09/jekyll/&lt;/li&gt;
+    &lt;li&gt;转载请注明出处&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;section&quot;&gt;三、准备工作&lt;/h5&gt;
+
+&lt;p&gt;（一） 工具介绍：git、github、jekyll、markdown&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://git-scm.com/&quot;&gt;git&lt;/a&gt;：是一个开源的分布式版本控制系统，非常高效的项目版本管理工具。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/&quot;&gt;GitHub&lt;/a&gt;：是一个基于Git的非常流行的开源项目托管库。 利用GitHub，可以让全球各地的程序员们一起协作开发。GitHub提供了一种功能，叫GitHub Pages，利用这个功能，我们可以为项目建立网站，当然，这也意味着我们可以通过GitHub Pages 建立自己的网站。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;：是一个简单的，针对博客设计的静态网站生成器。使用GitHub和Jekyll，我们可以打造自己的独立博客，你可以自由地定制网站的风格，且是免费的。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://wowubuntu.com/markdown/&quot;&gt;markdown&lt;/a&gt;： 是一种适用于网络的书写语言。严格的说它就是一种标记语言。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;（二） 环境配置：我的工作环境是win7系统，因此遵从简单原则，我选择 &lt;a href=&quot;http://rubyinstaller.org/downloads/&quot;&gt;RailsInstaller&lt;/a&gt;来搭建ruby环境（包含Ruby、Rails、Bundler、Git、Sqlite、TinyTDS、SQL Server support和DevKit。），然后来配置git和github；进而安装jekyll。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装ruby，上面已经说过了，推介用RailsInstaller（我下载的是railsinstaller-3.1.0.exe），具体步骤：（&lt;a href=&quot;http://www.cnblogs.com/tambor/archive/2011/12/25/rails_anzhuang_railsinstaller.html&quot;&gt;请参考&lt;/a&gt;）&lt;/p&gt;
+
+    &lt;p&gt;1）、注册git用户，请登录 &lt;a href=&quot;https://github.com/join&quot;&gt;github&lt;/a&gt;，如图1：
+ &lt;img src=&quot;/assets/blog-images/20150410125928.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;2）、安装步骤就不在这里说了，一路next下去。&lt;/p&gt;
+
+    &lt;p&gt;3）、安装完会自动弹出git和shh的设置提示，哦，在做这个之前先要注册一个git用户，所以，就有了1）步骤&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; ---
+ # Rails Environment Configuration.
+
+ Your git configuration is incomplete.
+ user.name and user.email are required for properly using git and services such
+ as GitHub (https://github.com/).
+	
+  Please enter your name, for example mine is: Wayne E. Seguin
+ name &amp;gt; F-olivia
+ Setting user.name to F-olivia
+	
+  Please enter your email address, for example mine is: wayneeseguin@gmail.com
+ email &amp;gt; xxxx@163.com
+ Setting user.email to xxxx@163.com
+ DL is deprecated, please use Fiddle
+	
+ git:
+  			user.name:  F-olivia
+  			user.email: xxxx@163.com
+  			version:    git version 1.9.4.msysgit.2
+
+ ruby:
+  			bin:        D:/RailsInstaller/Ruby2.0.0/bin/ruby.exe
+  			version:    ruby 2.1.5p273 (2014-11-13 revision 48405) [i386-mingw32]
+
+ rails:
+  			bin:        D:/RailsInstaller/Ruby2.0.0/bin/rails.bat
+  			version:    Rails 4.1.8
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;4）、填写github注册时的用户名和邮箱，就完成了公钥和密钥的生成，在C:\Documents and Settings\用户名下(C:\Users\xieax.ssh)，有个隐藏目录名为.ssh，id_rsa.pub文件就是公钥，id_rsa就是密钥。&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; ---
+ ssh:
+  		public_key_location: C:\Users\xieax/.ssh/id_rsa.pub
+  		public_key_contents: ssh-rsa AAAAB3NzaC1yc2E........
+ .............lGB3Nz F-olivia &amp;lt;xxxx@163.com&amp;gt;
+
+
+ NOTES:
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+  		Your public ssh key (id_rsa.pub) has been automatically generated and copied to your clipboard.
+
+&lt;pre&gt;&lt;code&gt;5）、ssh密钥与github账户做关联，把4）步骤中文件id_rsa.pub复制，然后登录github找到 “Account Settings” &amp;gt; Click “SSH Keys” &amp;gt; Click “Add SSH key”，把密钥串粘贴，如图1：
+![Alt text](/assets/blog-images/20150410134022.png)
+
+6) 、验证git连接，在开始菜单里找到RailsInstaller –&amp;gt; Git Bash，执行它，就打开了下面的命令窗口，以后的操作都是在这个窗口下进行的；输入命令：ssh -T git@github.com
+
+	---
+	$ ssh -T git@github.com
+	1.The authenticity of host &#39;github.com (207.97.227.239)&#39; can&#39;t be established.
+	2.RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+	3.Are you sure you want to continue connecting (yes/no)?
+
+选择yes
+	
+	Hi F-olivia! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+
+后续设置账户信息，看个人意愿了，我没有做这一步
+	
+	---
+	1. git config --global user.name &quot;你的名字&quot;
+	2. git config --global user.email &quot;your_email@youremail.com&quot;
+
+好了，git与github连接成功了，革命的道路走了一半了，继续加油！	
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装jekyll，这个比较繁琐，要安装一堆包（directory_watcher、liquid、open4、maruku和classifier，由于jekyll默认包是maruku来解析markdown，这里用kramdown），具体如下：&lt;/p&gt;
+
+    &lt;p&gt;科普一下，Ruby是一种脚本语言，Gem是基于Ruby的一些开发工具包，Rails也算是一组Gem，专门用来做网站的。 而目前最好gem包是淘宝的。&lt;/p&gt;
+
+    &lt;p&gt;1）、查看gem包，命令：gem soruces -l&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; ---
+ C:\Sites&amp;gt;gem soruces -l
+ ERROR:  While executing gem ... (Gem::CommandLineError)
+ 		Unknown command soruces
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;2）、更换成淘宝包&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; ---	
+ C:\Sites&amp;gt;gem sources -a http://ruby.taobao.org/
+ http://ruby.taobao.org/ added to sources
+	
+ C:\Sites&amp;gt;gem sources -l
+ *** CURRENT SOURCES ***
+	
+ http://ruby.taobao.org/
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;3）、&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;的设计师大奖&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    </entry>
+ 
     <entry>
         <title>git+github+markdown+jekyll blog系列（一）</title>
         <link href="http://F-olivia.github.io/ruby/2015/03/31/jekyll"/>
@@ -24,7 +165,7 @@
     &lt;li&gt;转载请注明出处&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;section&quot;&gt;目录：&lt;/h1&gt;
+&lt;h3 id=&quot;section&quot;&gt;目录：&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;起因&lt;/li&gt;
 &lt;li&gt;目标&lt;/li&gt;
@@ -33,7 +174,7 @@
 &lt;li&gt;参考&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;一、起因&lt;/h2&gt;
+&lt;h5 id=&quot;section-1&quot;&gt;一、起因&lt;/h5&gt;
 
 &lt;ol&gt;
   &lt;li&gt;缘起2012年看了一篇关于如何写简历的文章，介绍了Markdown文本编辑，还讲了&lt;a href=&quot;https://github.com/&quot;&gt;GitHub&lt;/a&gt; 上建立自己的技术blog，给自己加分项目；这时我才知道git以及github是什么东东，markdown又是啥东西？但我没有太多的关注这些东西。&lt;/li&gt;
@@ -46,7 +187,7 @@ GitHub 和 Jekyll 搭建独立博客非常好的入门文章，&lt;strong&gt;强
 
 &lt;p&gt;发现搭建一个blog这么容易啊。于是，我开始着手实施这件事情，但还是历史悠久啊！&lt;/p&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;二、目标&lt;/h2&gt;
+&lt;h5 id=&quot;section-2&quot;&gt;二、目标&lt;/h5&gt;
 
 &lt;p&gt;期待的blog要至少满足以下要求：&lt;/p&gt;
 

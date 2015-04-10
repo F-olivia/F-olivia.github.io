@@ -9,5 +9,6 @@ http://F-olivia.github.io/rss.xml
 http://F-olivia.github.io/sitemap.txt
 http://F-olivia.github.io/tags.html
 
+http://F-olivia.github.io/ruby/2015/04/09/jekyll
 http://F-olivia.github.io/ruby/2015/03/31/jekyll
 http://F-olivia.github.io/%E6%97%A5%E5%BF%97/2015/03/28/markdonnote
