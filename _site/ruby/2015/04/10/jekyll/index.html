@@ -241,25 +241,26 @@
   </li>
   <li>
     <p>介绍一下jekyll的结构，</p>
+
+    <pre><code> ```
+ .
+ ├── index.html
+ ├── _config.yml
+ ├── assets
+ │   ├── blog-images
+ │   ├── css
+ │   ├── fonts
+ │   ├── images
+ │   └── javascripts
+ ├── _includes
+ ├── _layouts
+ ├── _plugins
+ ├── _posts
+ └── _site
+ ```
+</code></pre>
   </li>
 </ol>
-
-<p><code>
-.
-├── index.html
-├── _config.yml
-├── assets
-│   ├── blog-images
-│   ├── css
-│   ├── fonts
-│   ├── images
-│   └── javascripts
-├── _includes
-├── _layouts
-├── _plugins
-├── _posts
-└── _site
-</code></p>
 
 <ul>
   <li>_config.yml</li>
@@ -268,14 +269,15 @@
 <p>这是针对 Jekyll 的<a href="http://jekyllrb.com/docs/configuration/">配置文件</a>，
 决定了 Jekyll 如何解析网站的源代码,下面是一个示例：</p>
 
-<p><code>
-baseurl: /StrayBirds
-markdown: redcarpet
-safe: false
-pygments: true
-excerpt_separator: "\n\n\n"
-paginate: 5
-</code></p>
+<pre><code>	```
+	baseurl: /StrayBirds
+	markdown: redcarpet
+	safe: false
+	pygments: true
+	excerpt_separator: "\n\n\n"
+	paginate: 5
+	```
+</code></pre>
 
 <p>我的网站建立在 <code>StrayBirds</code> 项目中，所以 <code>baseurl</code> 设置成 <code>StrayBirds</code>，
 我的文章采用 Markdown 格式写成，可以指定 Markdown 的解析器 <code>redcarpet</code>。
@@ -295,31 +297,33 @@ paginate 指定了一页有几篇文章，页数太多时，我们可以将文�
 每个网页只需要关心自己的内容就好，其它的都由模板决定。例如，这个目录下的
 default.html 文件：</p>
 
-<p>```html</p>
-
-<p>&lt;!DOCTYPE html&gt;</p>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>{{ page.title }}</title>
-  </head>
-  <body>
-    <header>
-    </header>
-
-    <aside>
-    </aside>
-
-    <article>
-{{ content }}
-    </article>
-
-    <footer>
-    </footer>
-  </body>
-</html>
-
-<p>```</p>
+<pre><code>	```html
+	
+	&lt;!DOCTYPE html&gt;
+	&lt;html&gt;
+	  &lt;head&gt;
+	    &lt;meta charset='utf-8'&gt;
+	    &lt;title&gt;{{ page.title }}&lt;/title&gt;
+	  &lt;/head&gt;
+	  &lt;body&gt;
+	    &lt;header&gt;
+	    &lt;/header&gt;
+	
+	    &lt;aside&gt;
+	    &lt;/aside&gt;
+	
+	    &lt;article&gt;
+	{{ content }}
+	    &lt;/article&gt;
+	
+	    &lt;footer&gt;
+	    &lt;/footer&gt;
+	  &lt;/body&gt;
+	&lt;/html&gt;
+	
+	
+	```
+</code></pre>
 
 <p>可以看出，这个文件就是所有页面共有的东西，每个页面的具体内容会被填充在
 `` 中，注意这个 content 两边的标记，这是一种叫 
@@ -335,22 +339,24 @@ default.html 文件：</p>
 <p>这是网站的首页，访问 <code>http://username.github.io</code> 时，会指向 
 <code>http://username.github.io/index.html</code>，我们看一下基本内容：</p>
 
-<p>```html
-	—
-	layout: default
-	title: 首页
-	—</p>
-
-<ul class="post-list">
-    {% for post in site.posts %}
-        <a href="{{site.baseurl}}{{post.url}}"> {{ post.title }}  </a> <br />
-        {{ post.date | date: "%F" }} <br />
-        {{ post.category }} <br />
-        {{ post.excerpt }} 
-    {% endfor %}
-
-</ul>
-<p>```</p>
+<pre><code>	```html
+		---
+		layout: default
+		title: 首页
+		---
+	
+	
+	&lt;ul class="post-list"&gt;
+	    {% for post in site.posts %}
+	        &lt;a href="{{site.baseurl}}{{post.url}}"&gt; {{ post.title }}  &lt;/a&gt; &lt;br&gt;
+	        {{ post.date | date: "%F" }} &lt;br&gt;
+	        {{ post.category }} &lt;br&gt;
+	        {{ post.excerpt }} 
+	    {% endfor %}
+	
+	&lt;/ul&gt;
+	```
+</code></pre>
 
 <p>注意，文件开头的描述，我们称之为 <a href="http://jekyllrb.com/docs/frontmatter/">front-matter</a>，
 是对当前文件的一种描述，这里
@@ -369,14 +375,15 @@ default.html 文件：</p>
 
 <p>这个目录存放我们的所有博客文章，他们的名字有统一的格式：</p>
 
-<p><code>
-YEAR-MONTH-DAY-title.MARKUP
-</code></p>
+<pre><code>	```
+	YEAR-MONTH-DAY-title.MARKUP
+	```
+</code></pre>
 
 <p>例如，2014-02-15-github-jeklly.md，这个文件名会被解析，前面的 <code>index.html</code> 中，
 <code>post.date</code> 的值就由这里文件名中的日期而来。下面，我们看看一篇文章的内容示例：</p>
 
-<p>```</p>
+<p>ok，今天就到这儿吧，还有个尾巴，明天接着来</p>
 
         </div>
 

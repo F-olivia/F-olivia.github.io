@@ -4,7 +4,7 @@
     <title>红薯的技术博客</title>
     <link href="http://F-olivia.github.io/" rel="self"/>
     <link href="http://F-olivia.github.io"/>
-    <updated>2015-04-10T17:25:35+08:00</updated>
+    <updated>2015-04-10T17:30:19+08:00</updated>
     <id>http://F-olivia.github.io</id>
     <author>
     <name>红薯</name>
@@ -101,25 +101,26 @@
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;介绍一下jekyll的结构，&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; ```
+ .
+ ├── index.html
+ ├── _config.yml
+ ├── assets
+ │   ├── blog-images
+ │   ├── css
+ │   ├── fonts
+ │   ├── images
+ │   └── javascripts
+ ├── _includes
+ ├── _layouts
+ ├── _plugins
+ ├── _posts
+ └── _site
+ ```
+&lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;&lt;code&gt;
-.
-├── index.html
-├── _config.yml
-├── assets
-│   ├── blog-images
-│   ├── css
-│   ├── fonts
-│   ├── images
-│   └── javascripts
-├── _includes
-├── _layouts
-├── _plugins
-├── _posts
-└── _site
-&lt;/code&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;_config.yml&lt;/li&gt;
@@ -128,14 +129,15 @@
 &lt;p&gt;这是针对 Jekyll 的&lt;a href=&quot;http://jekyllrb.com/docs/configuration/&quot;&gt;配置文件&lt;/a&gt;，
 决定了 Jekyll 如何解析网站的源代码,下面是一个示例：&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-baseurl: /StrayBirds
-markdown: redcarpet
-safe: false
-pygments: true
-excerpt_separator: &quot;\n\n\n&quot;
-paginate: 5
-&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;	```
+	baseurl: /StrayBirds
+	markdown: redcarpet
+	safe: false
+	pygments: true
+	excerpt_separator: &quot;\n\n\n&quot;
+	paginate: 5
+	```
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;我的网站建立在 &lt;code&gt;StrayBirds&lt;/code&gt; 项目中，所以 &lt;code&gt;baseurl&lt;/code&gt; 设置成 &lt;code&gt;StrayBirds&lt;/code&gt;，
 我的文章采用 Markdown 格式写成，可以指定 Markdown 的解析器 &lt;code&gt;redcarpet&lt;/code&gt;。
@@ -155,31 +157,33 @@ paginate 指定了一页有几篇文章，页数太多时，我们可以将文�
 每个网页只需要关心自己的内容就好，其它的都由模板决定。例如，这个目录下的
 default.html 文件：&lt;/p&gt;
 
-&lt;p&gt;```html&lt;/p&gt;
-
-&lt;p&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/p&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot; /&gt;
-    &lt;title&gt;{{ page.title }}&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;header&gt;
-    &lt;/header&gt;
-
-    &lt;aside&gt;
-    &lt;/aside&gt;
-
-    &lt;article&gt;
-{{ content }}
-    &lt;/article&gt;
-
-    &lt;footer&gt;
-    &lt;/footer&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;	```html
+	
+	&amp;lt;!DOCTYPE html&amp;gt;
+	&amp;lt;html&amp;gt;
+	  &amp;lt;head&amp;gt;
+	    &amp;lt;meta charset=&#39;utf-8&#39;&amp;gt;
+	    &amp;lt;title&amp;gt;{{ page.title }}&amp;lt;/title&amp;gt;
+	  &amp;lt;/head&amp;gt;
+	  &amp;lt;body&amp;gt;
+	    &amp;lt;header&amp;gt;
+	    &amp;lt;/header&amp;gt;
+	
+	    &amp;lt;aside&amp;gt;
+	    &amp;lt;/aside&amp;gt;
+	
+	    &amp;lt;article&amp;gt;
+	{{ content }}
+	    &amp;lt;/article&amp;gt;
+	
+	    &amp;lt;footer&amp;gt;
+	    &amp;lt;/footer&amp;gt;
+	  &amp;lt;/body&amp;gt;
+	&amp;lt;/html&amp;gt;
+	
+	
+	```
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;可以看出，这个文件就是所有页面共有的东西，每个页面的具体内容会被填充在
 `` 中，注意这个 content 两边的标记，这是一种叫 
@@ -195,22 +199,24 @@ default.html 文件：&lt;/p&gt;
 &lt;p&gt;这是网站的首页，访问 &lt;code&gt;http://username.github.io&lt;/code&gt; 时，会指向 
 &lt;code&gt;http://username.github.io/index.html&lt;/code&gt;，我们看一下基本内容：&lt;/p&gt;
 
-&lt;p&gt;```html
-	—
-	layout: default
-	title: 首页
-	—&lt;/p&gt;
-
-&lt;ul class=&quot;post-list&quot;&gt;
-    {% for post in site.posts %}
-        &lt;a href=&quot;{{site.baseurl}}{{post.url}}&quot;&gt; {{ post.title }}  &lt;/a&gt; &lt;br /&gt;
-        {{ post.date | date: &quot;%F&quot; }} &lt;br /&gt;
-        {{ post.category }} &lt;br /&gt;
-        {{ post.excerpt }} 
-    {% endfor %}
-
-&lt;/ul&gt;
-&lt;p&gt;```&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;	```html
+		---
+		layout: default
+		title: 首页
+		---
+	
+	
+	&amp;lt;ul class=&quot;post-list&quot;&amp;gt;
+	    {% for post in site.posts %}
+	        &amp;lt;a href=&quot;{{site.baseurl}}{{post.url}}&quot;&amp;gt; {{ post.title }}  &amp;lt;/a&amp;gt; &amp;lt;br&amp;gt;
+	        {{ post.date | date: &quot;%F&quot; }} &amp;lt;br&amp;gt;
+	        {{ post.category }} &amp;lt;br&amp;gt;
+	        {{ post.excerpt }} 
+	    {% endfor %}
+	
+	&amp;lt;/ul&amp;gt;
+	```
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;注意，文件开头的描述，我们称之为 &lt;a href=&quot;http://jekyllrb.com/docs/frontmatter/&quot;&gt;front-matter&lt;/a&gt;，
 是对当前文件的一种描述，这里
@@ -229,14 +235,15 @@ default.html 文件：&lt;/p&gt;
 
 &lt;p&gt;这个目录存放我们的所有博客文章，他们的名字有统一的格式：&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-YEAR-MONTH-DAY-title.MARKUP
-&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;	```
+	YEAR-MONTH-DAY-title.MARKUP
+	```
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;例如，2014-02-15-github-jeklly.md，这个文件名会被解析，前面的 &lt;code&gt;index.html&lt;/code&gt; 中，
 &lt;code&gt;post.date&lt;/code&gt; 的值就由这里文件名中的日期而来。下面，我们看看一篇文章的内容示例：&lt;/p&gt;
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;p&gt;ok，今天就到这儿吧，还有个尾巴，明天接着来&lt;/p&gt;
 </content>
     </entry>
  
