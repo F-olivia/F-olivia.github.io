@@ -5,10 +5,131 @@
         <description>红薯的技术博客 - 红薯</description>
         <link>http://F-olivia.github.io</link>
         <link>http://F-olivia.github.io</link>
-        <lastBuildDate>2015-04-10T17:30:19+08:00</lastBuildDate>
-        <pubDate>2015-04-10T17:30:19+08:00</pubDate>
+        <lastBuildDate>2015-09-18T23:55:39+08:00</lastBuildDate>
+        <pubDate>2015-09-18T23:55:39+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>mysql学习系列（一）</title>
+                <description>
+&lt;ul&gt;
+    &lt;li&gt;作者：&lt;a href=&quot;http://weibo.com/Polivia&quot; target=&quot;blank&quot;&gt;tomfans&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;本文地址：http://f-olivia.github.io/database/2015/09/18/mysql/&lt;/li&gt;
+    &lt;li&gt;转载请注明出处&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;目录：&lt;/h3&gt;
+&lt;p&gt;本次学习依据mysql版本：Server version: 5.6.23-log MySQL Community Server (GPL)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;概述&lt;/li&gt;
+&lt;li&gt;字符串类型&lt;/li&gt;
+&lt;li&gt;数值类型&lt;/li&gt;
+&lt;li&gt;日期和时间类型&lt;/li&gt;
+&lt;li&gt;应用场景&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;section-1&quot;&gt;一、概述&lt;/h5&gt;
+&lt;p&gt;如目录中所列，字符串（string type）、数值（numeric type）、日期与时间（date and time type）&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;字符串（string type）：依据标准SQL（92，99，2003等）&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; 1）固定长度（Fixed-width）
+ &amp;gt; CHARACTER(length)
+ &amp;gt; CHAR(length)
+ 2）可变长度（Variable-length）
+ &amp;gt; CHARACTER VARYING(length)
+ &amp;gt; CHAR VARYING(length)
+ &amp;gt; VARCHAR(length)
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;但，SQL2003中有关大数据对象类型，mysql中是没有的，如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;	CHARACTER LARGE OBJECT
+	CHAR LARGE OBJECT
+	CLOB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接下来，mysql支持以下类型：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;	3）二进制（BINARY）和可变长度二进制（VARBINARY）
+	4）二进制大对象（BLOB）和文本大对象（text）
+	5）枚举型（ENUM）
+	6）SET字符串对象
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;数值（numeric type）：支持标准SQL2003所有数值类型&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; 1）整型（interger data）
+ &amp;gt; TINYINT
+ &amp;gt; SMALLINT
+ &amp;gt; MEDIUMINT
+ &amp;gt; INT
+ &amp;gt; BIGINT
+ 2）浮点型（floating-point）
+ &amp;gt; FLOAT
+ &amp;gt; DOUBLE
+ 3）固定宽度（a fixed-point）
+ &amp;gt; DECIMAL
+ &amp;gt; NUMERIC
+ 4）BIT型
+ &amp;gt;BIT
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;SQL2003的数值类型有以下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;	1）精确数值类型（Exact numeric）
+	&amp;gt; NUMERIC(g,f)
+	&amp;gt; DECIMAL(g,f) -(DEC)
+	&amp;gt; SMALLINT
+	&amp;gt; INTEGER(INT)
+	&amp;gt; BIGINT
+	2）近似值类型（Approximate numeric）
+	&amp;gt; FLOAT(p)
+	&amp;gt; REAL
+	&amp;gt; DOUBLE PRECISION
+	3）扩充了一些
+	&amp;gt; TINYINT
+	&amp;gt; MEDIUMINT
+	&amp;gt; BIT(x)
+	&amp;gt; SERIAL
+		&amp;gt;&amp;gt;(BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE KEY)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;日期与时间（date and time type）&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; 1）DATETIME
+ 2）DATE
+ 3）TIME
+ 4）YEAR
+ 5）TIMESTAMP
+ 6）Zero
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;与SQL2003标准有所不同&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;	1）DATE
+	2）TIME(p)，其中p代表精度
+	3）TIMESRAMP(p)，--[WITH|WITHOUT] TIME ZONE可以带时区
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+                <link>http://F-olivia.github.io/database/2015/09/18/mysql</link>
+                <guid>http://F-olivia.github.io/database/2015/09/18/mysql</guid>
+                <pubDate>2015-09-18T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>git+github+markdown+jekyll blog系列（三）</title>
