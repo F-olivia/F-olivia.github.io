@@ -4,7 +4,7 @@
     <title>红薯的技术博客</title>
     <link href="http://F-olivia.github.io/" rel="self"/>
     <link href="http://F-olivia.github.io"/>
-    <updated>2015-09-19T22:01:48+08:00</updated>
+    <updated>2015-09-19T22:21:14+08:00</updated>
     <id>http://F-olivia.github.io</id>
     <author>
     <name>红薯</name>
@@ -38,20 +38,23 @@
 &lt;p&gt;如目录中所列，字符串（string type）、数值（numeric type）、日期与时间（date and time type）&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;字符串（string type）：依据标准SQL（92，99，2003等）&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;字符串（string type）：依据标准SQL（92，99，2003等）&lt;/p&gt;
+
+    &lt;p&gt;1) 固定长度（Fixed-width）
+ * CHARACTER(length)
+ * CHAR(length)&lt;/p&gt;
+
+    &lt;p&gt;2) 可变长度（Variable-length）
+ * CHARACTER VARYING(length)
+ * CHAR VARYING(length)
+ * VARCHAR(length)&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;```
-    1）固定长度（Fixed-width）
-    * CHARACTER(length)
-    * CHAR(length)&lt;/p&gt;
+&lt;p&gt;但，SQL2003中有关大数据对象类型，mysql中是没有的，如：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;2）可变长度（Variable-length）
-* CHARACTER VARYING(length)
-* CHAR VARYING(length)
-* VARCHAR(length) ``` 但，SQL2003中有关大数据对象类型，mysql中是没有的，如：
-
-* CHARACTER LARGE OBJECT
+&lt;pre&gt;&lt;code&gt;* CHARACTER LARGE OBJECT
 * CHAR LARGE OBJECT
 * CLOB
 &lt;/code&gt;&lt;/pre&gt;
@@ -68,63 +71,64 @@
   &lt;li&gt;
     &lt;p&gt;数值（numeric type）：支持标准SQL2003所有数值类型&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; 1）整型（interger data）
- &amp;gt; TINYINT
- &amp;gt; SMALLINT
- &amp;gt; MEDIUMINT
- &amp;gt; INT
- &amp;gt; BIGINT
- 2）浮点型（floating-point）
- &amp;gt; FLOAT
- &amp;gt; DOUBLE
- 3）固定宽度（a fixed-point）
- &amp;gt; DECIMAL
- &amp;gt; NUMERIC
- 4）BIT型
- &amp;gt;BIT
-&lt;/code&gt;&lt;/pre&gt;
+    &lt;p&gt;1) 整型（interger data）
+ * TINYINT
+ * SMALLINT
+ * MEDIUMINT
+ * INT
+ * BIGINT&lt;/p&gt;
+
+    &lt;p&gt;2）浮点型（floating-point）
+ * FLOAT
+ * DOUBLE&lt;/p&gt;
+
+    &lt;p&gt;3）固定宽度（a fixed-point）
+ * DECIMAL
+ * NUMERIC&lt;/p&gt;
+
+    &lt;p&gt;4）BIT型
+ * BIT&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;SQL2003的数值类型有以下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;	1）精确数值类型（Exact numeric）
-	&amp;gt; NUMERIC(g,f)
-	&amp;gt; DECIMAL(g,f) -(DEC)
-	&amp;gt; SMALLINT
-	&amp;gt; INTEGER(INT)
-	&amp;gt; BIGINT
-	2）近似值类型（Approximate numeric）
-	&amp;gt; FLOAT(p)
-	&amp;gt; REAL
-	&amp;gt; DOUBLE PRECISION
-	3）扩充了一些
-	&amp;gt; TINYINT
-	&amp;gt; MEDIUMINT
-	&amp;gt; BIT(x)
-	&amp;gt; SERIAL
-		&amp;gt;&amp;gt;(BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE KEY)
+&lt;pre&gt;&lt;code&gt;1）精确数值类型（Exact numeric）
+* NUMERIC(g,f)
+* DECIMAL(g,f) -(DEC)
+* SMALLINT
+* INTEGER(INT)
+* BIGINT
+2）近似值类型（Approximate numeric）
+* FLOAT(p)
+* REAL
+* DOUBLE PRECISION
+3）扩充了一些
+* TINYINT
+* MEDIUMINT
+* BIT(x)
+* SERIAL
+	&amp;gt;&amp;gt;(BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE KEY)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;日期与时间（date and time type）&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; 1）DATETIME
+    &lt;p&gt;1）DATETIME
  2）DATE
  3）TIME
  4）YEAR
  5）TIMESTAMP
- 6）Zero
-&lt;/code&gt;&lt;/pre&gt;
+ 6）Zero&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;与SQL2003标准有所不同&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;	1）DATE
-	2）TIME(p)，其中p代表精度
-	3）TIMESRAMP(p)，--[WITH|WITHOUT] TIME ZONE可以带时区
+&lt;pre&gt;&lt;code&gt;1）DATE
+2）TIME(p)，其中p代表精度
+3）TIMESRAMP(p)，--[WITH|WITHOUT] TIME ZONE可以带时区
 &lt;/code&gt;&lt;/pre&gt;
 
 </content>

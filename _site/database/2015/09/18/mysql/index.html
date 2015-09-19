@@ -178,20 +178,23 @@
 <p>如目录中所列，字符串（string type）、数值（numeric type）、日期与时间（date and time type）</p>
 
 <ol>
-  <li>字符串（string type）：依据标准SQL（92，99，2003等）</li>
+  <li>
+    <p>字符串（string type）：依据标准SQL（92，99，2003等）</p>
+
+    <p>1) 固定长度（Fixed-width）
+ * CHARACTER(length)
+ * CHAR(length)</p>
+
+    <p>2) 可变长度（Variable-length）
+ * CHARACTER VARYING(length)
+ * CHAR VARYING(length)
+ * VARCHAR(length)</p>
+  </li>
 </ol>
 
-<p>```
-    1）固定长度（Fixed-width）
-    * CHARACTER(length)
-    * CHAR(length)</p>
+<p>但，SQL2003中有关大数据对象类型，mysql中是没有的，如：</p>
 
-<pre><code>2）可变长度（Variable-length）
-* CHARACTER VARYING(length)
-* CHAR VARYING(length)
-* VARCHAR(length) ``` 但，SQL2003中有关大数据对象类型，mysql中是没有的，如：
-
-* CHARACTER LARGE OBJECT
+<pre><code>* CHARACTER LARGE OBJECT
 * CHAR LARGE OBJECT
 * CLOB
 </code></pre>
@@ -208,63 +211,64 @@
   <li>
     <p>数值（numeric type）：支持标准SQL2003所有数值类型</p>
 
-    <pre><code> 1）整型（interger data）
- &gt; TINYINT
- &gt; SMALLINT
- &gt; MEDIUMINT
- &gt; INT
- &gt; BIGINT
- 2）浮点型（floating-point）
- &gt; FLOAT
- &gt; DOUBLE
- 3）固定宽度（a fixed-point）
- &gt; DECIMAL
- &gt; NUMERIC
- 4）BIT型
- &gt;BIT
-</code></pre>
+    <p>1) 整型（interger data）
+ * TINYINT
+ * SMALLINT
+ * MEDIUMINT
+ * INT
+ * BIGINT</p>
+
+    <p>2）浮点型（floating-point）
+ * FLOAT
+ * DOUBLE</p>
+
+    <p>3）固定宽度（a fixed-point）
+ * DECIMAL
+ * NUMERIC</p>
+
+    <p>4）BIT型
+ * BIT</p>
   </li>
 </ol>
 
 <p>SQL2003的数值类型有以下：</p>
 
-<pre><code>	1）精确数值类型（Exact numeric）
-	&gt; NUMERIC(g,f)
-	&gt; DECIMAL(g,f) -(DEC)
-	&gt; SMALLINT
-	&gt; INTEGER(INT)
-	&gt; BIGINT
-	2）近似值类型（Approximate numeric）
-	&gt; FLOAT(p)
-	&gt; REAL
-	&gt; DOUBLE PRECISION
-	3）扩充了一些
-	&gt; TINYINT
-	&gt; MEDIUMINT
-	&gt; BIT(x)
-	&gt; SERIAL
-		&gt;&gt;(BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE KEY)
+<pre><code>1）精确数值类型（Exact numeric）
+* NUMERIC(g,f)
+* DECIMAL(g,f) -(DEC)
+* SMALLINT
+* INTEGER(INT)
+* BIGINT
+2）近似值类型（Approximate numeric）
+* FLOAT(p)
+* REAL
+* DOUBLE PRECISION
+3）扩充了一些
+* TINYINT
+* MEDIUMINT
+* BIT(x)
+* SERIAL
+	&gt;&gt;(BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE KEY)
 </code></pre>
 
 <ol>
   <li>
     <p>日期与时间（date and time type）</p>
 
-    <pre><code> 1）DATETIME
+    <p>1）DATETIME
  2）DATE
  3）TIME
  4）YEAR
  5）TIMESTAMP
- 6）Zero
-</code></pre>
+ 6）Zero</p>
   </li>
 </ol>
 
 <p>与SQL2003标准有所不同</p>
 
-<pre><code>	1）DATE
-	2）TIME(p)，其中p代表精度
-	3）TIMESRAMP(p)，--[WITH|WITHOUT] TIME ZONE可以带时区
+<pre><code>1）DATE
+2）TIME(p)，其中p代表精度
+3）TIMESRAMP(p)，--[WITH|WITHOUT] TIME ZONE可以带时区
 </code></pre>
 
 
