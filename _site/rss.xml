@@ -5,8 +5,8 @@
         <description>红薯的技术博客 - 红薯</description>
         <link>http://F-olivia.github.io</link>
         <link>http://F-olivia.github.io</link>
-        <lastBuildDate>2015-09-19T22:21:14+08:00</lastBuildDate>
-        <pubDate>2015-09-19T22:21:14+08:00</pubDate>
+        <lastBuildDate>2015-09-19T22:30:32+08:00</lastBuildDate>
+        <pubDate>2015-09-19T22:30:32+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -94,10 +94,12 @@
 * SMALLINT
 * INTEGER(INT)
 * BIGINT
+
 2）近似值类型（Approximate numeric）
 * FLOAT(p)
 * REAL
 * DOUBLE PRECISION
+
 3）扩充了一些
 * TINYINT
 * MEDIUMINT
