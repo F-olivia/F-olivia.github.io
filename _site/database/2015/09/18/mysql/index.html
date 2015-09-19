@@ -178,33 +178,30 @@
 <p>如目录中所列，字符串（string type）、数值（numeric type）、日期与时间（date and time type）</p>
 
 <ol>
-  <li>
-    <p>字符串（string type）：依据标准SQL（92，99，2003等）</p>
-
-    <pre><code> 1）固定长度（Fixed-width）
- &gt; CHARACTER(length)
- &gt; CHAR(length)
- 2）可变长度（Variable-length）
- &gt; CHARACTER VARYING(length)
- &gt; CHAR VARYING(length)
- &gt; VARCHAR(length)
-</code></pre>
-  </li>
+  <li>字符串（string type）：依据标准SQL（92，99，2003等）</li>
 </ol>
 
-<p>但，SQL2003中有关大数据对象类型，mysql中是没有的，如：</p>
+<p>```
+    1）固定长度（Fixed-width）
+    * CHARACTER(length)
+    * CHAR(length)</p>
 
-<pre><code>	CHARACTER LARGE OBJECT
-	CHAR LARGE OBJECT
-	CLOB
+<pre><code>2）可变长度（Variable-length）
+* CHARACTER VARYING(length)
+* CHAR VARYING(length)
+* VARCHAR(length) ``` 但，SQL2003中有关大数据对象类型，mysql中是没有的，如：
+
+* CHARACTER LARGE OBJECT
+* CHAR LARGE OBJECT
+* CLOB
 </code></pre>
 
 <p>接下来，mysql支持以下类型：</p>
 
-<pre><code>	3）二进制（BINARY）和可变长度二进制（VARBINARY）
-	4）二进制大对象（BLOB）和文本大对象（text）
-	5）枚举型（ENUM）
-	6）SET字符串对象
+<pre><code>3）二进制（BINARY）和可变长度二进制（VARBINARY）
+4）二进制大对象（BLOB）和文本大对象（text）
+5）枚举型（ENUM）
+6）SET字符串对象
 </code></pre>
 
 <ol>

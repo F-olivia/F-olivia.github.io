@@ -5,8 +5,8 @@
         <description>红薯的技术博客 - 红薯</description>
         <link>http://F-olivia.github.io</link>
         <link>http://F-olivia.github.io</link>
-        <lastBuildDate>2015-09-18T23:55:39+08:00</lastBuildDate>
-        <pubDate>2015-09-18T23:55:39+08:00</pubDate>
+        <lastBuildDate>2015-09-19T22:01:48+08:00</lastBuildDate>
+        <pubDate>2015-09-19T22:01:48+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -33,33 +33,30 @@
 &lt;p&gt;如目录中所列，字符串（string type）、数值（numeric type）、日期与时间（date and time type）&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;字符串（string type）：依据标准SQL（92，99，2003等）&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; 1）固定长度（Fixed-width）
- &amp;gt; CHARACTER(length)
- &amp;gt; CHAR(length)
- 2）可变长度（Variable-length）
- &amp;gt; CHARACTER VARYING(length)
- &amp;gt; CHAR VARYING(length)
- &amp;gt; VARCHAR(length)
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
+  &lt;li&gt;字符串（string type）：依据标准SQL（92，99，2003等）&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;但，SQL2003中有关大数据对象类型，mysql中是没有的，如：&lt;/p&gt;
+&lt;p&gt;```
+    1）固定长度（Fixed-width）
+    * CHARACTER(length)
+    * CHAR(length)&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;	CHARACTER LARGE OBJECT
-	CHAR LARGE OBJECT
-	CLOB
+&lt;pre&gt;&lt;code&gt;2）可变长度（Variable-length）
+* CHARACTER VARYING(length)
+* CHAR VARYING(length)
+* VARCHAR(length) ``` 但，SQL2003中有关大数据对象类型，mysql中是没有的，如：
+
+* CHARACTER LARGE OBJECT
+* CHAR LARGE OBJECT
+* CLOB
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;接下来，mysql支持以下类型：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;	3）二进制（BINARY）和可变长度二进制（VARBINARY）
-	4）二进制大对象（BLOB）和文本大对象（text）
-	5）枚举型（ENUM）
-	6）SET字符串对象
+&lt;pre&gt;&lt;code&gt;3）二进制（BINARY）和可变长度二进制（VARBINARY）
+4）二进制大对象（BLOB）和文本大对象（text）
+5）枚举型（ENUM）
+6）SET字符串对象
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ol&gt;
