@@ -5,8 +5,8 @@
         <description>红薯的技术博客 - 红薯</description>
         <link>http://F-olivia.github.io</link>
         <link>http://F-olivia.github.io</link>
-        <lastBuildDate>2015-09-22T17:01:27+08:00</lastBuildDate>
-        <pubDate>2015-09-22T17:01:27+08:00</pubDate>
+        <lastBuildDate>2015-09-22T17:08:10+08:00</lastBuildDate>
+        <pubDate>2015-09-22T17:08:10+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -39,8 +39,11 @@
 
 &lt;pre&gt;&lt;code&gt;1）长度，char：0~255；varchar：0-65535(255*255)
 2）存储（Stored），
-3）检索（retrieved）， 表1：
+3）检索（retrieved）
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;表1：&lt;/p&gt;
+
 &lt;table&gt;
 	&lt;tr&gt;
 		&lt;td&gt;值&lt;/td&gt;&lt;td&gt;CHAR(4)&lt;/td&gt;&lt;td&gt;检索&lt;/td&gt;&lt;td&gt;存储&lt;/td&gt;&lt;td&gt;VARCHAR(4)&lt;/td&gt;&lt;td&gt;存储&lt;/td&gt;&lt;td&gt;检索&lt;/td&gt;
@@ -56,8 +59,10 @@
 		&lt;td&gt;&#39;abcdefgh&#39;&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;4bytes&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;5bytes&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;
 	&lt;/tr&gt;
 
+
 从表1中得出以下结论：
 表2：
+
 &lt;table&gt;
 	&lt;tr&gt;
 		&lt;td&gt; &lt;/td&gt;&lt;td&gt;CHAR(M)&lt;/td&gt;&lt;td&gt;VARCHAR(M)&lt;/td&gt;&lt;td&gt;备注&lt;/td&gt;
@@ -69,10 +74,10 @@
 		&lt;td&gt;检索&lt;/td&gt;&lt;td&gt;取出来的值，会截取多余空格；跟sql_mode有关&lt;/td&gt;&lt;td&gt;跟存储的内容一致&lt;/td&gt;&lt;td&gt;跟sql_mode有关&lt;/td&gt;
 	&lt;/tr&gt;
 
+
 具体请看实例：
 如图1：
 	![Alt text](/assets/blog-images/20150922163551.png)
-
 
 
 #####有关知识点：
