@@ -5,10 +5,131 @@
         <description>红薯的技术博客 - 红薯</description>
         <link>http://F-olivia.github.io</link>
         <link>http://F-olivia.github.io</link>
-        <lastBuildDate>2015-09-19T22:30:32+08:00</lastBuildDate>
-        <pubDate>2015-09-19T22:30:32+08:00</pubDate>
+        <lastBuildDate>2015-09-22T17:01:27+08:00</lastBuildDate>
+        <pubDate>2015-09-22T17:01:27+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>mysql学习系列（二）</title>
+                <description>
+&lt;ul&gt;
+    &lt;li&gt;作者：&lt;a href=&quot;http://weibo.com/Polivia&quot; target=&quot;blank&quot;&gt;tomfans&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;本文地址：http://f-olivia.github.io/database/2015/09/19/mysql/&lt;/li&gt;
+    &lt;li&gt;转载请注明出处&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;section&quot;&gt;二、字符串类型&lt;/h5&gt;
+
+&lt;p&gt;1 固定长度（Fixed-width）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CHARACTER(length)&lt;/li&gt;
+  &lt;li&gt;CHAR(length)：是CHARACTER的简写，其中MYSQL还可以这么定义：NATIONAL CHAR&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2 可变长度（Variable-length）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;VARCHAR(length)&lt;/li&gt;
+  &lt;li&gt;NATIONAL VARCHAR（length）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;sqlmode&quot;&gt;区别：跟字符集和系统参数sql_mode都有关系&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code&gt;1）长度，char：0~255；varchar：0-65535(255*255)
+2）存储（Stored），
+3）检索（retrieved）， 表1：
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt;值&lt;/td&gt;&lt;td&gt;CHAR(4)&lt;/td&gt;&lt;td&gt;检索&lt;/td&gt;&lt;td&gt;存储&lt;/td&gt;&lt;td&gt;VARCHAR(4)&lt;/td&gt;&lt;td&gt;存储&lt;/td&gt;&lt;td&gt;检索&lt;/td&gt;
+		&lt;tr&gt;
+		&lt;td&gt;&#39;&#39;&lt;/td&gt;&lt;td&gt;&#39;    &#39;&lt;/td&gt;&lt;td&gt;&#39;&#39;&lt;/td&gt;&lt;td&gt;4bytes&lt;/td&gt;&lt;td&gt;&#39;&#39;&lt;/td&gt;&lt;td&gt;1bytes&lt;/td&gt;&lt;td&gt;&#39;&#39;&lt;/td&gt;
+		&lt;tr&gt;
+		&lt;td&gt;&#39;ab&#39;&lt;/td&gt;&lt;td&gt;&#39;ab  &#39;&lt;/td&gt;&lt;td&gt;&#39;ab&#39;&lt;/td&gt;&lt;td&gt;4bytes&lt;/td&gt;&lt;td&gt;&#39;ab&#39;&lt;/td&gt;&lt;td&gt;3bytes&lt;/td&gt;&lt;td&gt;&#39;ab&#39;&lt;/td&gt;
+		&lt;tr&gt;
+		&lt;td&gt;&#39;ab &#39;&lt;/td&gt;&lt;td&gt;&#39;ab  &#39;&lt;/td&gt;&lt;td&gt;&#39;ab&#39;&lt;/td&gt;&lt;td&gt;4bytes&lt;/td&gt;&lt;td&gt;&#39;ab &#39;&lt;/td&gt;&lt;td&gt;3bytes&lt;/td&gt;&lt;td&gt;&#39;ab &#39;&lt;/td&gt;
+		&lt;tr&gt;
+		&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;4bytes&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;5bytes&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;
+		&lt;tr&gt;
+		&lt;td&gt;&#39;abcdefgh&#39;&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;4bytes&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;5bytes&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;
+	&lt;/tr&gt;
+
+从表1中得出以下结论：
+表2：
+&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt; &lt;/td&gt;&lt;td&gt;CHAR(M)&lt;/td&gt;&lt;td&gt;VARCHAR(M)&lt;/td&gt;&lt;td&gt;备注&lt;/td&gt;
+		&lt;tr&gt;
+		&lt;td&gt;长度&lt;/td&gt;&lt;td&gt;固定长度&lt;/td&gt;&lt;td&gt;根据字符集自动换算长度，该表当中所有之和&amp;lt;65535&lt;/td&gt;&lt;td&gt;跟字符集有关&lt;/td&gt;
+		&lt;tr&gt;
+		&lt;td&gt;存储&lt;/td&gt;&lt;td&gt;固定长度，不足补空格；超长的话，根据sql_mode进行报错，或自动截断&lt;/td&gt;&lt;td&gt;空字符，需要一个字节；如果&amp;lt;255个字节，会增加一个字节，记录长度；如果&amp;gt;255个字节,会增加两个字节&lt;/td&gt;&lt;td&gt;跟sql_mode有关&lt;/td&gt;
+		&lt;tr&gt;
+		&lt;td&gt;检索&lt;/td&gt;&lt;td&gt;取出来的值，会截取多余空格；跟sql_mode有关&lt;/td&gt;&lt;td&gt;跟存储的内容一致&lt;/td&gt;&lt;td&gt;跟sql_mode有关&lt;/td&gt;
+	&lt;/tr&gt;
+
+具体请看实例：
+如图1：
+	![Alt text](/assets/blog-images/20150922163551.png)
+
+
+
+#####有关知识点：
+a、字符集，这个概念比较大，为了不影响本章主题，这里就不过多介绍，有时间会单独抽出一章来着重介绍
+
+b、sql_mode：表示SQL运行在何种模式，
+
+1) 查看：show variables like &#39;sql_mode&#39;; 或者 SELECT @@GLOBAL.sql_mode;SELECT @@SESSION.sql_mode;
+
+2) 设置：SET GLOBAL sql_mode = &#39;modes&#39;;SET SESSION sql_mode = &#39;modes&#39;;
+或者在配置文件my.cnf(unix)/my.ini(windows),写入sql_mode=&quot;modes&quot;;如果多个用&quot;,&quot;隔开
+
+3) 几类常见的模式：STRICT_TRANS_TABLES、STRICT_ALL_TABLES、PAD_CHAR_TO_FULL_LENGTH等
+
+4）参考：refman-5.6-en.a4，Section 5.1.7, “Server SQL Modes”
+
+关于sql_mode具体操作如下：
+如图2：
+	![Alt text](/assets/blog-images/20150922164809.png)
+
+
+c、常用命令：
+	
+查看表结构:
+
+	desc(describe) table_name;
+	explain table_name;
+	show columns from table_name;
+	show create table table_name;(这个可以查看表的定义)
+	
+	举例：创建表t_desc
+	
+	mysql&amp;gt; create table t_desc(
+    -&amp;gt; col1 char(6) not null default &#39;&#39;,
+    -&amp;gt; col2 character(6),
+    -&amp;gt; col3 varchar(6),
+    -&amp;gt; col4 national varchar(6));
+	
+
+如图3：
+	![Alt text](/assets/blog-images/20150922095133.png)
+
+d、问题：根据mysql参考文档中，varchar(4)，如果实际存储‘abcd’，存储长度是5，怎么查看？
+
+3 二进制（BINARY）和可变长度二进制（VARBINARY）
+
+4 二进制大对象（BLOB）和文本大对象（text）
+
+5 枚举型（ENUM）
+
+6 SET字符串对象
+&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/table&gt;
+</description>
+                <link>http://F-olivia.github.io/database/2015/09/22/mysql</link>
+                <guid>http://F-olivia.github.io/database/2015/09/22/mysql</guid>
+                <pubDate>2015-09-22T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>mysql学习系列（一）</title>
@@ -32,20 +153,17 @@
 &lt;h5 id=&quot;section-1&quot;&gt;一、概述&lt;/h5&gt;
 &lt;p&gt;如目录中所列，字符串（string type）、数值（numeric type）、日期与时间（date and time type）&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;字符串（string type）：依据标准SQL（92，99，2003等）&lt;/p&gt;
+&lt;p&gt;1 字符串（string type）：依据标准SQL（92，99，2003等）&lt;/p&gt;
 
-    &lt;p&gt;1) 固定长度（Fixed-width）
- * CHARACTER(length)
- * CHAR(length)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1) 固定长度（Fixed-width）
+* CHARACTER(length)
+* CHAR(length)
 
-    &lt;p&gt;2) 可变长度（Variable-length）
- * CHARACTER VARYING(length)
- * CHAR VARYING(length)
- * VARCHAR(length)&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+2) 可变长度（Variable-length）
+* CHARACTER VARYING(length)
+* CHAR VARYING(length)
+* VARCHAR(length)
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;但，SQL2003中有关大数据对象类型，mysql中是没有的，如：&lt;/p&gt;
 
@@ -62,29 +180,26 @@
 6）SET字符串对象
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;数值（numeric type）：支持标准SQL2003所有数值类型&lt;/p&gt;
+&lt;p&gt;2 数值（numeric type）：支持标准SQL2003所有数值类型&lt;/p&gt;
 
-    &lt;p&gt;1) 整型（interger data）
- * TINYINT
- * SMALLINT
- * MEDIUMINT
- * INT
- * BIGINT&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1) 整型（interger data）
+* TINYINT
+* SMALLINT
+* MEDIUMINT
+* INT
+* BIGINT
 
-    &lt;p&gt;2）浮点型（floating-point）
- * FLOAT
- * DOUBLE&lt;/p&gt;
+2）浮点型（floating-point）
+* FLOAT
+* DOUBLE
 
-    &lt;p&gt;3）固定宽度（a fixed-point）
- * DECIMAL
- * NUMERIC&lt;/p&gt;
+3）固定宽度（a fixed-point）
+* DECIMAL
+* NUMERIC
 
-    &lt;p&gt;4）BIT型
- * BIT&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+4）BIT型
+* BIT
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;SQL2003的数值类型有以下：&lt;/p&gt;
 
@@ -108,18 +223,15 @@
 	&amp;gt;&amp;gt;(BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE KEY)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;日期与时间（date and time type）&lt;/p&gt;
+&lt;p&gt;3 日期与时间（date and time type）&lt;/p&gt;
 
-    &lt;p&gt;1）DATETIME
- 2）DATE
- 3）TIME
- 4）YEAR
- 5）TIMESTAMP
- 6）Zero&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;1）DATETIME
+2）DATE
+3）TIME
+4）YEAR
+5）TIMESTAMP
+6）Zero
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;与SQL2003标准有所不同&lt;/p&gt;
 

@@ -9,6 +9,7 @@ http://F-olivia.github.io/rss.xml
 http://F-olivia.github.io/sitemap.txt
 http://F-olivia.github.io/tags.html
 
+http://F-olivia.github.io/database/2015/09/22/mysql
 http://F-olivia.github.io/database/2015/09/18/mysql
 http://F-olivia.github.io/ruby/2015/04/10/jekyll
 http://F-olivia.github.io/ruby/2015/04/09/jekyll
