@@ -190,23 +190,32 @@
 <p>表1：</p>
 
 <table>
-	<tr>
-		<td>值</td><td>CHAR(4)</td><td>检索</td><td>存储</td><td>VARCHAR(4)</td><td>存储</td><td>检索</td>
-		<tr>
-		<td>''</td><td>'    '</td><td>''</td><td>4bytes</td><td>''</td><td>1bytes</td><td>''</td>
-		<tr>
-		<td>'ab'</td><td>'ab  '</td><td>'ab'</td><td>4bytes</td><td>'ab'</td><td>3bytes</td><td>'ab'</td>
-		<tr>
-		<td>'ab '</td><td>'ab  '</td><td>'ab'</td><td>4bytes</td><td>'ab '</td><td>3bytes</td><td>'ab '</td>
-		<tr>
-		<td>'abcd'</td><td>'abcd'</td><td>'abcd'</td><td>4bytes</td><td>'abcd'</td><td>5bytes</td><td>'abcd'</td>
-		<tr>
-		<td>'abcdefgh'</td><td>'abcd'</td><td>'abcd'</td><td>4bytes</td><td>'abcd'</td><td>5bytes</td><td>'abcd'</td>
-	</tr>
+  <thead>
+    <tr>
+      <th style="text-align: right">值</th>
+      <th style="text-align: right">CHAR(4)</th>
+      <th style="text-align: right">检索</th>
+      <th style="text-align: right">存储</th>
+      <th>VARCHAR(4)</th>
+      <th>存储</th>
+      <th>检索</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">xax</td>
+      <td style="text-align: right">xax</td>
+      <td style="text-align: right">xax</td>
+      <td style="text-align: right">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+  </tbody>
+</table>
 
-
-从表1中得出以下结论：
-表2：
+<p>从表1中得出以下结论：
+表2：</p>
 
 <table>
 	<tr>
@@ -222,7 +231,7 @@
 
 具体请看实例：
 如图1：
-	![Alt text](/assets/blog-images/20150922163551.png)
+![Alt text](/assets/blog-images/20150922163551.png)
 
 
 #####有关知识点：
@@ -241,7 +250,7 @@ b、sql_mode：表示SQL运行在何种模式，
 
 关于sql_mode具体操作如下：
 如图2：
-	![Alt text](/assets/blog-images/20150922164809.png)
+![Alt text](/assets/blog-images/20150922164809.png)
 
 
 c、常用命令：
@@ -263,7 +272,7 @@ c、常用命令：
 	
 
 如图3：
-	![Alt text](/assets/blog-images/20150922095133.png)
+![Alt text](/assets/blog-images/20150922095133.png)
 
 d、问题：根据mysql参考文档中，varchar(4)，如果实际存储‘abcd’，存储长度是5，怎么查看？
 
@@ -274,7 +283,7 @@ d、问题：根据mysql参考文档中，varchar(4)，如果实际存储‘abcd
 5 枚举型（ENUM）
 
 6 SET字符串对象
-</tr></tr></tr></table></tr></tr></tr></tr></tr></table>
+</tr></tr></tr></table>
 
         </div>
 

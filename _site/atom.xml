@@ -4,7 +4,7 @@
     <title>红薯的技术博客</title>
     <link href="http://F-olivia.github.io/" rel="self"/>
     <link href="http://F-olivia.github.io"/>
-    <updated>2015-09-22T17:08:10+08:00</updated>
+    <updated>2015-09-23T09:05:30+08:00</updated>
     <id>http://F-olivia.github.io</id>
     <author>
     <name>红薯</name>
@@ -50,23 +50,32 @@
 &lt;p&gt;表1：&lt;/p&gt;
 
 &lt;table&gt;
-	&lt;tr&gt;
-		&lt;td&gt;值&lt;/td&gt;&lt;td&gt;CHAR(4)&lt;/td&gt;&lt;td&gt;检索&lt;/td&gt;&lt;td&gt;存储&lt;/td&gt;&lt;td&gt;VARCHAR(4)&lt;/td&gt;&lt;td&gt;存储&lt;/td&gt;&lt;td&gt;检索&lt;/td&gt;
-		&lt;tr&gt;
-		&lt;td&gt;&#39;&#39;&lt;/td&gt;&lt;td&gt;&#39;    &#39;&lt;/td&gt;&lt;td&gt;&#39;&#39;&lt;/td&gt;&lt;td&gt;4bytes&lt;/td&gt;&lt;td&gt;&#39;&#39;&lt;/td&gt;&lt;td&gt;1bytes&lt;/td&gt;&lt;td&gt;&#39;&#39;&lt;/td&gt;
-		&lt;tr&gt;
-		&lt;td&gt;&#39;ab&#39;&lt;/td&gt;&lt;td&gt;&#39;ab  &#39;&lt;/td&gt;&lt;td&gt;&#39;ab&#39;&lt;/td&gt;&lt;td&gt;4bytes&lt;/td&gt;&lt;td&gt;&#39;ab&#39;&lt;/td&gt;&lt;td&gt;3bytes&lt;/td&gt;&lt;td&gt;&#39;ab&#39;&lt;/td&gt;
-		&lt;tr&gt;
-		&lt;td&gt;&#39;ab &#39;&lt;/td&gt;&lt;td&gt;&#39;ab  &#39;&lt;/td&gt;&lt;td&gt;&#39;ab&#39;&lt;/td&gt;&lt;td&gt;4bytes&lt;/td&gt;&lt;td&gt;&#39;ab &#39;&lt;/td&gt;&lt;td&gt;3bytes&lt;/td&gt;&lt;td&gt;&#39;ab &#39;&lt;/td&gt;
-		&lt;tr&gt;
-		&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;4bytes&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;5bytes&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;
-		&lt;tr&gt;
-		&lt;td&gt;&#39;abcdefgh&#39;&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;4bytes&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;&lt;td&gt;5bytes&lt;/td&gt;&lt;td&gt;&#39;abcd&#39;&lt;/td&gt;
-	&lt;/tr&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;值&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;CHAR(4)&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;检索&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;存储&lt;/th&gt;
+      &lt;th&gt;VARCHAR(4)&lt;/th&gt;
+      &lt;th&gt;存储&lt;/th&gt;
+      &lt;th&gt;检索&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;xax&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;xax&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;xax&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;—&lt;/td&gt;
+      &lt;td&gt;—&lt;/td&gt;
+      &lt;td&gt;—&lt;/td&gt;
+      &lt;td&gt;—&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
-
-从表1中得出以下结论：
-表2：
+&lt;p&gt;从表1中得出以下结论：
+表2：&lt;/p&gt;
 
 &lt;table&gt;
 	&lt;tr&gt;
@@ -82,7 +91,7 @@
 
 具体请看实例：
 如图1：
-	![Alt text](/assets/blog-images/20150922163551.png)
+![Alt text](/assets/blog-images/20150922163551.png)
 
 
 #####有关知识点：
@@ -101,7 +110,7 @@ b、sql_mode：表示SQL运行在何种模式，
 
 关于sql_mode具体操作如下：
 如图2：
-	![Alt text](/assets/blog-images/20150922164809.png)
+![Alt text](/assets/blog-images/20150922164809.png)
 
 
 c、常用命令：
@@ -123,7 +132,7 @@ c、常用命令：
 	
 
 如图3：
-	![Alt text](/assets/blog-images/20150922095133.png)
+![Alt text](/assets/blog-images/20150922095133.png)
 
 d、问题：根据mysql参考文档中，varchar(4)，如果实际存储‘abcd’，存储长度是5，怎么查看？
 
@@ -134,7 +143,7 @@ d、问题：根据mysql参考文档中，varchar(4)，如果实际存储‘abcd
 5 枚举型（ENUM）
 
 6 SET字符串对象
-&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/tr&gt;&lt;/tr&gt;&lt;/tr&gt;&lt;/table&gt;
 </content>
     </entry>
  
