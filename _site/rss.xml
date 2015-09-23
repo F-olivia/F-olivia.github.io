@@ -5,8 +5,8 @@
         <description>红薯的技术博客 - 红薯</description>
         <link>http://F-olivia.github.io</link>
         <link>http://F-olivia.github.io</link>
-        <lastBuildDate>2015-09-23T09:53:07+08:00</lastBuildDate>
-        <pubDate>2015-09-23T09:53:07+08:00</pubDate>
+        <lastBuildDate>2015-09-23T09:59:19+08:00</lastBuildDate>
+        <pubDate>2015-09-23T09:59:19+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -58,12 +58,12 @@
 
 &lt;table border=&quot;1&quot;&gt;
 &lt;tr&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt;CHAR(M)&lt;/td&gt;&lt;td&gt;VARCHAR(M)&lt;/td&gt;&lt;td&gt;备注&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;长度&lt;/td&gt;&lt;td&gt;固定长度&lt;/td&gt;&lt;td&gt;根据字符集自动换算长度，  
+&lt;tr&gt;&lt;td&gt;长度&lt;/td&gt;&lt;td&gt;固定长度&lt;/td&gt;&lt;td&gt;根据字符集自动换算长度，&lt;br /&gt;
 该表当中所有之和&amp;lt;65535&lt;/td&gt;&lt;td&gt;跟字符集有关&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;存储&lt;/td&gt;&lt;td&gt;固定长度，不足补空格；超长的话，  
-根据sql_mode进行报错，或自动截断&lt;/td&gt;&lt;td&gt;空字符，需要一个字节；  
-如果&amp;lt;255个字节，会增加一个字节，记录长度；如果&amp;gt;255个字节,会增加两个字节&lt;/td&gt;&lt;td&gt;跟sql_mode有关&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;检索&lt;/td&gt;&lt;td&gt;取出来的值，会截取多余空格；跟sql_mode有关&lt;/td&gt;&lt;td&gt;跟存储的内容一致&lt;/td&gt;&lt;td&gt;跟sql_mode有关&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;存储&lt;/td&gt;&lt;td&gt;固定长度，不足补空格；&lt;br /&gt;超长的话，
+根据sql_mode&lt;br /&gt;进行报错，或自动截断&lt;/td&gt;&lt;td&gt;空字符，需要一个字节；&lt;br /&gt;
+如果&amp;lt;255个字节，会增加一个&lt;br /&gt;字节，记录长度；&lt;br /&gt;如果&amp;gt;255个字节,会增加两个字节&lt;/td&gt;&lt;td&gt;跟sql_mode有关&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;检索&lt;/td&gt;&lt;td&gt;取出来的值，会截取多余空格；&lt;br /&gt;跟sql_mode有关&lt;/td&gt;&lt;td&gt;跟存储的内容一致&lt;/td&gt;&lt;td&gt;跟sql_mode有关&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 
 &lt;p&gt;具体请看实例：
@@ -113,7 +113,8 @@ mysql&amp;gt; create table t_desc(
 -&amp;gt; col4 national varchar(6));
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;具体操作请看，
+&lt;p&gt;&lt;br /&gt;
+具体操作请看，
 如图3：
 &lt;img src=&quot;/assets/blog-images/20150922095133.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
 
