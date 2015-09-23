@@ -220,14 +220,21 @@
 
 <p>b、sql_mode：表示SQL运行在何种模式，</p>
 
-<p>1) 查看：show variables like ‘sql_mode’; 或者 SELECT @@GLOBAL.sql_mode;SELECT @@SESSION.sql_mode;</p>
-
-<p>2) 设置：SET GLOBAL sql_mode = ‘modes’;SET SESSION sql_mode = ‘modes’;
+<ul>
+  <li>
+    <p>查看：show variables like ‘sql_mode’; 或者 SELECT @@GLOBAL.sql_mode;SELECT @@SESSION.sql_mode;</p>
+  </li>
+  <li>
+    <p>设置：SET GLOBAL sql_mode = ‘modes’;SET SESSION sql_mode = ‘modes’;
 或者在配置文件my.cnf(unix)/my.ini(windows),写入sql_mode=”modes”;如果多个用”,”隔开</p>
-
-<p>3) 几类常见的模式：STRICT_TRANS_TABLES、STRICT_ALL_TABLES、PAD_CHAR_TO_FULL_LENGTH等</p>
-
-<p>4）参考：refman-5.6-en.a4，Section 5.1.7, “Server SQL Modes”</p>
+  </li>
+  <li>
+    <p>几类常见的模式：STRICT_TRANS_TABLES、STRICT_ALL_TABLES、PAD_CHAR_TO_FULL_LENGTH等</p>
+  </li>
+  <li>
+    <p>参考：refman-5.6-en.a4，Section 5.1.7, “Server SQL Modes”</p>
+  </li>
+</ul>
 
 <p>关于sql_mode具体操作如下：
 如图2：
@@ -255,6 +262,8 @@ mysql&gt; create table t_desc(
 <img src="/assets/blog-images/20150922095133.png" alt="Alt text" /></p>
 
 <p>d、问题：根据mysql参考文档中，varchar(4)，如果实际存储‘abcd’，存储长度是5，怎么查看？</p>
+
+<p>余下的章节，我只能后续补上，…..</p>
 
 <p>3 二进制（BINARY）和可变长度二进制（VARBINARY）</p>
 
