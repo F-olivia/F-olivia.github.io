@@ -160,7 +160,7 @@
             
 <ul>
     <li>作者：<a href="http://weibo.com/Polivia" target="blank">tomfans</a></li>
-    <li>本文地址：http://f-olivia.github.io/database/2015/09/19/mysql/</li>
+    <li>本文地址：http://f-olivia.github.io/database/2015/09/22/mysql/</li>
     <li>转载请注明出处</li>
 </ul>
 
@@ -189,101 +189,80 @@
 
 <p>表1：</p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: right">值</th>
-      <th style="text-align: right">CHAR(4)</th>
-      <th style="text-align: right">检索</th>
-      <th style="text-align: right">存储</th>
-      <th>VARCHAR(4)</th>
-      <th>存储</th>
-      <th>检索</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: right">xax</td>
-      <td style="text-align: right">xax</td>
-      <td style="text-align: right">xax</td>
-      <td style="text-align: right">—</td>
-      <td>—</td>
-      <td>—</td>
-      <td>—</td>
-    </tr>
-  </tbody>
+<table border="1">
+<tr><td>值</td><td>CHAR(4)</td><td>检索</td><td>存储</td><td>VARCHAR(4)</td><td>存储</td><td>检索</td></tr>
+<tr><td>''</td><td>'    '</td><td>''</td><td>4bytes</td><td>''</td><td>1bytes</td><td>''</td></tr>
+<tr><td>'ab'</td><td>'ab  '</td><td>'ab'</td><td>4bytes</td><td>'ab'</td><td>3bytes</td><td>'ab'</td></tr>
+<tr><td>'ab '</td><td>'ab  '</td><td>'ab'</td><td>4bytes</td><td>'ab '</td><td>3bytes</td><td>'ab '</td></tr>
+<tr><td>'abcd'</td><td>'abcd'</td><td>'abcd'</td><td>4bytes</td><td>'abcd'</td><td>5bytes</td><td>'abcd'</td></tr>
+<tr><td>'abcdefgh'</td><td>'abcd'</td><td>'abcd'</td><td>4bytes</td><td>'abcd'</td><td>5bytes</td><td>'abcd'</td></tr>
 </table>
 
 <p>从表1中得出以下结论：
 表2：</p>
 
-<table>
-	<tr>
-		<td> </td><td>CHAR(M)</td><td>VARCHAR(M)</td><td>备注</td>
-		<tr>
-		<td>长度</td><td>固定长度</td><td>根据字符集自动换算长度，该表当中所有之和&lt;65535</td><td>跟字符集有关</td>
-		<tr>
-		<td>存储</td><td>固定长度，不足补空格；超长的话，根据sql_mode进行报错，或自动截断</td><td>空字符，需要一个字节；如果&lt;255个字节，会增加一个字节，记录长度；如果&gt;255个字节,会增加两个字节</td><td>跟sql_mode有关</td>
-		<tr>
-		<td>检索</td><td>取出来的值，会截取多余空格；跟sql_mode有关</td><td>跟存储的内容一致</td><td>跟sql_mode有关</td>
-	</tr>
+<table border="1">
+<tr><td> </td><td>CHAR(M)</td><td>VARCHAR(M)</td><td>备注</td></tr>
+<tr><td>长度</td><td>固定长度</td><td>根据字符集自动换算长度，  
+该表当中所有之和&lt;65535</td><td>跟字符集有关</td></tr>
+<tr><td>存储</td><td>固定长度，不足补空格；超长的话，  
+根据sql_mode进行报错，或自动截断</td><td>空字符，需要一个字节；  
+如果&lt;255个字节，会增加一个字节，记录长度；如果&gt;255个字节,会增加两个字节</td><td>跟sql_mode有关</td></tr>
+<tr><td>检索</td><td>取出来的值，会截取多余空格；跟sql_mode有关</td><td>跟存储的内容一致</td><td>跟sql_mode有关</td></tr>
+</table>
 
-
-具体请看实例：
+<p>具体请看实例：
 如图1：
-![Alt text](/assets/blog-images/20150922163551.png)
+<img src="/assets/blog-images/20150922163551.png" alt="Alt text" /></p>
 
+<h5 id="section-1">有关知识点：</h5>
+<p>a、字符集，这个概念比较大，为了不影响本章主题，这里就不过多介绍，有时间会单独抽出一章来着重介绍</p>
 
-#####有关知识点：
-a、字符集，这个概念比较大，为了不影响本章主题，这里就不过多介绍，有时间会单独抽出一章来着重介绍
+<p>b、sql_mode：表示SQL运行在何种模式，</p>
 
-b、sql_mode：表示SQL运行在何种模式，
+<p>1) 查看：show variables like ‘sql_mode’; 或者 SELECT @@GLOBAL.sql_mode;SELECT @@SESSION.sql_mode;</p>
 
-1) 查看：show variables like 'sql_mode'; 或者 SELECT @@GLOBAL.sql_mode;SELECT @@SESSION.sql_mode;
+<p>2) 设置：SET GLOBAL sql_mode = ‘modes’;SET SESSION sql_mode = ‘modes’;
+或者在配置文件my.cnf(unix)/my.ini(windows),写入sql_mode=”modes”;如果多个用”,”隔开</p>
 
-2) 设置：SET GLOBAL sql_mode = 'modes';SET SESSION sql_mode = 'modes';
-或者在配置文件my.cnf(unix)/my.ini(windows),写入sql_mode="modes";如果多个用","隔开
+<p>3) 几类常见的模式：STRICT_TRANS_TABLES、STRICT_ALL_TABLES、PAD_CHAR_TO_FULL_LENGTH等</p>
 
-3) 几类常见的模式：STRICT_TRANS_TABLES、STRICT_ALL_TABLES、PAD_CHAR_TO_FULL_LENGTH等
+<p>4）参考：refman-5.6-en.a4，Section 5.1.7, “Server SQL Modes”</p>
 
-4）参考：refman-5.6-en.a4，Section 5.1.7, “Server SQL Modes”
-
-关于sql_mode具体操作如下：
+<p>关于sql_mode具体操作如下：
 如图2：
-![Alt text](/assets/blog-images/20150922164809.png)
+<img src="/assets/blog-images/20150922164809.png" alt="Alt text" /></p>
 
+<p>c、常用命令：</p>
 
-c、常用命令：
-	
-查看表结构:
+<p>查看表结构:</p>
 
-	desc(describe) table_name;
-	explain table_name;
-	show columns from table_name;
-	show create table table_name;(这个可以查看表的定义)
-	
-	举例：创建表t_desc
-	
-	mysql&gt; create table t_desc(
-    -&gt; col1 char(6) not null default '',
-    -&gt; col2 character(6),
-    -&gt; col3 varchar(6),
-    -&gt; col4 national varchar(6));
-	
+<pre><code>desc(describe) table_name;
+explain table_name;
+show columns from table_name;
+show create table table_name;(这个可以查看表的定义)
 
-如图3：
-![Alt text](/assets/blog-images/20150922095133.png)
+举例：创建表t_desc
 
-d、问题：根据mysql参考文档中，varchar(4)，如果实际存储‘abcd’，存储长度是5，怎么查看？
+mysql&gt; create table t_desc(
+-&gt; col1 char(6) not null default '',
+-&gt; col2 character(6),
+-&gt; col3 varchar(6),
+-&gt; col4 national varchar(6));
+</code></pre>
 
-3 二进制（BINARY）和可变长度二进制（VARBINARY）
+<p>如图3：
+<img src="/assets/blog-images/20150922095133.png" alt="Alt text" /></p>
 
-4 二进制大对象（BLOB）和文本大对象（text）
+<p>d、问题：根据mysql参考文档中，varchar(4)，如果实际存储‘abcd’，存储长度是5，怎么查看？</p>
 
-5 枚举型（ENUM）
+<p>3 二进制（BINARY）和可变长度二进制（VARBINARY）</p>
 
-6 SET字符串对象
-</tr></tr></tr></table>
+<p>4 二进制大对象（BLOB）和文本大对象（text）</p>
+
+<p>5 枚举型（ENUM）</p>
+
+<p>6 SET字符串对象</p>
 
         </div>
 
