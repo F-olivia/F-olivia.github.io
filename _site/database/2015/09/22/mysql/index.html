@@ -265,15 +265,68 @@ mysql&gt; create table t_desc(
 
 <p>d、问题：根据mysql参考文档中，varchar(4)，如果实际存储‘abcd’，存储长度是5，怎么查看？</p>
 
-<p>余下的章节，我只能后续补上，…..</p>
-
 <p>3 二进制（BINARY）和可变长度二进制（VARBINARY）</p>
+
+<h5 id="sqlmode-1">区别：跟系统参数sql_mode都有关；与字符集无关</h5>
+
+<pre><code>1）长度，BINARY：0~255；VARBINARY：0-65535
+2）存储：单个字节存储的，所以跟字符集无关
+3）如果，sql_mode指定为空，超过指定长度存储，会报警告，且自动截断；如果指定为STRICT_TRANS_TABLE，则会报错
+4）如果，存储值长度不够，用0字节（0x00）补全；
+</code></pre>
+
+<p>具体请看，
+如图4：
+<br />
+<img src="/assets/blog-images/20150923164823.jpg" alt="Alt text" /></p>
 
 <p>4 二进制大对象（BLOB）和文本大对象（text）</p>
 
-<p>5 枚举型（ENUM）</p>
+<p>该数据类型没有太多介绍，只是存储备注等需要更长描述性字段，涉及2个参数：</p>
 
-<p>6 SET字符串对象</p>
+<ul>
+  <li>max_sort_length：进行排序和分组有意义的字节长度</li>
+  <li>max_allowed_packet：客户端与服务器端通讯缓存包大小</li>
+</ul>
+
+<h5 id="section-2">区别：列出二进制字符和非二进制字符</h5>
+
+<ul>
+  <li>
+    <p>非二进制字符串
+&gt; char(0-255)<br />
+&gt; varchar(0-65535)<br />
+&gt; text(0-65535)<br />
+&gt; TINYTEXT(0-255)<br />
+&gt; MEDIUMTEXT(0-16777215)<br />
+&gt; LONGTEXT(0-4294967295)</p>
+  </li>
+  <li>
+    <p>二进制字符串
+&gt; BINARY(0-255)<br />
+&gt; VARBINARY(0-65535)<br />
+&gt; TINYBLOB(0-255)<br />
+&gt; BLOB(0-65535)<br />
+&gt; MEDIUMBLOB(0-16777215)<br />
+&gt; LONGBLOB(0-4294967295)</p>
+  </li>
+</ul>
+
+<p>5 枚举型（ENUM）和SET字符串对象</p>
+
+<pre><code>1）长度：ENUM（0-65535）；SET（64个不同成员）
+2）ENUM只能有一个，空串或者为null；SET可以多个值
+3）ENUM索引值为自然值，0表示这是非法值；SET索引值为该实际值的二进制编码
+4）存储NUMBER类型，也是用引号引起来
+</code></pre>
+
+<p>具体请看实验吧：
+如图5：
+<br />
+<img src="/assets/blog-images/20150924162913.png，&quot;ENUM&quot;" alt="Alt text" /></p>
+
+<p><br />
+<img src="/assets/blog-images/20150924164031.png，&quot;SET&quot;" alt="Alt text" />	</p>
 
         </div>
 

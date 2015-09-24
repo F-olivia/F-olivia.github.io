@@ -5,8 +5,8 @@
         <description>红薯的技术博客 - 红薯</description>
         <link>http://F-olivia.github.io</link>
         <link>http://F-olivia.github.io</link>
-        <lastBuildDate>2015-09-23T10:03:18+08:00</lastBuildDate>
-        <pubDate>2015-09-23T10:03:18+08:00</pubDate>
+        <lastBuildDate>2015-09-24T16:41:04+08:00</lastBuildDate>
+        <pubDate>2015-09-24T16:41:04+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -120,15 +120,68 @@ mysql&amp;gt; create table t_desc(
 
 &lt;p&gt;d、问题：根据mysql参考文档中，varchar(4)，如果实际存储‘abcd’，存储长度是5，怎么查看？&lt;/p&gt;
 
-&lt;p&gt;余下的章节，我只能后续补上，…..&lt;/p&gt;
-
 &lt;p&gt;3 二进制（BINARY）和可变长度二进制（VARBINARY）&lt;/p&gt;
+
+&lt;h5 id=&quot;sqlmode-1&quot;&gt;区别：跟系统参数sql_mode都有关；与字符集无关&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code&gt;1）长度，BINARY：0~255；VARBINARY：0-65535
+2）存储：单个字节存储的，所以跟字符集无关
+3）如果，sql_mode指定为空，超过指定长度存储，会报警告，且自动截断；如果指定为STRICT_TRANS_TABLE，则会报错
+4）如果，存储值长度不够，用0字节（0x00）补全；
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体请看，
+如图4：
+&lt;br /&gt;
+&lt;img src=&quot;/assets/blog-images/20150923164823.jpg&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;4 二进制大对象（BLOB）和文本大对象（text）&lt;/p&gt;
 
-&lt;p&gt;5 枚举型（ENUM）&lt;/p&gt;
+&lt;p&gt;该数据类型没有太多介绍，只是存储备注等需要更长描述性字段，涉及2个参数：&lt;/p&gt;
 
-&lt;p&gt;6 SET字符串对象&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;max_sort_length：进行排序和分组有意义的字节长度&lt;/li&gt;
+  &lt;li&gt;max_allowed_packet：客户端与服务器端通讯缓存包大小&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;section-2&quot;&gt;区别：列出二进制字符和非二进制字符&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;非二进制字符串
+&amp;gt; char(0-255)&lt;br /&gt;
+&amp;gt; varchar(0-65535)&lt;br /&gt;
+&amp;gt; text(0-65535)&lt;br /&gt;
+&amp;gt; TINYTEXT(0-255)&lt;br /&gt;
+&amp;gt; MEDIUMTEXT(0-16777215)&lt;br /&gt;
+&amp;gt; LONGTEXT(0-4294967295)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;二进制字符串
+&amp;gt; BINARY(0-255)&lt;br /&gt;
+&amp;gt; VARBINARY(0-65535)&lt;br /&gt;
+&amp;gt; TINYBLOB(0-255)&lt;br /&gt;
+&amp;gt; BLOB(0-65535)&lt;br /&gt;
+&amp;gt; MEDIUMBLOB(0-16777215)&lt;br /&gt;
+&amp;gt; LONGBLOB(0-4294967295)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;5 枚举型（ENUM）和SET字符串对象&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1）长度：ENUM（0-65535）；SET（64个不同成员）
+2）ENUM只能有一个，空串或者为null；SET可以多个值
+3）ENUM索引值为自然值，0表示这是非法值；SET索引值为该实际值的二进制编码
+4）存储NUMBER类型，也是用引号引起来
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体请看实验吧：
+如图5：
+&lt;br /&gt;
+&lt;img src=&quot;/assets/blog-images/20150924162913.png，&amp;quot;ENUM&amp;quot;&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/blog-images/20150924164031.png，&amp;quot;SET&amp;quot;&quot; alt=&quot;Alt text&quot; /&gt;	&lt;/p&gt;
 </description>
                 <link>http://F-olivia.github.io/database/2015/09/22/mysql</link>
                 <guid>http://F-olivia.github.io/database/2015/09/22/mysql</guid>
