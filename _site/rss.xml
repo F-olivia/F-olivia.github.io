@@ -5,8 +5,8 @@
         <description>红薯的技术博客 - 红薯</description>
         <link>http://F-olivia.github.io</link>
         <link>http://F-olivia.github.io</link>
-        <lastBuildDate>2015-09-24T16:41:04+08:00</lastBuildDate>
-        <pubDate>2015-09-24T16:41:04+08:00</pubDate>
+        <lastBuildDate>2015-09-24T16:44:41+08:00</lastBuildDate>
+        <pubDate>2015-09-24T16:44:41+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -178,10 +178,10 @@ mysql&amp;gt; create table t_desc(
 &lt;p&gt;具体请看实验吧：
 如图5：
 &lt;br /&gt;
-&lt;img src=&quot;/assets/blog-images/20150924162913.png，&amp;quot;ENUM&amp;quot;&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/assets/blog-images/20150924162913.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/blog-images/20150924164031.png，&amp;quot;SET&amp;quot;&quot; alt=&quot;Alt text&quot; /&gt;	&lt;/p&gt;
+&lt;img src=&quot;/assets/blog-images/20150924164031.png&quot; alt=&quot;Alt text&quot; /&gt;	&lt;/p&gt;
 </description>
                 <link>http://F-olivia.github.io/database/2015/09/22/mysql</link>
                 <guid>http://F-olivia.github.io/database/2015/09/22/mysql</guid>

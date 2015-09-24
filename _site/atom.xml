@@ -4,7 +4,7 @@
     <title>红薯的技术博客</title>
     <link href="http://F-olivia.github.io/" rel="self"/>
     <link href="http://F-olivia.github.io"/>
-    <updated>2015-09-24T16:41:04+08:00</updated>
+    <updated>2015-09-24T16:44:41+08:00</updated>
     <id>http://F-olivia.github.io</id>
     <author>
     <name>红薯</name>
@@ -183,10 +183,10 @@ mysql&amp;gt; create table t_desc(
 &lt;p&gt;具体请看实验吧：
 如图5：
 &lt;br /&gt;
-&lt;img src=&quot;/assets/blog-images/20150924162913.png，&amp;quot;ENUM&amp;quot;&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/assets/blog-images/20150924162913.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/blog-images/20150924164031.png，&amp;quot;SET&amp;quot;&quot; alt=&quot;Alt text&quot; /&gt;	&lt;/p&gt;
+&lt;img src=&quot;/assets/blog-images/20150924164031.png&quot; alt=&quot;Alt text&quot; /&gt;	&lt;/p&gt;
 </content>
     </entry>
  
