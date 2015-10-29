@@ -5,10 +5,126 @@
         <description>红薯的技术博客 - 红薯</description>
         <link>http://F-olivia.github.io</link>
         <link>http://F-olivia.github.io</link>
-        <lastBuildDate>2015-09-24T16:44:41+08:00</lastBuildDate>
-        <pubDate>2015-09-24T16:44:41+08:00</pubDate>
+        <lastBuildDate>2015-10-29T10:12:11+08:00</lastBuildDate>
+        <pubDate>2015-10-29T10:12:11+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>mysql学习系列（三）</title>
+                <description>
+&lt;ul&gt;
+    &lt;li&gt;作者：&lt;a href=&quot;http://weibo.com/Polivia&quot; target=&quot;blank&quot;&gt;tomfans&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;本文地址：http://f-olivia.github.io/database/2015/09/26/mysql/&lt;/li&gt;
+    &lt;li&gt;转载请注明出处&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;section&quot;&gt;三、数值类型&lt;/h5&gt;
+
+&lt;p&gt;支持标准SQL2003所有数值类型，在前面“概述”已经描述过，具体：&lt;/p&gt;
+
+&lt;p&gt;1  整型（interger data）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;TINYINT&lt;/li&gt;
+  &lt;li&gt;SMALLINT&lt;/li&gt;
+  &lt;li&gt;MEDIUMINT&lt;/li&gt;
+  &lt;li&gt;INT&lt;/li&gt;
+  &lt;li&gt;BIGINT&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;表1：&lt;/p&gt;
+
+&lt;table border=&quot;1&quot;&gt;
+&lt;tr&gt;&lt;td&gt;Type&lt;/td&gt;&lt;td&gt;存储(Bytes)&lt;/td&gt;&lt;td&gt;Min Value &lt;br /&gt; (Signed/Unsigned)&lt;/td&gt;&lt;td&gt;Max Value &lt;br /&gt; (Signed/Unsigned)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;TINYINT&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;-128&lt;/td&gt;&lt;td&gt;127&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;255&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;SMALLINT&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;-32768&lt;/td&gt;&lt;td&gt;32767&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;65535&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;MEDIUMINT&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;-8388608&lt;/td&gt;&lt;td&gt;8388607&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;16777215&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;INT&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;-2147483648&lt;/td&gt;&lt;td&gt;2147483647&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;4294967295&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;BIGINT&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;-9223372036854775808&lt;/td&gt;&lt;td&gt;9223372036854775807&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;18446744073709551615&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;2  固定宽度（a fixed-point）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DECIMAL&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;NUMERIC&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  DECIMAL[(M[,D])] [UNSIGNED] [ZEROFILL]
+  M:代表保存数据的长度，最大为65；默认为10
+  D:代表小数点部分的位数，最大为30
+  存储为二进制存储，每9个数字需要4个字节；举例decimal(12,2),整数部分：4+[(12-2)-9]/2=5，小数部分：2/2=1,共计6字节。
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如图1：
+&lt;img src=&quot;/assets/blog-images/20151009163109.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;3  BIT型&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;	BIT[(M)]
+	M:代表存储长度，1~64bits
+	存储是二进制位，存储换算：INT((n+7)/8),比如bit(1),为1个字节。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体操作请看
+如图2：
+&lt;img src=&quot;/assets/blog-images/20151009170200.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;4  浮点型（floating-point）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;FLOAT：单精度浮点型&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  FLOAT[(M,D)] [UNSIGNED] [ZEROFILL]
+  M:代表保存数据的长度，0~23bytes
+  D:代表小数点部分的位数，
+  存储为4个字节，如果长度&amp;gt;24，自动转换为DOUBLE。
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;DOUBLE：双精度浮点型&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  DOUBLE[(M,D)] [UNSIGNED] [ZEROFILL]
+  M:代表保存数据的长度，24~53bytes
+  D:代表小数点部分的位数，
+  存储为8个字节，
+  real类型是同义词。
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;具体操作请看
+如图3：
+&lt;img src=&quot;/assets/blog-images/20151009172422.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;5  数据类型属性&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NOT NULL：不允许为空&lt;/li&gt;
+  &lt;li&gt;NULL：允许为空&lt;/li&gt;
+  &lt;li&gt;DEFAULT：默认值&lt;/li&gt;
+  &lt;li&gt;AUTO_INCREMENT：自增长类型，只有整型为自增长类型&lt;/li&gt;
+  &lt;li&gt;UNSIGNED：无符号&lt;/li&gt;
+  &lt;li&gt;ZEROFILL：填充零&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;具体操作请看
+如图4：
+&lt;img src=&quot;/assets/blog-images/20151029100642.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+</description>
+                <link>http://F-olivia.github.io/database/2015/10/29/mysql</link>
+                <guid>http://F-olivia.github.io/database/2015/10/29/mysql</guid>
+                <pubDate>2015-10-29T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>mysql学习系列（二）</title>

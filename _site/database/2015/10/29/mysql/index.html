@@ -3,8 +3,8 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>mysql学习系列（二）</title>
-        <meta name="description" content="mysql的数据类型（二）字符型">
+        <title>mysql学习系列（三）</title>
+        <meta name="description" content="mysql的数据类型（三）数值型">
         <meta name="author" content="红薯">
 
         <!-- Enable responsive viewport -->
@@ -148,185 +148,123 @@
             <div class="content">
                 
 <div class="page-header">
-    <h1>mysql学习系列（二） </h1>
+    <h1>mysql学习系列（三） </h1>
 </div>
 
 <div class="row-fluid post-full">
     <div class="span12">
         <div class="date">
-            <span>2015-09-22</span>
+            <span>2015-10-29</span>
         </div>
         <div class="content">
             
 <ul>
     <li>作者：<a href="http://weibo.com/Polivia" target="blank">tomfans</a></li>
-    <li>本文地址：http://f-olivia.github.io/database/2015/09/22/mysql/</li>
+    <li>本文地址：http://f-olivia.github.io/database/2015/09/26/mysql/</li>
     <li>转载请注明出处</li>
 </ul>
 
-<h5 id="section">二、字符串类型</h5>
+<h5 id="section">三、数值类型</h5>
 
-<p>1 固定长度（Fixed-width）</p>
+<p>支持标准SQL2003所有数值类型，在前面“概述”已经描述过，具体：</p>
 
-<ul>
-  <li>CHARACTER(length)</li>
-  <li>CHAR(length)：是CHARACTER的简写，其中MYSQL还可以这么定义：NATIONAL CHAR</li>
-</ul>
-
-<p>2 可变长度（Variable-length）</p>
+<p>1  整型（interger data）</p>
 
 <ul>
-  <li>VARCHAR(length)</li>
-  <li>NATIONAL VARCHAR（length）</li>
+  <li>TINYINT</li>
+  <li>SMALLINT</li>
+  <li>MEDIUMINT</li>
+  <li>INT</li>
+  <li>BIGINT</li>
 </ul>
-
-<h5 id="sqlmode">区别：跟字符集和系统参数sql_mode都有关系</h5>
-
-<pre><code>1）长度，char：0~255；varchar：0-65535(255*255)
-2）存储（Stored），
-3）检索（retrieved）
-</code></pre>
 
 <p>表1：</p>
 
 <table border="1">
-<tr><td>值</td><td>CHAR(4)</td><td>检索</td><td>存储</td><td>VARCHAR(4)</td><td>存储</td><td>检索</td></tr>
-<tr><td>''</td><td>'    '</td><td>''</td><td>4bytes</td><td>''</td><td>1bytes</td><td>''</td></tr>
-<tr><td>'ab'</td><td>'ab  '</td><td>'ab'</td><td>4bytes</td><td>'ab'</td><td>3bytes</td><td>'ab'</td></tr>
-<tr><td>'ab '</td><td>'ab  '</td><td>'ab'</td><td>4bytes</td><td>'ab '</td><td>3bytes</td><td>'ab '</td></tr>
-<tr><td>'abcd'</td><td>'abcd'</td><td>'abcd'</td><td>4bytes</td><td>'abcd'</td><td>5bytes</td><td>'abcd'</td></tr>
-<tr><td>'abcdefgh'</td><td>'abcd'</td><td>'abcd'</td><td>4bytes</td><td>'abcd'</td><td>5bytes</td><td>'abcd'</td></tr>
+<tr><td>Type</td><td>存储(Bytes)</td><td>Min Value <br /> (Signed/Unsigned)</td><td>Max Value <br /> (Signed/Unsigned)</td></tr>
+<tr><td>TINYINT</td><td>1</td><td>-128</td><td>127</td></tr>
+<tr><td> </td><td> </td><td>0</td><td>255</td></tr>
+<tr><td>SMALLINT</td><td>2</td><td>-32768</td><td>32767</td></tr>
+<tr><td> </td><td> </td><td>0</td><td>65535</td></tr>
+<tr><td>MEDIUMINT</td><td>3</td><td>-8388608</td><td>8388607</td></tr>
+<tr><td> </td><td> </td><td>0</td><td>16777215</td></tr>
+<tr><td>INT</td><td>4</td><td>-2147483648</td><td>2147483647</td></tr>
+<tr><td> </td><td> </td><td>0</td><td>4294967295</td></tr>
+<tr><td>BIGINT</td><td>8</td><td>-9223372036854775808</td><td>9223372036854775807</td></tr>
+<tr><td> </td><td> </td><td>0</td><td>18446744073709551615</td></tr>
 </table>
 
-<p>从表1中得出以下结论：
-表2：</p>
-
-<table border="1">
-<tr><td> </td><td>CHAR(M)</td><td>VARCHAR(M)</td><td>备注</td></tr>
-<tr><td>长度</td><td>固定长度</td><td>根据字符集自动换算长度，<br />
-该表当中所有之和&lt;65535</td><td>跟字符集有关</td></tr>
-<tr><td>存储</td><td>固定长度，不足补空格；<br />超长的话，
-根据sql_mode<br />进行报错，或自动截断</td><td>空字符，需要一个字节；<br />
-如果&lt;255个字节，会增加一个<br />字节，记录长度；<br />如果&gt;255个字节,会增加两个字节</td><td>跟sql_mode有关</td></tr>
-<tr><td>检索</td><td>取出来的值，会截取多余空格；<br />跟sql_mode有关</td><td>跟存储的内容一致</td><td>跟sql_mode有关</td></tr>
-</table>
-
-<p>具体请看实例：
-如图1：
-<img src="/assets/blog-images/20150922163551.png" alt="Alt text" /></p>
-
-<h5 id="section-1">有关知识点：</h5>
-<p>a、字符集，这个概念比较大，为了不影响本章主题，这里就不过多介绍，有时间会单独抽出一章来着重介绍</p>
-
-<p>b、sql_mode：表示SQL运行在何种模式，</p>
+<p>2  固定宽度（a fixed-point）</p>
 
 <ul>
+  <li>DECIMAL</li>
   <li>
-    <p>查看：show variables like ‘sql_mode’; 或者 SELECT @@GLOBAL.sql_mode;SELECT @@SESSION.sql_mode;</p>
-  </li>
-  <li>
-    <p>设置：SET GLOBAL sql_mode = ‘modes’;SET SESSION sql_mode = ‘modes’;
-或者在配置文件my.cnf(unix)/my.ini(windows),写入sql_mode=”modes”;如果多个用”,”隔开</p>
-  </li>
-  <li>
-    <p>几类常见的模式：STRICT_TRANS_TABLES、STRICT_ALL_TABLES、PAD_CHAR_TO_FULL_LENGTH等</p>
-  </li>
-  <li>
-    <p>参考：refman-5.6-en.a4，Section 5.1.7, “Server SQL Modes”</p>
+    <p>NUMERIC</p>
+
+    <pre><code>  DECIMAL[(M[,D])] [UNSIGNED] [ZEROFILL]
+  M:代表保存数据的长度，最大为65；默认为10
+  D:代表小数点部分的位数，最大为30
+  存储为二进制存储，每9个数字需要4个字节；举例decimal(12,2),整数部分：4+[(12-2)-9]/2=5，小数部分：2/2=1,共计6字节。
+</code></pre>
   </li>
 </ul>
 
-<p>关于sql_mode具体操作如下：
+<p>如图1：
+<img src="/assets/blog-images/20151009163109.png" alt="Alt text" /></p>
+
+<p>3  BIT型</p>
+
+<pre><code>	BIT[(M)]
+	M:代表存储长度，1~64bits
+	存储是二进制位，存储换算：INT((n+7)/8),比如bit(1),为1个字节。
+</code></pre>
+
+<p>具体操作请看
 如图2：
-<img src="/assets/blog-images/20150922164809.png" alt="Alt text" /></p>
+<img src="/assets/blog-images/20151009170200.png" alt="Alt text" /></p>
 
-<p>c、常用命令：</p>
+<p>4  浮点型（floating-point）</p>
 
-<p>查看表结构:</p>
+<ul>
+  <li>
+    <p>FLOAT：单精度浮点型</p>
 
-<pre><code>desc(describe) table_name;
-explain table_name;
-show columns from table_name;
-show create table table_name;(这个可以查看表的定义)
-
-举例：创建表t_desc
-
-mysql&gt; create table t_desc(
--&gt; col1 char(6) not null default '',
--&gt; col2 character(6),
--&gt; col3 varchar(6),
--&gt; col4 national varchar(6));
+    <pre><code>  FLOAT[(M,D)] [UNSIGNED] [ZEROFILL]
+  M:代表保存数据的长度，0~23bytes
+  D:代表小数点部分的位数，
+  存储为4个字节，如果长度&gt;24，自动转换为DOUBLE。
 </code></pre>
+  </li>
+  <li>
+    <p>DOUBLE：双精度浮点型</p>
 
-<p>具体操作请看，
+    <pre><code>  DOUBLE[(M,D)] [UNSIGNED] [ZEROFILL]
+  M:代表保存数据的长度，24~53bytes
+  D:代表小数点部分的位数，
+  存储为8个字节，
+  real类型是同义词。
+</code></pre>
+  </li>
+</ul>
+
+<p>具体操作请看
 如图3：
-<br />
-<img src="/assets/blog-images/20150922095133.png" alt="Alt text" /></p>
+<img src="/assets/blog-images/20151009172422.png" alt="Alt text" /></p>
 
-<p>d、问题：根据mysql参考文档中，varchar(4)，如果实际存储‘abcd’，存储长度是5，怎么查看？</p>
+<p>5  数据类型属性</p>
 
-<p>3 二进制（BINARY）和可变长度二进制（VARBINARY）</p>
+<ul>
+  <li>NOT NULL：不允许为空</li>
+  <li>NULL：允许为空</li>
+  <li>DEFAULT：默认值</li>
+  <li>AUTO_INCREMENT：自增长类型，只有整型为自增长类型</li>
+  <li>UNSIGNED：无符号</li>
+  <li>ZEROFILL：填充零</li>
+</ul>
 
-<h5 id="sqlmode-1">区别：跟系统参数sql_mode都有关；与字符集无关</h5>
-
-<pre><code>1）长度，BINARY：0~255；VARBINARY：0-65535
-2）存储：单个字节存储的，所以跟字符集无关
-3）如果，sql_mode指定为空，超过指定长度存储，会报警告，且自动截断；如果指定为STRICT_TRANS_TABLE，则会报错
-4）如果，存储值长度不够，用0字节（0x00）补全；
-</code></pre>
-
-<p>具体请看，
+<p>具体操作请看
 如图4：
-<br />
-<img src="/assets/blog-images/20150923164823.jpg" alt="Alt text" /></p>
-
-<p>4 二进制大对象（BLOB）和文本大对象（text）</p>
-
-<p>该数据类型没有太多介绍，只是存储备注等需要更长描述性字段，涉及2个参数：</p>
-
-<ul>
-  <li>max_sort_length：进行排序和分组有意义的字节长度</li>
-  <li>max_allowed_packet：客户端与服务器端通讯缓存包大小</li>
-</ul>
-
-<h5 id="section-2">区别：列出二进制字符和非二进制字符</h5>
-
-<ul>
-  <li>
-    <p>非二进制字符串
-&gt; char(0-255)<br />
-&gt; varchar(0-65535)<br />
-&gt; text(0-65535)<br />
-&gt; TINYTEXT(0-255)<br />
-&gt; MEDIUMTEXT(0-16777215)<br />
-&gt; LONGTEXT(0-4294967295)</p>
-  </li>
-  <li>
-    <p>二进制字符串
-&gt; BINARY(0-255)<br />
-&gt; VARBINARY(0-65535)<br />
-&gt; TINYBLOB(0-255)<br />
-&gt; BLOB(0-65535)<br />
-&gt; MEDIUMBLOB(0-16777215)<br />
-&gt; LONGBLOB(0-4294967295)</p>
-  </li>
-</ul>
-
-<p>5 枚举型（ENUM）和SET字符串对象</p>
-
-<pre><code>1）长度：ENUM（0-65535）；SET（64个不同成员）
-2）ENUM只能有一个，空串或者为null；SET可以多个值
-3）ENUM索引值为自然值，0表示这是非法值；SET索引值为该实际值的二进制编码
-4）存储NUMBER类型，也是用引号引起来
-</code></pre>
-
-<p>具体请看实验吧：
-如图5：
-<br />
-<img src="/assets/blog-images/20150924162913.png" alt="Alt text" /></p>
-
-<p><br />
-<img src="/assets/blog-images/20150924164031.png" alt="Alt text" />	</p>
+<img src="/assets/blog-images/20151029100642.png" alt="Alt text" /></p>
 
         </div>
 
@@ -373,11 +311,11 @@ mysql&gt; create table t_desc(
         <div class="pagination">
             <ul>
             
-                <li class="prev"><a href="/database/2015/09/18/mysql" title="mysql学习系列（一）">&larr; Previous</a></li>
+                <li class="prev"><a href="/database/2015/09/22/mysql" title="mysql学习系列（二）">&larr; Previous</a></li>
             
                 <li><a href="/archive.html">Archive</a></li>
             
-                <li class="next"><a href="/database/2015/10/29/mysql" title="mysql学习系列（三）">Next &rarr;</a></li>
+                <li class="next disabled"><a>Next &rarr;</a>
             
             </ul>
         </div>
