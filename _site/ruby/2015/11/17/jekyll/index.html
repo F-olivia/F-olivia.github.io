@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>git+github+markdown+jekyll blog系列（一）</title>
+        <title>git+github+markdown+jekyll blog系列（四）</title>
         <meta name="description" content="利用github jekyll 创建 blog">
         <meta name="author" content="红薯">
 
@@ -148,56 +148,98 @@
             <div class="content">
                 
 <div class="page-header">
-    <h1>git+github+markdown+jekyll blog系列（一） </h1>
+    <h1>git+github+markdown+jekyll blog系列（四） </h1>
 </div>
 
 <div class="row-fluid post-full">
     <div class="span12">
         <div class="date">
-            <span>2015-03-31</span>
+            <span>2015-11-17</span>
         </div>
         <div class="content">
             
 <ul>
     <li>作者：<a href="http://weibo.com/Polivia" target="blank">tomfans</a></li>
-    <li>本文地址：http://f-olivia.github.io/ruby/2015/03/31/jekyll/</li>
+    <li>本文地址：http://f-olivia.github.io/ruby/2015/11/17/jekyll/</li>
     <li>转载请注明出处</li>
 </ul>
 
-<h3 id="section">目录：</h3>
-<ol>
-<li>起因</li>
-<li>目标</li>
-<li>准备工作</li>
-<li>实现</li>
-<li>参考</li>
-</ol>
+<p>首先唠叨几句，应该说想放弃这篇文的选写，觉得跟这系列文太遥远，再就是没有什么干料可说；结果遇上一篇文章，我觉得把这个系列做完整了。</p>
 
-<h5 id="section-1">一、起因</h5>
+<h5 id="section">三、参考</h5>
+
+<p>（一） 参考blog：</p>
 
 <ol>
-  <li>缘起2012年看了一篇关于如何写简历的文章，介绍了Markdown文本编辑，还讲了<a href="https://github.com/">GitHub</a> 上建立自己的技术blog，给自己加分项目；这时我才知道git以及github是什么东东，markdown又是啥东西？但我没有太多的关注这些东西。</li>
-  <li>2013年开始学习nosql的知识，发现很多关于git以及github的东西，这引起了我极大的好奇，怎么这些东西无处不在，原来他是开源的</li>
-  <li>这种冲动与日俱增，2013-1-24我给自己申请了github账号，准备着手建立自己blog，这样不用在qq上偶尔写写画画了。但是，对一个跟开源基本上不沾边的it民工，又不做互联网行当，自己搭建blog何其难啊？html、css、js等等，头大……</li>
-  <li>自从看了阮一峰的文章《[搭建一个免费的，无限流量的Blog—-github Pages和Jekyll入门]
-(http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)》是使用
-GitHub 和 Jekyll 搭建独立博客非常好的入门文章，<strong>强烈建议先阅读并操作一遍</strong>。</li>
+  <li>启蒙文章：阮一峰的文章《<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">搭建一个免费的，无限流量的Blog—-github Pages和Jekyll入门</a>》</li>
+  <li>模版blog：<a href="http://xpmozong.github.io/">寞踪</a></li>
+  <li>建议参考<a href="http://yanping.me/cn/blog/2012/03/18/github-pages-step-by-step/">Github Pages极简教程 - 雁起平沙的网络日志</a></li>
 </ol>
 
-<p>发现搭建一个blog这么容易啊。于是，我开始着手实施这件事情，但还是历史悠久啊！</p>
+<p>（二） 来自 Hacker School 的 Mary Rose Cook 最近实现了一个纯 JavaScript 写就的 Git：<a href="http://gitlet.maryrosecook.com/">Gitlet</a>，包括了 Git 核心命令的概念实现。Mary 说，这个项目一是为了了解 Git 内部原理，二是希望写一篇深入浅出解释 Git 核心概念的短文:<a href="http://maryrosecook.com/blog/post/git-in-six-hundred-words">Git in 600 words</a>。短文很有趣，思路清晰也足够深入，值得一看。</p>
 
-<h5 id="section-2">二、目标</h5>
+<ol>
+  <li>git init：设想你现在位于alpha/目录下，这里有一个文本文件number.txt，里面的内容只有一个词：“first”。现在执行git init将这个 alpha 文件夹初始化为 Git 仓库。</li>
+  <li>git add：执行git add number.txt会将number.txt添加到 Git 的索引（index）中。这个索引记录了所有 Git 保持追踪的文件，现在它有了一个映射记录number.txt -&gt; first，同时add命令还会把一个包含了first字符串的二进制对象加入 Git 的对象数据库里。</li>
+  <li>git commit：现在执行git commit -m first。这条命令会做三件事情。首先在对象数据库内创建一个树对象，用以记录alpha目录下的文件列表，这个对象有一个指针指向前面git add命令创建的first二进制对象；第二，这条命令还会创建一个 commit 对象用以代表刚刚提交的版本，它包含一个指针指向刚刚的树对象；第三，master 分支也会指向这个新创建的 commit 对象。</li>
+  <li>git clone：现在执行git clone . ../beta。它会创建一个新目录 beta 并将其初始化为 Git 仓库，然后把 alpha 仓库的对象数据库中所有对象拷贝给 beta 的对象数据库，将 beta 的 master 分支像 alpha 的 master 一样指向相应的对象。它还根据first提交的内容配置索引，并根据索引更新目录下的文件——也就是number.txt。</li>
+  <li>现在切换到 beta 目录，修改number.txt的内容为“second”，执行git add number.txt和git commit -m second，新创建的提交对象 second（译注：姑且称之为 second）会有一个指向父提交（first）的指针，表示 second 继承自 first，而 master 分支则指向 second 提交。</li>
+  <li>git remote：回到 alpha 目录，执行git remote add beta ../beta，将 beta 仓库设为远程仓库。</li>
+  <li>git pull：执行git pull beta master；在这条命令背后，它其实会执行git fetch beta master，从 beta 仓库中找到 second 提交的相关对象拷贝到 alpha 仓库；把 alpha 中关于 beta 的 master 分支记录指向这个 second 提交；更新FETCH_HEAD指向刚刚从 beta 仓库拉取的 master 分支，还是这个 second 提交。<br /> 此外，pull命令还会执行git merge FETCH_HEAD。从FETCH_HEAD得知最近拉取的分支是 beta 仓库的 master 分支，据此拿到相应的对象，也就是 second 提交对象。此时 alpha 的 master 分支指着 first 提交，正好是 second 的祖先提交，于是对于 merge 命令来说只需要将 master 分支指向 second 提交即可。接下来merge命令还会更新索引以匹配 second 提交的内容，并且相应更新工作目录中的文件。</li>
+  <li>git branch red：现在执行git branch red，创建一个名为“red”、指向 second 提交的新分支。</li>
+  <li>git checkout red：然后执行git checkout red。在 checkout 之前，HEAD指向 master 分支，执行命令之后它就指向了 red 分支，使得 red 成为当前分支。</li>
+  <li>重复2、3步骤：接下来把number.txt的内容修改为 “third”，执行git add numbers.txt和run git commit -m third。</li>
+  <li>git push：之后再执行git push beta red，这条命令会把 alpha 仓库内跟 third 提交相关的对象拷贝至 beta 仓库，并且将（alpha 仓库内记录的）beta 仓库 red 分支指向 third 提交。</li>
+</ol>
 
-<p>期待的blog要至少满足以下要求：</p>
+<p>具体引用了<a href="http://gitlet.maryrosecook.com/">gitlet的代码</a>：</p>
 
-<ul>
-  <li>易写易读：使用者可以方便的编辑、管理文章，用户获取信息；</li>
-  <li>极简：尽量少的安装软件，使用少的命令，接触少的概念；</li>
-  <li>可用性：适应不同设备、浏览器访问，支持无障碍访问，只是关闭javascript访问</li>
-</ul>
+<pre><code>	---
+	$ npm install -g gitlet
 
-<p>好了，就到这里吧，请看下回继续</p>
+	$ mkdir a
+	$ cd a
+	./a $ gitlet init
+	
+	./a $ echo first &gt; number.txt
+	./a $ gitlet add number.txt
+	./a $ gitlet commit -m "first"
+		[master 2912d7a2] first
+	
+	./a $ cd ..
+		$ gitlet clone a b
+	
+		$ cd b
+	./b $ echo second &gt; number.txt
+	./b $ gitlet add number.txt
+	./b $ gitlet commit -m "second"
+	      [master 484de172] second
+	
+		$ cd ../a
+	./a $ gitlet remote add b ../b
+	./a $ gitlet fetch b master
+		From ../b
+		Count 6
+		master -&gt; b/master
+	./a $ gitlet merge FETCH_HEAD
+		Fast-forward
+	
+	./a $ gitlet branch other
+	./a $ gitlet checkout other
+		Switched to branch other
+	
+	./a $ echo third &gt; number.txt
+	./a $ gitlet add number.txt
+	./a $ gitlet commit -m "third"
+		[other 656b332d] third
+	
+	./a $ gitlet push b other
+		To ../b
+		Count 9
+		other -&gt; other
+</code></pre>
 
+<p>好了，这个系列就到这里。谢谢几位的带领！</p>
 
         </div>
 
@@ -244,11 +286,11 @@ GitHub 和 Jekyll 搭建独立博客非常好的入门文章，<strong>强烈建
         <div class="pagination">
             <ul>
             
-                <li class="prev"><a href="/%E6%97%A5%E5%BF%97/2015/03/28/markdonnote" title="你好，世界">&larr; Previous</a></li>
+                <li class="prev"><a href="/database/2015/10/29/mysql" title="mysql学习系列（三）">&larr; Previous</a></li>
             
                 <li><a href="/archive.html">Archive</a></li>
             
-                <li class="next"><a href="/ruby/2015/04/09/jekyll" title="git+github+markdown+jekyll blog系列（二）">Next &rarr;</a></li>
+                <li class="next disabled"><a>Next &rarr;</a>
             
             </ul>
         </div>
