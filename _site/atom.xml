@@ -4,7 +4,7 @@
     <title>红薯的技术博客</title>
     <link href="http://F-olivia.github.io/" rel="self"/>
     <link href="http://F-olivia.github.io"/>
-    <updated>2015-11-17T16:06:24+08:00</updated>
+    <updated>2015-11-26T09:10:57+08:00</updated>
     <id>http://F-olivia.github.io</id>
     <author>
     <name>红薯</name>
@@ -12,6 +12,60 @@
     </author>
 
 
+    <entry>
+        <title>mysql学习系列（四）</title>
+        <link href="http://F-olivia.github.io/database/2015/11/26/mysql"/>
+        <updated>2015-11-26T00:00:00+08:00</updated>
+        <id>http://F-olivia.github.io/database/2015/11/26/mysql</id>
+        <content type="html">
+&lt;ul&gt;
+    &lt;li&gt;作者：&lt;a href=&quot;http://weibo.com/Polivia&quot; target=&quot;blank&quot;&gt;tomfans&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;本文地址：http://f-olivia.github.io/database/2015/11/26/mysql/&lt;/li&gt;
+    &lt;li&gt;转载请注明出处&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;section&quot;&gt;四、日期类型&lt;/h5&gt;
+
+&lt;p&gt;日期类型与标准SQL2003有所不同，在前面“概述”已经描述过，具体如表1：：&lt;/p&gt;
+
+&lt;table border=&quot;1&quot;&gt;
+&lt;tr&gt;&lt;td&gt;Type&lt;/td&gt;&lt;td&gt;存储(Bytes)&lt;/td&gt;&lt;td&gt;Min Value &lt;/td&gt;&lt;td&gt;Max Value&lt;/td&gt;&lt;td&gt;Zero Value&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;DATETIME&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;&#39;1000-01-01 00:00:00.000000&#39; &lt;/td&gt;&lt;td&gt;&#39;9999-12-31 23:59:59.999999&#39;&lt;/td&gt;&lt;td&gt;&#39;0000-00-00 00:00:00&#39;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;DATE&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;&#39;1000-01-01&#39;&lt;/td&gt;&lt;td&gt;&#39;9999-12-31&#39;&lt;/td&gt;&lt;td&gt;&#39;0000-00-00&#39;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;TIME&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;&#39;-838:59:59&#39;&lt;/td&gt;&lt;td&gt;&#39;838:59:59&#39;&lt;/td&gt;&lt;td&gt;&#39;00:00:00&#39;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;TIMESTAMP&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;&#39;1970-01-01 00:00:01.000000&#39;&lt;/td&gt;&lt;td&gt;&#39;2038-01-19 03:14:07.999999&#39;&lt;/td&gt;&lt;td&gt;&#39;0000-00-00 00:00:00&#39;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;YEAR(2)&lt;br /&gt;也是4位数&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1970&lt;/td&gt;&lt;td&gt;2069&lt;/td&gt;&lt;td&gt;0000&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;YEAR(4)&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1901&lt;/td&gt;&lt;td&gt;2155&lt;/td&gt;&lt;td&gt;0000&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;每个时间类型都有一个指定范围的值域，如果不合法则赋给零值（Zero），TIMESTAMP有自动更新的特性；&lt;/p&gt;
+
+&lt;p&gt;如图1：
+&lt;img src=&quot;/assets/blog-images/20151118151200.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;datedatetimetimestamp&quot;&gt;DATE、DATETIME、TIMESTAMP：&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DATE只有日期，没有时间；显示格式：”YYYY-MM-DD”；范围见表1；&lt;/li&gt;
+  &lt;li&gt;DATETIME既有日期，又有时间；显示格式：’YYYY-MM-DD HH:MM:SS[.fraction]’；范围见表1；可提供自动初始化和更新；&lt;/li&gt;
+  &lt;li&gt;TIMESTAMP既有日期，又有时间；显示格式：’YYYY-MM-DD HH:MM:SS[.fraction]’；范围见表1，是UTC（Universal Time Coordinated）标准；可提供自动初始化和更新；存储时由当前时区转换成UTC存储，检索时再转换成当前时区；&lt;/li&gt;
+  &lt;li&gt;TIMESTAMP和DATETIME自动初始化和更新（Automatic Initialization and Updating for TIMESTAMP and DATETIME）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;具体个中区别请看实验吧
+如图2：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog-images/20151124101506.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog-images/20151124103838.jpg&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog-images/20151124111100.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;关于数据类型暂时告一段落吧，至于“应用场景”这节等对mysql实际有经验我再补充上去。
+这样我就可以继续下面的话题了，ok！&lt;/p&gt;
+</content>
+    </entry>
+ 
     <entry>
         <title>git+github+markdown+jekyll blog系列（四）</title>
         <link href="http://F-olivia.github.io/ruby/2015/11/17/jekyll"/>
