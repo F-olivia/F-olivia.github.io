@@ -1,0 +1,1014 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>PostgreSQL学习系列（一）</title>
+        <meta name="description" content="post的源码安装">
+        <meta name="author" content="红薯">
+
+        <!-- Enable responsive viewport -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- Le styles -->
+        <link href="/assets/themes/twitter/bootstrap/css/bootstrap.2.2.2.min.css" rel="stylesheet">
+        <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+        <script src="/assets/themes/twitter/google-code-prettify/jquery.js"></script>
+        <script src="/assets/themes/twitter/google-code-prettify/prettify.js"></script>
+        <link href="/assets/themes/twitter/google-code-prettify/sunburst.css" rel="stylesheet" type="text/css" media="all">
+        <!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata"> -->
+        <script type="text/javascript">
+            $(function(){
+                $("pre").addClass("prettyprint");
+                prettyPrint();
+
+                // hide #back-top first
+                $("#back-top").hide();
+
+                // fade in #back-top
+                $(function () {
+                    $(window).scroll(function () {
+                        if ($(this).scrollTop() > 400) {
+                            $('#back-top').fadeIn();
+                        } else {
+                            $('#back-top').fadeOut();
+                        }
+                });
+
+                // scroll body to 0px on click
+                $('#back-top a').click(function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                        }, 800);
+                    return false;
+                    });
+                });
+
+            });
+        </script>
+        <!-- Le fav and touch icons -->
+    <!-- Update these with your own images
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+        <!-- atom & rss feed -->
+        <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+        <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+    </head>
+
+    <body>
+        <p id="back-top"><a href="#top"><i class="fa fa-chevron-circle-up fa-3x"></i> <br> </a> </p>
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container-narrow">
+                    <a class="brand" href="/">红薯的技术博客</a>
+                    <ul class="nav">
+                        
+                        
+                        
+
+
+  
+    
+      
+      	
+      	<li><a href="/aboutMe.html">关于我</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">存档</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">分类</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">页面</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-narrow">
+
+            <div class="content">
+                
+<div class="page-header">
+    <h1>PostgreSQL学习系列（一） </h1>
+</div>
+
+<div class="row-fluid post-full">
+    <div class="span12">
+        <div class="date">
+            <span>2016-05-17</span>
+        </div>
+        <div class="content">
+            
+<ul>
+    <li>作者：<a href="http://weibo.com/Polivia" target="blank">F-olivia</a></li>
+    <li>本文地址：http://f-olivia.github.io/database/2016/05/17/postgresql/</li>
+    <li>转载请注明出处</li>
+</ul>
+
+<h3 id="section">目录</h3>
+<ol>
+<li>获取安装包</li>
+<li>PostgreSQL源码目录结构简介</li>
+<li>源码安装PostgreSQL</li>
+<li>PostgreSQL软件目录结构简介</li>
+<li>验证安装</li>
+</ol>
+
+<p>环境：vmware9.0下OS centos 5.7 ；DB postgresql 9.1.2 </p>
+
+<h5 id="section-1">获取安装包</h5>
+<p>1.输入官方网址
+http://www.postgresql.org/</p>
+
+<p>2.点击download标签页，进入点击“file browser”；
+如图1：
+<img src="/assets/blog-images/20160513102252.png" alt="Alt text" /></p>
+
+<p>3.进入后File Browser，会看到
+如图2：
+<img src="/assets/blog-images/20160513102915.png" alt="Alt text" />
+我选择了版本 v9.5.2，然后点击进去；</p>
+
+<p>4.进入就是源码包，我选择了postgresql-9.5.2.tar.bz2，
+如图3：
+<img src="/assets/blog-images/20160513103214.png" alt="Alt text" /></p>
+
+<h5 id="postgresql">PostgreSQL源码目录结构简介</h5>
+<p>1.解压安装包：</p>
+
+<pre><code>[root@localhost ~]# tar -jxvf postgresql-9.5.2.tar.bz2 
+postgresql-9.5.2/
+postgresql-9.5.2/.dir-locals.el
+postgresql-9.5.2/contrib/
+......
+postgresql-9.5.2/.gitattributes
+postgresql-9.5.2/aclocal.m4
+postgresql-9.5.2/configure.in
+postgresql-9.5.2/INSTALL
+[root@localhost ~]# ll
+total 18024
+-rw-------. 1 root root     1089 May 12 00:28 anaconda-ks.cfg
+drwxrwxrwx. 6 1107 1107     4096 Mar 29 04:23 postgresql-9.5.2
+-rw-r--r--. 1 root root 18446616 May 13 17:56 postgresql-9.5.2.tar.bz2
+</code></pre>
+
+<p>2.查看安装包目录结构：</p>
+
+<pre><code>[root@localhost postgresql-9.5.2]# ll
+total 636
+-rw-r--r--.  1 1107 1107   1192 Mar 29 04:07 COPYRIGHT        --版权信息
+-rw-r--r--.  1 1107 1107   3638 Mar 29 04:07 GNUmakefile.in   --Makefile 的雏形
+-rw-r--r--.  1 1107 1107    283 Mar 29 04:07 HISTORY          --版本变更的历史说明
+-rw-r--r--.  1 1107 1107  74597 Mar 29 04:23 INSTALL          --安装方法简要说明
+-rw-r--r--.  1 1107 1107   1489 Mar 29 04:07 Makefile         --Makefile模版
+-rw-r--r--.  1 1107 1107   1209 Mar 29 04:07 README           
+-rw-r--r--.  1 1107 1107    385 Mar 29 04:07 aclocal.m4       --config 用的文件的一部分
+drwxrwxrwx.  2 1107 1107   4096 Mar 29 04:20 config           --
+-rwxr-xr-x.  1 1107 1107 462599 Mar 29 04:07 configure        --源码安装的配置脚本
+-rw-r--r--.  1 1107 1107  73212 Mar 29 04:07 configure.in     --
+drwxrwxrwx. 53 1107 1107   4096 Mar 29 04:20 contrib          --已打包到PG源码中的第三方贡献的插件源码
+drwxrwxrwx.  3 1107 1107    101 Mar 29 04:20 doc              --文档目录
+drwxrwxrwx. 15 1107 1107   4096 Mar 29 04:23 src              --源码目录
+</code></pre>
+
+<p>一级目录：/config、/contrib、/doc、/src</p>
+
+<p>/config</p>
+
+<pre><code>[root@localhost postgresql-9.5.2]# cd config
+[root@localhost config]# ll
+total 200
+-rw-r--r--. 1 1107 1107   441 Mar 29 04:07 Makefile
+-rw-r--r--. 1 1107 1107  3595 Mar 29 04:07 ac_func_accept_argtypes.m4
+-rw-r--r--. 1 1107 1107  7066 Mar 29 04:07 acx_pthread.m4
+-rw-r--r--. 1 1107 1107 18827 Mar 29 04:07 c-compiler.m4
+-rw-r--r--. 1 1107 1107 12234 Mar 29 04:07 c-library.m4
+-rwxr-xr-x. 1 1107 1107 43434 Mar 29 04:07 config.guess
+-rwxr-xr-x. 1 1107 1107 36133 Mar 29 04:07 config.sub
+-rw-r--r--. 1 1107 1107  2794 Mar 29 04:07 docbook.m4
+-rw-r--r--. 1 1107 1107  5281 Mar 29 04:07 general.m4
+-rwxr-xr-x. 1 1107 1107 13997 Mar 29 04:07 install-sh
+-rw-r--r--. 1 1107 1107  4214 Mar 29 04:07 libtool.m4
+-rwxr-xr-x. 1 1107 1107  1348 Mar 29 04:07 missing
+-rw-r--r--. 1 1107 1107  2734 Mar 29 04:07 perl.m4
+-rw-r--r--. 1 1107 1107  1252 Mar 29 04:07 prep_buildtree
+-rw-r--r--. 1 1107 1107  8975 Mar 29 04:07 programs.m4
+-rw-r--r--. 1 1107 1107  3860 Mar 29 04:07 python.m4
+-rw-r--r--. 1 1107 1107  2451 Mar 29 04:07 tcl.m4
+-rw-r--r--. 1 1107 1107   464 Mar 29 04:07 test_quiet_include.h
+</code></pre>
+
+<p>/doc</p>
+
+<pre><code>[root@localhost postgresql-9.5.2]# ll doc/
+total 20
+-rw-r--r--. 1 1107 1107  163 Mar 29 04:07 KNOWN_BUGS
+-rw-r--r--. 1 1107 1107  163 Mar 29 04:07 MISSING_FEATURES
+-rw-r--r--. 1 1107 1107  469 Mar 29 04:07 Makefile
+-rw-r--r--. 1 1107 1107   75 Mar 29 04:07 TODO
+-rw-r--r--. 1 1107 1107 1574 Mar 29 04:07 bug.template
+drwxrwxrwx. 3 1107 1107   32 Mar 29 04:20 src
+</code></pre>
+
+<p>contrib/</p>
+
+<pre><code>[root@localhost postgresql-9.5.2]# ll contrib/
+total 172                                                     
+-rw-r--r--. 1 1107 1107 1365 Mar 29 04:07 Makefile            --
+-rw-r--r--. 1 1107 1107 1131 Mar 29 04:07 README              --
+drwxrwxrwx. 2 1107 1107   88 Mar 29 04:20 adminpack           --一些管理函数
+drwxrwxrwx. 2 1107 1107   40 Mar 29 04:20 auth_delay          --认证失败后延迟报异常, 可以防止暴力破解
+drwxrwxrwx. 2 1107 1107   42 Mar 29 04:20 auto_explain        --将超过指定执行时间的SQL的执行计划输出到日志中
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 btree_gin           --gin索引方法的btree操作符扩展. 
+															  --(在某些情况下"多列gin组合索引"比"多个btree单列索引"的bitmap anding更高效)
+drwxrwxrwx. 5 1107 1107 4096 Mar 29 04:20 btree_gist          --gist索引方法的btree操作符扩展.
+															  --(在组合索引中的某些列类型仅支持gist索引访问方法, 
+															  --而另一些列的类型支持btree以及gist时btree_gist更为有效, 
+															  --同时btree_gist还新增了&lt;&gt;用于排他约束,&lt;-&gt;用于近邻算法)
+drwxrwxrwx. 2 1107 1107 4096 Mar 29 04:20 chkpass             --自动加密的字段类型(使用UNIX标准函数crypt()进行封装, 所以仅支持前8位安全) 
+															  --'abcdefghijkl'::chkpass = 'abcdefgh'
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 citext              --不区分大小写的数据类型.
+-rw-r--r--. 1 1107 1107   85 Mar 29 04:07 contrib-global.mk   --
+drwxrwxrwx. 5 1107 1107 4096 Mar 29 04:23 cube                --多维立方体类型, 支持多维立方体对象的相同,相交,包含等运算
+drwxrwxrwx. 6 1107 1107 4096 Mar 29 04:20 dblink              --PostgreSQL跨库操作插件
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 dict_int            --全文检索的一个字典模板, 用于控制数字被拆分的最大长度. 以控制数字在全文检索中的分词个数.
+															  --(maxlen =6: 12345678 -&gt; 123456 截断成6个, rejectlong =true则忽略这个分词)
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 dict_xsyn           --全文检索的一个字典模块, 设置分词的同义词, 支持同义词匹配.
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 earthdistance       --可以使用cube或point类型计算地球表面两点之间的距离
+drwxrwxrwx. 7 1107 1107 4096 Mar 29 04:20 file_fdw            --文件外部表模块
+drwxrwxrwx. 2 1107 1107 4096 Mar 29 04:20 fuzzystrmatch       --单字节字符串之间的相似性判断
+drwxrwxrwx. 5 1107 1107 4096 Mar 29 04:20 hstore              --hstore用于存储k-v数据类型, 同时这个插件还提供了比较多的K-V类型相关的函数和操作符.
+															  --例如提供数组,json,hstore之间的转换. k-v的存在判断,删除k-v值.
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 hstore_plperl       --
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 hstore_plpython     --
+drwxrwxrwx. 2 1107 1107   98 Mar 29 04:20 intagg              --int类型的数组聚合函数.(内建的array_agg函数已包含这个功能)
+drwxrwxrwx. 6 1107 1107 4096 Mar 29 04:20 intarray            --int类型的数组功能扩展库, 提供了一些常用的函数和操作符
+															  --(数组元素个数, 元素排序, 元素下标, 取元素子集, 相交, 包含, 增加元素, 删除元素, 合并等)
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 isn                 --提供国际通用的产品标识码数据类型, 例如ISBN, ISMN...
+drwxrwxrwx. 2 1107 1107 4096 Mar 29 04:20 lo                  --大对象的一个可选模块, lo类型以及自动unlink大对象的触发器. 
+															  --方便大对象在消亡后的自动unlink, 防止大对象存储泄漏(类似内存泄漏).
+drwxrwxrwx. 5 1107 1107 4096 Mar 29 04:20 ltree               --异构数据类型以及操作函数和操作符. 例如China.Zhejiang.Hang &lt;@'China'
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 ltree_plpython      --
+drwxrwxrwx. 2 1107 1107   55 Mar 29 04:20 oid2name            --oid转换成name的命令行工具, 不属于extension. 或通过系统表查询得到.
+drwxrwxrwx. 2 1107 1107 4096 Mar 29 04:20 pageinspect         --用于读取数据库PAGE裸信息的插件, 可以读main, fsm, vmFORK的页数据, 一般用于debug.
+															  --(使用时请参照对应数据库版本的头文件解读信息)
+drwxrwxrwx. 2 1107 1107   43 Mar 29 04:20 passwordcheck       --创建用户或者修改用户密码时, 检查密码的安全性, 如果太弱的话, 将返回错误.
+drwxrwxrwx. 2 1107 1107 4096 Mar 29 04:20 pg_buffercache      --输出当前的shared buffer的状态数据(细化到page number)
+drwxrwxrwx. 2 1107 1107 4096 Mar 29 04:20 pg_freespacemap     --输出对象指定page或所有page的free space map信息.
+drwxrwxrwx. 2 1107 1107   91 Mar 29 04:20 pg_prewarm          --加载关系数据到操作系统缓冲区缓存或PostgreSQL缓冲区缓存。
+drwxrwxrwx. 2 1107 1107   57 Mar 29 04:20 pg_standby          --8.4以及以前的版本方便于创建warm standby的命令行工具
+drwxrwxrwx. 2 1107 1107 4096 Mar 29 04:20 pg_stat_statements  --跟踪数据库的SQL, 收集SQL的统计信息.
+drwxrwxrwx. 5 1107 1107 4096 Mar 29 04:20 pg_trgm             --将字符串拆分成3个一组的多个单元, 用于测试两个字符串之间的近似度. 比分词更加暴力.
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 pgcrypto            --PostgreSQL的服务端数据加密的扩展库
+drwxrwxrwx. 2 1107 1107 4096 Mar 29 04:20 pgrowlocks          --(从行头信息中的infomask获取行锁信息), 注意输出的不是snapshot.
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 pgstattuple         --行级统计信息(dead tuples, live tuples, table_len, free_space,free_percent), 索引的统计信息.
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 postgres_fdw        --postgresql跨库的外部表插件
+drwxrwxrwx. 5 1107 1107 4096 Mar 29 04:23 seg                 --线段类型和浮点数的区间类型. 以及相关的操作符, 索引访问方法等.
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 sepgsql             --基于SELinux安全策略的访问控制模块.
+drwxrwxrwx. 2 1107 1107 4096 Mar 29 04:20 spi                 --一些服务端的触发器函数(例如跟踪记录的存活时间, 被哪个用户修改了,记录的修改时间等).
+drwxrwxrwx. 2 1107 1107 4096 Mar 29 04:20 sslinfo             --输出ssl认证的客户端的一些认证信息.
+drwxrwxrwx. 3 1107 1107   42 Mar 29 04:20 start-scripts       --数据库启动脚本模板
+drwxrwxrwx. 5 1107 1107 4096 Mar 29 04:20 tablefunc           --一般可用于行列变换, 异构数据处理等.
+drwxrwxrwx. 2 1107 1107   70 Mar 29 04:20 tcn                 --提供异步消息输出的触发器.
+drwxrwxrwx. 5 1107 1107 4096 Mar 29 04:20 test_decoding       --逻辑解码输出插件的一个示例.
+drwxrwxrwx. 5 1107 1107 4096 Mar 29 04:20 tsearch2            --在文本搜索整合到内核PostgreSQL 版本8.3之前的应用提供后向兼容的文本搜索功能.
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 tsm_system_rows     --
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 tsm_system_time     --
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 unaccent            --全文检索相关的插件
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 uuid-ossp           --生成UUID的插件
+drwxrwxrwx. 2 1107 1107   55 Mar 29 04:20 vacuumlo            --大对象垃圾回收的命令
+drwxrwxrwx. 4 1107 1107 4096 Mar 29 04:20 xml2                --xml相关插件
+</code></pre>
+
+<p>/src</p>
+
+<pre><code>[root@localhost postgresql-9.5.2]# ll src/
+total 116
+-rw-r--r--.  1 1107 1107   173 Mar 29 04:07 DEVELOPERS          --面向开发人员的注释
+-rw-r--r--.  1 1107 1107  1961 Mar 29 04:07 Makefile            --
+-rw-r--r--.  1 1107 1107 26379 Mar 29 04:07 Makefile.global.in  --
+-rw-r--r--.  1 1107 1107 16409 Mar 29 04:07 Makefile.shlib      --共享库用的Makefile
+drwxrwxrwx. 25 1107 1107  4096 Mar 29 04:20 backend             --后台进程相关的源码(包括postmaster, optimizer, replication,checkpoint, access,... 等等)
+-rw-r--r--.  1 1107 1107  1226 Mar 29 04:07 bcc32.mak           --
+drwxrwxrwx. 19 1107 1107  4096 Mar 29 04:20 bin                 --客户端进程的源码(例如initdb, psql, pg_dump等等)
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 common              --公共组件库代码
+drwxrwxrwx. 27 1107 1107  4096 Mar 29 04:23 include             --头文件
+drwxrwxrwx.  4 1107 1107    44 Mar 29 04:20 interfaces          --前端相关的库的代码(交互接口的源码；例如ecpg, libpq)
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 makefiles           --
+-rw-r--r--.  1 1107 1107  5906 Mar 29 04:07 nls-global.mk       --
+drwxrwxrwx.  6 1107 1107    73 Mar 29 04:20 pl                  --过程语言的源码(例如plperl, plpgsql, plpython, pltcl)
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 port                --平台移植相关的代码
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 template            --不同OS平台下的编译器选项模板
+drwxrwxrwx. 11 1107 1107  4096 Mar 29 04:20 test                --测试相关的源码
+drwxrwxrwx.  4 1107 1107  4096 Mar 29 04:20 timezone            --(从http://www.iana.org/time-zones同步的时区库)
+drwxrwxrwx. 10 1107 1107  4096 Mar 29 04:20 tools               --编译过程中用到的一些命令行工具
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 tutorial            --包含基本的SQL教程脚本
+-rw-r--r--.  1 1107 1107   760 Mar 29 04:07 win32.mak           --Win32 Makefile (Visual C++ 用)
+</code></pre>
+
+<p>这里比较核心的是backend,bin,interface这几个目录。Backend是对应于后端，bin和interface对应于前端。bin里面有pgsql,initdb,pg_dump等各种工具的代码。interface里面有PostgreSQL的C语言的库libpq,另外可以在C里嵌入SQL的ECPG命令的相关代码。
+Backend目录的结构如下：</p>
+
+<pre><code>[root@localhost postgresql-9.5.2]# ll src/backend/      
+total 96
+-rw-r--r--.  1 1107 1107 11299 Mar 29 04:07 Makefile        
+drwxrwxrwx. 14 1107 1107  4096 Mar 29 04:20 access       --各种存储访问方法(在各个子目录下) 
+														 --common(共同函数)、gin (Generalized Inverted Index通用逆向索引)
+ 														 --gist (Generalized  Search Tree通用索引)、 hash (哈希索引)、heap (heap的访问方法)、
+														 --index (通用索引函数)、 nbtree (Btree函数)、transam (事务处理)   
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:22 bootstrap    --数据库的初始化处理(initdb的时候)
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:23 catalog      --系统目录
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 commands     --SELECT/INSERT/UPDATE/DELETE以为的SQL文的处理   
+-rw-r--r--.  1 1107 1107  1349 Mar 29 04:07 common.mk    --
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 executor     --执行器(访问的执行)                             
+drwxrwxrwx.  2 1107 1107    37 Mar 29 04:20 foreign      --FDW(Foreign Data Wrapper)处理                  
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 lib          --共同函数                                   
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 libpq        --前端/后端通信处理                          
+drwxrwxrwx.  2 1107 1107    34 Mar 29 04:20 main         --postgres的主函数                           
+-rw-r--r--.  1 1107 1107   733 Mar 29 04:07 nls.mk       --                   
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 nodes        --构文树节点相关的处理函数
+drwxrwxrwx.  7 1107 1107    89 Mar 29 04:20 optimizer    --优化器
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:22 parser       --SQL构文解析器
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 po           --
+drwxrwxrwx.  8 1107 1107  4096 Mar 29 04:23 port         --平台相关的代码
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 postmaster   --postmaster的主函数 (常驻postgres)
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 regex        -- 正则处理
+drwxrwxrwx.  4 1107 1107  4096 Mar 29 04:23 replication  --streaming replication 
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 rewrite      --规则及视图相关的重写处理  
+drwxrwxrwx.  4 1107 1107  4096 Mar 29 04:20 snowball     --全文检索相关（语干处理）  
+drwxrwxrwx. 10 1107 1107  4096 Mar 29 04:20 storage      --共享内存、磁盘上的存储、缓存等全部一次/二次记录管理(以下的目录)
+														 --buffer/(缓存管理)、 file/(文件)、freespace/(Fee Space Map管理) 
+														 --ipc/(进程间通信)、large_object /(大对象的访问函数)、 
+														 --lmgr/(锁管理)、page/(页面访问相关函数)、 smgr/(存储管理器)
+drwxrwxrwx.  2 1107 1107    99 Mar 29 04:20 tcop         --postgres (数据库引擎的进程)的主要部分
+drwxrwxrwx.  2 1107 1107  4096 Mar 29 04:20 tsearch      --全文检索
+drwxrwxrwx. 14 1107 1107  4096 Mar 29 04:23 utils        --各种模块(以下目录) 
+														 --adt/(嵌入的数据类型)、cache/(缓存管理)、 error/(错误处理)、fmgr/(函数管理)、
+														 --hash/(hash函数)、init/(数据库初始化、postgres的初期处理)、 mb/(多字节文字处理)、
+														 --misc/(其他)、mmgr/(内存的管理函数)、 resowner/(查询处理中的数据(buffer pin及表锁)的管理)、
+														 --sort/(排序处理)、time/(事务的 MVCC 管理)
+</code></pre>
+
+<h5 id="postgresql-1">源码安装PostgreSQL</h5>
+
+<p>1.配置（Configuration）</p>
+
+<p>./configure –prefix=/opt/pgsql9.5.2 –with-pgport=1921 –with-perl –with-tcl –with-python –with-openssl –with-pam –without-ldap –with-libxml –with-libxslt –enable-thread-safety –with-wal-blocksize=16 –with-blocksize=16 –enable-dtrace –enable-debug</p>
+
+<p>1）配置选项</p>
+
+<pre><code>--prefix=/opt/pgsql9.5.2：安装所有文件在/opt/pgsql9.5.2中（取代默认时的/usr/local/pgsql）。
+--with-pgport=1921：为服务器和客户端设置默认端口号。默认是5432。
+--with-perl：编译PL/Perl服务端语言。
+--with-python：编译PL/Python服务端语言。
+--with-tcl：编译PL/Tcl服务端语言。
+--with-openssl：编译支持SLL（加密）连接。这需要安装OpenSSL包。
+--with-pam：编译支持PAM（Pluggable Authentication Modules，可插拔认证模块）
+--without-ldap：编译支持认证和连接参数检查
+--with-libxml：编译libxml（支持SQL/XML），支持这个选项需要Libxml 2.6.23及最新版
+--with-libxslt：编译xml2模块，使用libxslt
+--enable-thread-safety：让客户端库是线程安全的；允许在libpq和ECPG程序里的并发线程安全地控制他们私有的连接句柄。
+--with-wal-blocksize=16：WAL：预写式日志（Write-Ahead Logging）设置WAL块大小，以KB为单位。这是WAL日志中存储和I/O单元。默认情况下，8KB，适用于大多数情况； 但是其它的值可能在特殊情况下是有用的。该值必须是1和64之间（KB）2的幂。请注意，改变这个值需要初始化数据库。
+--with-blocksize=16：设置block size，以KB为单位。这是表的存储和IO单元。默认为8K,适用于大多数情况；但是在特殊场合中，其他的值可能是非常有用的。这个值必须是2的1到32次方（KB）。注意,改变这个值需要一个initdb。
+--enable-dtrace：编译PostgreSQL支持动态跟踪工具DTrace
+--enable-debug：把所有程序和库以带有调试符号的方式编译
+--enable-nls[=LANGUAGES]:打开本地语言支持(NLS)，即以非英文显示程序的信息的能力。LANGUAGES是一个空格分隔的语言代码列表，标识你想支持的语言。比如--enable-nls='de fr'。（你提供的列表和实际支持的列表之间的交集将会自动计算出来。）如果你没有声明一个列表，那么就安装所有可用的翻译。
+</code></pre>
+
+<p>2）configure时，遇到问题及解决，由于没有事先检查这些安装包是否安装，基本上都报错了</p>
+
+<pre><code>a.dtrace：缺少systemtap工具，需要安装systemtap-devel、systemtap-client和systemtap-runtime这3个包。其中systemtap-sdt-devel是编译PostgreSQL时，选项--enable-dtrace需要的包。
+
+---
+	在CentOS中安装systemtap：
+	在安装systemtap前，要保证kernel对应的kernel-devel包的版本保持一致：
+	
+	检查：
+	[root@localhost ~]# rpm -qa|grep kernel
+	[root@localhost ~]# uname -a
+	
+	不一致的话，则安装对应的kernel-devel版本或者升级kernel：
+	[root@localhost ~]# yum install kernel-devel
+	或：[root@localhost ~]# yum update kernel
+	重启服务器。
+	
+	安装systemtap
+	[root@localhost ~]# yum install systemtap systemtap-sdt-devel
+	
+	使用命令：
+	[root@localhost ~]# rpm -qf /usr/bin/stap
+	systemtap-devel-2.3-4.el6_5.x86_64
+	systemtap-client-2.3-4.el6_5.x86_64
+	rpm -qf：查询文件隶属的软件包
+	
+	检查stap是否正常
+	[root@localhost postgresql-9.5.2]# stap
+	A script must be specified.
+	Try '--help' for more information.
+	[root@localhost postgresql-9.5.2]# stap -ve 'probe begin { log("hello world") exit() }'
+	Pass 1: parsed user script and 110 library script(s) using 116404virt/37456res/2968shr/34832data kb, in 110usr/70sys/193real ms.
+	Pass 2: analyzed script: 1 probe(s), 2 function(s), 0 embed(s), 0 global(s) using 117064virt/38248res/3092shr/35492data kb, in 10usr/0sys/4real ms.
+	Pass 3: translated to C into "/tmp/stapdzwQoj/stap_4b5600e768dc4f7653aec2a6f0b84c1b_1030_src.c" using 117064virt/38852res/3632shr/35492data kb, in 0usr/0sys/1real ms.
+	Pass 4: compiled C into "stap_4b5600e768dc4f7653aec2a6f0b84c1b_1030.ko" in 5020usr/1800sys/7369real ms.
+	Pass 5: starting run.
+	hello world
+	Pass 5: run completed in 10usr/40sys/333real ms.
+	
+	stap调试好后，PostgreSQL编译时必须开启dtrace支持，即--enable-dtrace。
+---
+
+b.configure: error: could not determine flags for linking embedded Perl.
+
+---
+	[root@localhost postgresql-9.5.2]# yum install perl-ExtUtils-Embed
+	Loaded plugins: fastestmirror, langpacks
+	Loading mirror speeds from cached hostfile
+	 * base: ftp.sjtu.edu.cn
+	......
+	Installed:
+  perl-ExtUtils-Embed.noarch 0:1.30-286.el7                                                  
+
+Dependency Installed:
+  gdbm-devel.x86_64 0:1.10-8.el7                libdb-devel.x86_64 0:5.3.21-19.el7          
+  perl-ExtUtils-Install.noarch 0:1.58-286.el7   perl-ExtUtils-MakeMaker.noarch 0:6.68-3.el7 
+  perl-ExtUtils-Manifest.noarch 0:1.61-244.el7  perl-ExtUtils-ParseXS.noarch 1:3.18-2.el7   
+  perl-devel.x86_64 4:5.16.3-286.el7           
+
+Complete!
+--- 
+后面的问题包，我就不详细罗列安装内容了
+
+c.configure: error: readline library not found
+[root@localhost postgresql-9.5.2]# yum install readline-devel.x86_64
+readline选项，是默认安装的，结果我没有选择不按装导致的；该选项允许psql（PostgreSQL命令行SQL解释器）记住每个键入的命令， 并允许你使用箭头键来调用和编辑以前的命令。这是非常有帮助的，强烈推荐。
+
+d.configure: error: zlib library not found
+[root@localhost postgresql-9.5.2]# yum install zlib-devel.x86_64
+缺省的时候将使用zlib压缩库。如果你不想使用它， 那么你必须给configure声明--without-zlib选项。
+
+e.configure: error: library 'crypto' is required for OpenSSL
+[root@localhost postgresql-9.5.2]# yum install openssl openssl-devel
+
+f.configure: error: library 'pam' is required for PAM
+[root@localhost postgresql-9.5.2]# yum install pam pam-devel
+
+g.configure: error: library 'xml2' (version &gt;= 2.6.23) is required for XML support
+[root@localhost postgresql-9.5.2]# yum install libxml2 libxml2-devel
+
+h.configure: error: library 'xslt' is required for XSLT support
+[root@localhost postgresql-9.5.2]# yum install libxslt libxslt-devel
+
+i.configure: error: Tcl shell not found
+[root@localhost postgresql-9.5.2]# yum install tcl tcl-devel
+
+j.configure: error: header file is required for LDAP
+[root@localhost postgresql-9.5.2]# yum install openldap openldap-devel
+
+k.configure: error: header file &lt;Python.h&gt; is required for Python
+[root@localhost postgresql-9.5.2]# yum install python python-devel
+</code></pre>
+
+<p>configure终于完成，还是前期工作没做好，这里参考了<a href="http://my.oschina.net/tashi/blog/189351">博文</a></p>
+
+<p>2.编译：gmake world（make world安装包含了文档，所有的contrib）</p>
+
+<pre><code>[root@localhost postgresql-9.5.2]# gmake world
+gmake -C doc all
+gmake[1]: Entering directory `/root/postgresql-9.5.2/doc'
+gmake -C src all
+gmake[2]: Entering directory `/root/postgresql-9.5.2/doc/src'
+gmake -C sgml all
+......
+gmake[2]: Leaving directory `/root/postgresql-9.5.2/contrib/ltree_plpython'
+gmake[1]: Leaving directory `/root/postgresql-9.5.2/contrib'
+PostgreSQL, contrib, and documentation successfully made. Ready to install.
+</code></pre>
+
+<p>3.安装：gmake install-world（带world参数可以安装PG的附属信息，如文档，帮助等）</p>
+
+<pre><code>[root@localhost postgresql-9.5.2]# gmake install-world
+gmake -C doc install
+gmake[1]: Entering directory `/root/postgresql-9.5.2/doc'
+gmake -C src install
+gmake[2]: Entering directory `/root/postgresql-9.5.2/doc/src'
+gmake -C sgml install
+......
+gmake[2]: Leaving directory `/root/postgresql-9.5.2/contrib/ltree_plpython'
+gmake[1]: Leaving directory `/root/postgresql-9.5.2/contrib'
+PostgreSQL, contrib, and documentation installation complete.
+</code></pre>
+
+<p>4.配置PG</p>
+
+<p>1）新建用户</p>
+
+<pre><code>[root@localhost ~]# groupadd postgres
+[root@localhost ~]# useradd -g postgres postgres
+[root@localhost ~]# passwd postgres
+Changing password for user postgres.
+New password: 
+BAD PASSWORD: The password contains the user name in some form
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# su - postgres
+[postgres@localhost ~]$ ll
+æ€»ç”¨é‡ 0
+[postgres@localhost ~]$ export LANG=C
+[postgres@localhost ~]$ ll
+total 0
+</code></pre>
+
+<p>2）创建数据库目录以及设置权限</p>
+
+<pre><code>[root@localhost pgsql9.5.2]# mkdir -p /db/pgdata
+[root@localhost ~]# cd /
+[root@localhost /]# ll \ grep db
+ls: cannot access  grep: No such file or directory
+db:
+total 0
+drwxr-xr-x. 2 root root 6 May 17 16:52 pgdata
+[root@localhost /]# chown -R postgres:postgres /db/pgdata
+[root@localhost /]# ll \ grep db
+ls: cannot access  grep: No such file or directory
+db:
+total 0
+drwxr-xr-x. 2 postgres postgres 6 May 17 16:52 pgdata
+</code></pre>
+
+<p>3）设置环境变量</p>
+
+<pre><code>a.add .bash_profile
+
+[postgres@localhost ~]$ vi bash_profile
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+export PATH
+
+export PS1="$USER@`/bin/hostname -s`-&gt; "
+export PGHOME=/opt/pgsql9.5.2
+export PGDATA=/db/pgdata
+export PGPORT=1921
+export PATH=$PGHOME/bin:$PATH
+export MANPATH=$PGHOME/share/man:$MANPATH
+export LANG=en_US.utf8
+export DATE=`date +"%Y%m%d%H%M"`
+export LD_LIBRARY_PATH=$PGHOME/lib:/lib64:/usr/lib64:/usr/local/lib64:/lib:/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
+export PGUSER=postgres
+export PGHOST=$PGDATA
+alias rm='rm  -i'
+alias ll='ls -lh'
+
+".bash_profile" 26L, 634C written                                           
+[postgres@localhost ~]$ source .bash_profile 
+postgres@localhost-&gt; which psql
+/opt/pgsql9.5.2/bin/psql
+postgres@localhost-&gt; psql -V
+psql (PostgreSQL) 9.5.2
+</code></pre>
+
+<p>4）初始化数据库</p>
+
+<pre><code>postgres@localhost-&gt; initdb -D $PGDATA -E UTF8 --locale=C -U postgres -W
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "C".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /db/pgdata ... ok
+creating subdirectories ... ok
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting dynamic shared memory implementation ... posix
+creating configuration files ... ok
+creating template1 database in /db/pgdata/base/1 ... ok
+initializing pg_authid ... ok
+Enter new superuser password: 
+Enter it again: 
+setting password ... ok
+initializing dependencies ... ok
+creating system views ... ok
+loading system objects' descriptions ... ok
+creating collations ... ok
+creating conversions ... ok
+creating dictionaries ... ok
+setting privileges on built-in objects ... ok
+creating information schema ... ok
+loading PL/pgSQL server-side language ... ok
+vacuuming database template1 ... ok
+copying template1 to template0 ... ok
+copying template1 to postgres ... ok
+syncing data to disk ... ok
+
+WARNING: enabling "trust" authentication for local connections
+You can change this by editing pg_hba.conf or using the option -A, or
+--auth-local and --auth-host, the next time you run initdb.
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /db/pgdata -l logfile start
+
+postgres@localhost-&gt; cd /db/pgdata/
+postgres@localhost-&gt; ll
+total 48K
+drwx------. 5 postgres postgres   38 May 17 17:32 base						--pg default表空间目录
+drwx------. 2 postgres postgres 4.0K May 17 17:32 global					--全局变量
+drwx------. 2 postgres postgres   17 May 17 17:32 pg_clog
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_commit_ts
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_dynshmem
+-rw-------. 1 postgres postgres 4.4K May 17 17:32 pg_hba.conf				--网关配置文件
+-rw-------. 1 postgres postgres 1.6K May 17 17:32 pg_ident.conf
+drwx------. 4 postgres postgres   37 May 17 17:32 pg_logical
+drwx------. 4 postgres postgres   34 May 17 17:32 pg_multixact
+drwx------. 2 postgres postgres   17 May 17 17:32 pg_notify
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_replslot
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_serial
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_snapshots
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_stat
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_stat_tmp
+drwx------. 2 postgres postgres   17 May 17 17:32 pg_subtrans
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_tblspc
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_twophase
+-rw-------. 1 postgres postgres    4 May 17 17:32 PG_VERSION
+drwx------. 3 postgres postgres   58 May 17 17:32 pg_xlog
+-rw-------. 1 postgres postgres   88 May 17 17:32 postgresql.auto.conf
+-rw-------. 1 postgres postgres  22K May 17 17:32 postgresql.conf			--配置文件
+</code></pre>
+
+<p>5）修改主配置文件及内核参数</p>
+
+<ul>
+  <li>pg_hba.conf用于配置控制访问数据库的来源;</li>
+  <li>
+    <p>postgresql.conf是数据库的主配置文件, 最好也调整一下Linux内核参数.</p>
+
+    <p>a.Linux内核相关参数调整</p>
+  </li>
+</ul>
+
+<hr />
+<pre><code>[root@localhost ~]# vi /etc/sysctl.conf
+# System default settings live in /usr/lib/sysctl.d/00-system.conf.
+# To override those settings, enter new settings here, or in an /etc/sysctl.d/&lt;name&gt;.conf file
+# For more information, see sysctl.conf(5) and sysctl.d(5).
+#
+....... 增加以下参数
+kernel.shmmni = 4096
+kernel.sem = 50100 64128000 50100 1280
+fs.file-max = 7672460
+net.ipv4.ip_local_port_range = 9000 65000
+net.core.rmem_default = 1048576
+net.core.rmem_max = 4194304
+net.core.wmem_default = 262144
+net.core.wmem_max = 1048576
+</code></pre>
+
+<hr />
+
+<pre><code>[root@localhost ~]# vi /etc/security/limits.conf 
+# /etc/security/limits.conf
+#
+......增加以下参数
+
+* soft nofile 131072
+
+* hard nofile 131072
+
+* soft nproc 131072
+
+* hard nproc 131072
+
+* soft core unlimited
+
+* hard core unlimited
+
+* soft memlock 50000000
+* hard memlock 50000000
+"/etc/security/limits.conf" 69L, 2596C written
+
+b. pg_hba.conf
+
+postgres@localhost-&gt; vi pg_hba.conf 
+# PostgreSQL Client Authentication Configuration File
+......增加一项
+host all all 0.0.0.0/0 md5
+
+c.postgresql.conf
+
+postgres@localhost-&gt; vi postgresql.conf 
+# -----------------------------
+# PostgreSQL configuration file
+# -----------------------------
+......以下参数调整
+listen_addresses = '0.0.0.0' 
+port = 1921   
+unix_socket_permissions = 0700
+tcp_keepalives_idle = 60
+vacuum_cost_delay = 10
+bgwriter_delay = 20ms 
+synchronous_commit = on
+wal_writer_delay = 20ms
+log_destination = 'csvlog'
+log_directory = 'pg_log'             
+log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log' 
+log_file_mode = 0600                   
+log_truncate_on_rotation = on 
+log_rotation_age = 1d
+log_rotation_size = 10MB 
+log_checkpoints = on
+log_connections = on
+log_disconnections = on
+log_error_verbosity = verbose
+</code></pre>
+
+<p>6）启动，登录pg</p>
+
+<pre><code>postgres@localhost-&gt; pg_ctl start
+server starting
+postgres@localhost-&gt; LOG:  00000: ending log output to stderr
+HINT:  Future log output will go to log destination "csvlog".
+LOCATION:  PostmasterMain, postmaster.c:1219
+LOG:  00000: database system was shut down at 2016-05-17 17:32:21 CST
+LOCATION:  StartupXLOG, xlog.c:5909
+LOG:  00000: MultiXact member wraparound protections are now enabled
+LOCATION:  SetOffsetVacuumLimit, multixact.c:2629
+LOG:  00000: database system is ready to accept connections
+LOCATION:  reaper, postmaster.c:2788
+LOG:  00000: autovacuum launcher started
+LOCATION:  AutoVacLauncherMain, autovacuum.c:413
+
+postgres@localhost-&gt; psql -h 127.0.0.1 -p 1921 -U postgres postgres
+LOG:  00000: connection received: host=127.0.0.1 port=62381
+LOCATION:  BackendInitialize, postmaster.c:4085
+LOG:  00000: connection authorized: user=postgres database=postgres
+LOCATION:  PerformAuthentication, postinit.c:259
+psql (9.5.2)
+Type "help" for help.
+
+postgres=# \dt
+No relations found.
+
+postgres=# select version();
+                                                 version                                     
+            
+---------------------------------------------------------------------------------------------
+------------
+ PostgreSQL 9.5.2 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5
+-4), 64-bit
+(1 row)
+
+postgres=# \q
+LOG:  00000: disconnection: session time: 0:00:23.637 user=postgres database=postgres host=127.0.0.1 port=62385
+LOCATION:  log_disconnections, postgres.c:4467
+</code></pre>
+
+<h5 id="postgresql-2">PostgreSQL软件目录结构简介</h5>
+
+<pre><code>drwx------. 5 postgres postgres   38 May 17 17:32 base                -- 这个目录对应pg_default表空间  
+drwx------. 2 postgres postgres 4.0K May 17 22:55 global              --这个目录对应pg_global表空间, 存放集群中的共享对象例pg_database表, 
+                                                                      (select relkind,relname from pg_class where reltablespace = 
+                                                                                                                (select oid from pg_tablespace where spcname=‘pg_global’) 
+                                                                                                                order by 1) , 包含控制文件等.     
+drwx------. 2 postgres postgres   17 May 17 17:32 pg_clog             -- 存储事务提交状态数据                                                                                                                                                                                                      
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_commit_ts        
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_dynshmem         
+-rw-------. 1 postgres postgres 4.4K May 17 18:59 pg_hba.conf         -- 数据库访问控制文件 
+-rw-------. 1 postgres postgres 1.6K May 17 17:32 pg_ident.conf       
+drwx------. 2 postgres postgres   84 May 17 22:55 pg_log              -- 数据库日志目录(根据配置定义, 可能没有这个目录) 
+drwx------. 4 postgres postgres   37 May 17 17:32 pg_logical          
+drwx------. 4 postgres postgres   34 May 17 17:32 pg_multixact        -- 共享行锁的事务状态数据         
+drwx------. 2 postgres postgres   17 May 17 22:55 pg_notify           -- 异步消息相关的状态数据         
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_replslot         
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_serial           -- 串行隔离级别的事务状态数据            
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_snapshots        -- 存储执行了事务snapshot导出的状态数据  
+drwx------. 2 postgres postgres    6 May 17 22:55 pg_stat             
+drwx------. 2 postgres postgres   40 May 17 22:55 pg_stat_tmp         -- 统计信息的临时文件
+drwx------. 2 postgres postgres   17 May 17 17:32 pg_subtrans         -- 子事务状态数据    
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_tblspc           -- 表空间的软链接目录
+drwx------. 2 postgres postgres    6 May 17 17:32 pg_twophase         -- 二阶事务的状态数据
+-rw-------. 1 postgres postgres    4 May 17 17:32 PG_VERSION          -- 数据库版本        
+drwx------. 3 postgres postgres   58 May 17 17:32 pg_xlog             -- 存储WAL文件       
+-rw-------. 1 postgres postgres   88 May 17 17:32 postgresql.auto.conf
+-rw-------. 1 postgres postgres  22K May 17 22:52 postgresql.conf     -- 配置文件                                                                                
+-rw-------. 1 postgres postgres   29 May 17 22:55 postmaster.opts     -- 记录数据库启动时的命令行选项                                                            
+-rw-------. 1 postgres postgres   65 May 17 22:55 postmaster.pid      -- 数据库启动的主进程信息文件(包括$PGDATA目录, 数据库启动时间, 监听端口ipc信息等)
+</code></pre>
+
+<h5 id="section-2">验证安装</h5>
+
+<pre><code>postgres@localhost-&gt; psql
+psql (9.5.2)
+Type "help" for help.
+
+postgres=# \q
+postgres@localhost-&gt; createdb test
+postgres@localhost-&gt; psql -l
+                             List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype |   Access privileges   
+-----------+----------+----------+---------+-------+-----------------------
+ postgres  | postgres | UTF8     | C       | C     | 
+ template0 | postgres | UTF8     | C       | C     | =c/postgres          +
+           |          |          |         |       | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C       | C     | =c/postgres          +
+           |          |          |         |       | postgres=CTc/postgres
+ test      | postgres | UTF8     | C       | C     | 
+(4 rows)
+
+postgres@localhost-&gt; psql test
+psql (9.5.2)
+Type "help" for help.
+
+test=# \d
+No relations found.
+test=# create table t1(id int,name varchar(30));
+CREATE TABLE
+test=# create table t2(id int);
+CREATE TABLE
+test=# \d
+        List of relations
+ Schema | Name | Type  |  Owner   
+--------+------+-------+----------
+ public | t1   | table | postgres
+ public | t2   | table | postgres
+(2 rows)
+
+test=# \d t1
+             Table "public.t1"
+ Column |         Type          | Modifiers 
+--------+-----------------------+-----------
+ id     | integer               | 
+ name   | character varying(30) | 
+
+test=# insert into t1(id,name) values(1,'xax');
+INSERT 0 1
+test=# select * from t1;
+ id | name 
+----+------
+  1 | xax
+(1 row)
+</code></pre>
+
+
+        </div>
+
+    
+        <ul class="tag_box inline">
+            <li><i class="icon-folder-open"></i></li>
+            
+            
+
+
+  
+     
+    	<li><a href="/categories.html#database-ref">
+    		database <span>5</span>
+    	</a></li>
+    
+  
+
+
+        </ul>
+        
+
+    
+        <ul class="tag_box inline">
+            <li><i class="icon-tags"></i></li>
+            
+            
+
+
+  
+     
+    	<li><a href="/tags.html#database-ref">database <span>5</span></a></li>
+     
+    	<li><a href="/tags.html#postgresql-ref">postgresql <span>1</span></a></li>
+    
+  
+
+
+
+        </ul>
+        
+
+        <hr>
+        <div class="pagination">
+            <ul>
+            
+                <li class="prev"><a href="/database/2015/11/26/mysql" title="mysql学习系列（四）">&larr; Previous</a></li>
+            
+                <li><a href="/archive.html">Archive</a></li>
+            
+                <li class="next disabled"><a>Next &rarr;</a>
+            
+            </ul>
+        </div>
+        <hr>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+    </div>
+</div>
+
+
+            </div>
+            <footer>
+                <p>&copy; 2016 红薯
+                    with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+                    and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+                </p>
+            </footer>
+
+        </div>
+
+        
+    </body>
+</html>
+
