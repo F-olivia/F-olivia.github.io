@@ -25,7 +25,7 @@ tags: [database,postgresql]
 
 环境：vmware9.0下OS centos 5.7 ；DB postgresql 9.1.2 
 
-#####获取安装包
+##### 获取安装包
 1.输入官方网址
 http://www.postgresql.org/
 
@@ -42,7 +42,7 @@ http://www.postgresql.org/
 如图3：
 ![Alt text](/assets/blog-images/20160513103214.png)
 
-#####PostgreSQL源码目录结构简介
+##### PostgreSQL源码目录结构简介
 1.解压安装包：
 
 	[root@localhost ~]# tar -jxvf postgresql-9.5.2.tar.bz2 
@@ -251,7 +251,7 @@ Backend目录的结构如下：
 															 --misc/(其他)、mmgr/(内存的管理函数)、 resowner/(查询处理中的数据(buffer pin及表锁)的管理)、
 															 --sort/(排序处理)、time/(事务的 MVCC 管理)
 
-#####源码安装PostgreSQL
+##### 源码安装PostgreSQL
 
 1.配置（Configuration）
 
@@ -661,7 +661,7 @@ configure终于完成，还是前期工作没做好，这里参考了[博文](ht
 	LOG:  00000: disconnection: session time: 0:00:23.637 user=postgres database=postgres host=127.0.0.1 port=62385
 	LOCATION:  log_disconnections, postgres.c:4467
 		
-#####PostgreSQL软件目录结构简介
+##### PostgreSQL软件目录结构简介
 	
 	drwx------. 5 postgres postgres   38 May 17 17:32 base                -- 这个目录对应pg_default表空间  
 	drwx------. 2 postgres postgres 4.0K May 17 22:55 global              --这个目录对应pg_global表空间, 存放集群中的共享对象例pg_database表, 
@@ -692,7 +692,7 @@ configure终于完成，还是前期工作没做好，这里参考了[博文](ht
 	-rw-------. 1 postgres postgres   29 May 17 22:55 postmaster.opts     -- 记录数据库启动时的命令行选项                                                            
 	-rw-------. 1 postgres postgres   65 May 17 22:55 postmaster.pid      -- 数据库启动的主进程信息文件(包括$PGDATA目录, 数据库启动时间, 监听端口ipc信息等)
 
-#####验证安装
+##### 验证安装
 	
 	postgres@localhost-> psql
 	psql (9.5.2)
