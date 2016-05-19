@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>PostgreSQL学习系列（二）</title>
+        <meta name="description" content="postgres的源码安装-第三方插件安装">
+        <meta name="author" content="红薯">
+
+        <!-- Enable responsive viewport -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- Le styles -->
+        <link href="/assets/themes/twitter/bootstrap/css/bootstrap.2.2.2.min.css" rel="stylesheet">
+        <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+        <script src="/assets/themes/twitter/google-code-prettify/jquery.js"></script>
+        <script src="/assets/themes/twitter/google-code-prettify/prettify.js"></script>
+        <link href="/assets/themes/twitter/google-code-prettify/sunburst.css" rel="stylesheet" type="text/css" media="all">
+        <!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata"> -->
+        <script type="text/javascript">
+            $(function(){
+                $("pre").addClass("prettyprint");
+                prettyPrint();
+
+                // hide #back-top first
+                $("#back-top").hide();
+
+                // fade in #back-top
+                $(function () {
+                    $(window).scroll(function () {
+                        if ($(this).scrollTop() > 400) {
+                            $('#back-top').fadeIn();
+                        } else {
+                            $('#back-top').fadeOut();
+                        }
+                });
+
+                // scroll body to 0px on click
+                $('#back-top a').click(function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                        }, 800);
+                    return false;
+                    });
+                });
+
+            });
+        </script>
+        <!-- Le fav and touch icons -->
+    <!-- Update these with your own images
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+        <!-- atom & rss feed -->
+        <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+        <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+    </head>
+
+    <body>
+        <p id="back-top"><a href="#top"><i class="fa fa-chevron-circle-up fa-3x"></i> <br> </a> </p>
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container-narrow">
+                    <a class="brand" href="/">红薯的技术博客</a>
+                    <ul class="nav">
+                        
+                        
+                        
+
+
+  
+    
+      
+      	
+      	<li><a href="/aboutMe.html">关于我</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">存档</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">分类</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">页面</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-narrow">
+
+            <div class="content">
+                
+<div class="page-header">
+    <h1>PostgreSQL学习系列（二） </h1>
+</div>
+
+<div class="row-fluid post-full">
+    <div class="span12">
+        <div class="date">
+            <span>2016-05-18</span>
+        </div>
+        <div class="content">
+            
+<ul>
+    <li>作者：<a href="http://weibo.com/Polivia" target="blank">F-olivia</a></li>
+    <li>本文地址：http://f-olivia.github.io/database/2016/05/18/postgresql/</li>
+    <li>转载请注明出处</li>
+</ul>
+
+<h5 id="section">源码包中自带的插件包安装</h5>
+<p>在源码安装时，用gmake install，应该是自带的所有插件包都已编译，
+gmake world和gmake install-world 所有的插件都会被安装, 那么就不需要再次安装了.在源码包目录/contrib下，</p>
+
+<p>1.安装所有的插件包：只要执行：gmake &amp;&amp; gmake install ，</p>
+
+<p>2.安装单个插件包：那就进入到所在插件包目录，比如pg_stat_statements，</p>
+
+<pre><code>[root@localhost contrib]# cd pg_stat_statements/
+[root@localhost pg_stat_statements]# ll
+total 476
+-rw-r--r--. 1 1107 1107    687 Mar 29 04:07 Makefile
+-rw-r--r--. 1 1107 1107   1246 Mar 29 04:07 pg_stat_statements--1.0--1.1.sql
+-rw-r--r--. 1 1107 1107   1336 Mar 29 04:07 pg_stat_statements--1.1--1.2.sql
+-rw-r--r--. 1 1107 1107   1454 Mar 29 04:07 pg_stat_statements--1.2--1.3.sql
+-rw-r--r--. 1 1107 1107   1399 Mar 29 04:07 pg_stat_statements--1.3.sql
+-rw-r--r--. 1 1107 1107    449 Mar 29 04:07 pg_stat_statements--unpackaged--1.0.sql
+-rw-r--r--. 1 1107 1107  87326 Mar 29 04:07 pg_stat_statements.c
+-rw-r--r--. 1 1107 1107    191 Mar 29 04:07 pg_stat_statements.control
+-rw-r--r--. 1 root root 223496 May 14 06:41 pg_stat_statements.o
+-rwxr-xr-x. 1 root root 143100 May 14 06:41 pg_stat_statements.so
+[root@localhost pg_stat_statements]# make install
+</code></pre>
+
+<p>3.使用插件包，还拿pg_stat_statements来说，</p>
+
+<pre><code>---1)到数据库中以超级用户执行create extension
+postgres=# create extension pg_stat_statements;
+CREATE EXTENSION
+---2)到配置参数文件中增加参数值
+postgres@localhost-&gt; vi postgresql.conf 
+shared_preload_libraries = 'pg_stat_statements' 
+pg_stat_statements.max = 10000
+pg_stat_statements.track = all
+....
+---3)重启pg，测试
+postgres@localhost-&gt; pg_ctl restart -m fast
+waiting for server to shut down.... done
+postgres@localhost-&gt; psql
+psql (9.5.2)
+Type "help" for help.
+
+postgres=# select * from pg_stat_statements;
+ userid | dbid | queryid | query | calls | total_time | min_time | max_time | 
+mean_time | stddev_time | rows | shared_blks_hit | shared_blks_read | shared_b
+lks_dirtied | shared_blks_written | local_blks_hit | local_blks_read | local_b
+lks_dirtied | local_blks_written | temp_blks_read | temp_blks_written | blk_re
+ad_time | blk_write_time 
+--------+------+---------+-------+-------+------------+----------+----------+-
+----------+-------------+------+-----------------+------------------+---------
+------------+---------------------+----------------+-----------------+--------
+------------+--------------------+----------------+-------------------+-------
+--------+----------------
+(0 rows)
+
+postgres=# select * from pg_stat_statements;
+ userid | dbid  |  queryid   |               query               | calls | tot
+al_time | min_time | max_time | mean_time | stddev_time | rows | shared_blks_h
+it | shared_blks_read | shared_blks_dirtied | shared_blks_written | local_blks
+_hit | local_blks_read | local_blks_dirtied | local_blks_written | temp_blks_r
+ead | temp_blks_written | blk_read_time | blk_write_time 
+--------+-------+------------+-----------------------------------+-------+----
+--------+----------+----------+-----------+-------------+------+--------------
+---+------------------+---------------------+---------------------+-----------
+-----+-----------------+--------------------+--------------------+------------
+----+-------------------+---------------+----------------
+     10 | 13252 | 4291696289 | select * from pg_stat_statements; |     1 |    
+  1.012 |    1.012 |    1.012 |     1.012 |           0 |    0 |              
+ 0 |                0 |                   0 |                   0 |           
+   0 |               0 |                  0 |                  0 |            
+  0 |                 0 |             0 |              0
+(1 row)
+</code></pre>
+
+<h5 id="section-1">第三方插件安装</h5>
+
+<p>根据第三方插件提供的安装说明进行安装
+通用的安装方法，以安装debug包为例</p>
+
+<ol>
+  <li>把第三方插件的源码目录拷贝到contrib目录中
+ —首先，下载安装包pldebugger，步骤：
+ 1）打开网页http://git.postgresql.org/，找到安装包如图1：</li>
+</ol>
+
+<p><img src="/assets/blog-images/20160519100642.png" alt="Alt text" /></p>
+
+<pre><code>2）点击snapshot，如图2：
+</code></pre>
+
+<p><img src="/assets/blog-images/20160519101009.png" alt="Alt text" /></p>
+
+<pre><code>3）把安装包拷贝到contrib目录中
+[root@localhost ~]# ls
+anaconda-ks.cfg            postgresql-9.5.2
+pldebugger-14c6caf.tar.gz  postgresql-9.5.2.tar.bz2
+[root@localhost ~]# tar -zxvf pldebugger-14c6caf.tar.gz 
+pldebugger-14c6caf/
+......
+pldebugger-14c6caf/settings.projinc
+pldebugger-14c6caf/uninstall_pldbgapi.sql
+[root@localhost ~]# ll
+total 18076
+-rw-------. 1 root root     1089 May 12 00:28 anaconda-ks.cfg
+drwxrwxr-x. 2 root root     4096 Mar  1 05:33 pldebugger-14c6caf
+-rw-r--r--. 1 root root    47764 May 19 00:17 pldebugger-14c6caf.tar.gz
+drwxrwxrwx. 6 1107 1107     4096 May 14 06:36 postgresql-9.5.2
+-rw-r--r--. 1 root root 18446616 May 13 17:56 postgresql-9.5.2.tar.bz2
+[root@localhost ~]# cd pldebugger-14c6caf/
+[root@localhost pldebugger-14c6caf]# ll
+total 212
+-rw-rw-r--. 1 root root  2585 Mar  1 05:33 Makefile
+-rw-rw-r--. 1 root root  3711 Mar  1 05:33 README.pldebugger
+......
+-rw-rw-r--. 1 root root  1387 Mar  1 05:33 uninstall_pldbgapi.sql
+[root@localhost pldebugger-14c6caf]# vi README.pldebugger 
+PostgreSQL pl/pgsql Debugger API
+================================
+
+This module is a set of shared libraries which implement an API for debugging
+pl/pgsql functions on PostgreSQL 8.4 and above. The pgAdmin III project
+(http://www.pgadmin.org/) provides a client user interface as part of pgAdmin
+III v1.10.0 and above.
+
+If you wish to debug functions on PostgreSQL 8.2 or 8.3, please use v0.93 of
+the debugger plugin, or checkout the PRE_8_4_SERVER branch from CVS.
+
+
+Installation
+------------
+
+- Copy this directory to contrib/ in your PostgreSQL source tree.
+
+- Run 'make; make install'
+
+- Edit your postgresql.conf file, and modify the shared_preload_libraries config
+  option to look like:
+
+  shared_preload_libraries = '$libdir/plugin_debugger'
+
+- Restart PostgreSQL for the new setting to take effect.
+
+- Run the following command in the database or databases that you wish to
+  debug functions in:
+
+  CREATE EXTENSION pldbgapi;
+
+  (on server versions older than 9.1, you must instead run the pldbgapi--1.0.sql
+  script directly using psql).
+[root@localhost ~]# mv pldebugger-14c6caf postgresql-9.5.2/contrib/
+</code></pre>
+
+<ol>
+  <li>
+    <p>把pg_config加入到PATH中,其实就是上面到配置参数文件中增加参数值</p>
+
+    <p>[root@localhost lib]# su - postgres
+ Last login: Wed May 18 16:59:05 CST 2016 on pts/0
+ postgres@localhost-&gt; cd $PGDATA
+ postgres@localhost-&gt; vi postgresql.conf 
+ shared_preload_libraries = ‘pg_stat_statements,plugin_debugger’ </p>
+  </li>
+  <li>
+    <p>gmake clean; gmake; gmake install</p>
+
+    <p>[root@localhost ~]# cd postgresql-9.5.2/contrib/pldebugger-14c6caf/
+ [root@localhost pldebugger-14c6caf]# make
+ gcc -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -O2 -fpic -I../../src/pl/plpgsql/src -I. -I. -I../../src/include -D_GNU_SOURCE -I/usr/include/libxml2   -c -o plpgsql_debugger.o plpgsql_debugger.c
+ gcc -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -O2 -fpic -I. -I. -I../../src/include -D_GNU_SOURCE -I/usr/include/libxml2   -c -o plugin_debugger.o plugin_debugger.c
+ gcc -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -O2 -fpic -I. -I. -I../../src/include -D_GNU_SOURCE -I/usr/include/libxml2   -c -o dbgcomm.o dbgcomm.c
+ gcc -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -O2 -fpic -I. -I. -I../../src/include -D_GNU_SOURCE -I/usr/include/libxml2   -c -o pldbgapi.o pldbgapi.c
+ gcc -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -O2 -fpic -shared -o plugin_debugger.so plpgsql_debugger.o plugin_debugger.o dbgcomm.o pldbgapi.o -L../../src/port -L../../src/common -Wl,–as-needed -Wl,-rpath,’/opt/pgsql9.5.2/lib’,–enable-new-dtags<br />
+ [root@localhost pldebugger-14c6caf]# make install
+ /usr/bin/mkdir -p ‘/opt/pgsql9.5.2/lib’
+ /usr/bin/mkdir -p ‘/opt/pgsql9.5.2/share/extension’
+ /usr/bin/mkdir -p ‘/opt/pgsql9.5.2/share/extension’
+ /usr/bin/mkdir -p ‘/opt/pgsql9.5.2/share/doc//extension’
+ /usr/bin/install -c -m 755  plugin_debugger.so ‘/opt/pgsql9.5.2/lib/plugin_debugger.so’
+ /usr/bin/install -c -m 644 ./pldbgapi.control ‘/opt/pgsql9.5.2/share/extension/’
+ /usr/bin/install -c -m 644 ./pldbgapi–1.0.sql ./pldbgapi–unpackaged–1.0.sql  ‘/opt/pgsql9.5.2/share/extension/’
+ /usr/bin/install -c -m 644 ./README.pldebugger ‘/opt/pgsql9.5.2/share/doc//extension/’
+ [root@localhost lib]# ll|grep debug
+ -rwxr-xr-x. 1 root root  246413 May 19 00:20 plugin_debugger.so</p>
+  </li>
+  <li>
+    <p>create extension xxx; 对于一些老版本的插件, 可能没有改成扩展插件的安装模式. 那么需要到对应的库中直接执行SQL.</p>
+
+    <p>[root@localhost lib]# su - postgres
+ Last login: Wed May 18 16:59:05 CST 2016 on pts/0
+ postgres@localhost-&gt; psql
+ psql (9.5.2)
+ Type “help” for help.</p>
+
+    <p>postgres=# create extension pldbgpi;
+ ERROR:  could not open extension control file “/opt/pgsql9.5.2/share/extension/pldbgpi.control”: No such file or directory
+ postgres=# create extension pldbgapi;
+ CREATE EXTENSION
+ postgres=# \df —-如图3 </p>
+  </li>
+</ol>
+
+<p><img src="/assets/blog-images/20160519102355.png" alt="Alt text" /></p>
+
+<p>以上步骤，就已经把安装包安装成功，下面就是验证</p>
+
+<ol>
+  <li>
+    <p>需要安装pgadmin，具体步骤</p>
+
+    <p>1） 打开网页http://www.pgadmin.org/，点击标签页download，如图4：</p>
+  </li>
+</ol>
+
+<p><img src="/assets/blog-images/20160519102839.png" alt="Alt text" /></p>
+
+<pre><code>2） 点击进入，如图5：
+</code></pre>
+
+<p><img src="/assets/blog-images/20160519103020.png" alt="Alt text" /></p>
+
+<pre><code>3）点击进入，如图6：
+</code></pre>
+
+<p><img src="/assets/blog-images/20160519103149.png" alt="Alt text" /></p>
+
+<pre><code>4）解压，点击pgadmin3.msi进行安装，一路next即可
+</code></pre>
+
+<ol>
+  <li>配置连接postgres，如图7：</li>
+</ol>
+
+<p><img src="/assets/blog-images/20160519103448.jpg" alt="Alt text" /></p>
+
+<ol>
+  <li>
+    <p>在postgres库，新创建一个函数f_test()</p>
+
+    <p>postgres@localhost-&gt; psql
+ psql (9.5.2)
+ Type “help” for help.</p>
+
+    <p>postgres=# create function f_test(i_id int) returns int as <script type="math/tex">
+ postgres$# declare 
+ postgres$# begin
+ postgres$#   return i_id*2;
+ postgres$# end;
+ postgres$# </script> language plpgsql strict;
+ CREATE FUNCTION</p>
+
+    <p>然后在pgadmin中，如图8：</p>
+  </li>
+</ol>
+
+<p><img src="/assets/blog-images/20160519104033.png" alt="Alt text" /></p>
+
+<p>进入调试窗口，上图9：</p>
+
+<p><img src="/assets/blog-images/20160519104329.jpg" alt="Alt text" /></p>
+
+<p>这里说一下，在步骤5中，pgadmin配置连接postgres，一定要注意防火墙，以及端口的放开访问，要不连不上了。
+ok！</p>
+
+        </div>
+
+    
+        <ul class="tag_box inline">
+            <li><i class="icon-folder-open"></i></li>
+            
+            
+
+
+  
+     
+    	<li><a href="/categories.html#database-ref">
+    		database <span>6</span>
+    	</a></li>
+    
+  
+
+
+        </ul>
+        
+
+    
+        <ul class="tag_box inline">
+            <li><i class="icon-tags"></i></li>
+            
+            
+
+
+  
+     
+    	<li><a href="/tags.html#database-ref">database <span>6</span></a></li>
+     
+    	<li><a href="/tags.html#postgresql-ref">postgresql <span>2</span></a></li>
+    
+  
+
+
+
+        </ul>
+        
+
+        <hr>
+        <div class="pagination">
+            <ul>
+            
+                <li class="prev"><a href="/database/2016/05/17/postgresql" title="PostgreSQL学习系列（一）">&larr; Previous</a></li>
+            
+                <li><a href="/archive.html">Archive</a></li>
+            
+                <li class="next disabled"><a>Next &rarr;</a>
+            
+            </ul>
+        </div>
+        <hr>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+    </div>
+</div>
+
+
+            </div>
+            <footer>
+                <p>&copy; 2016 红薯
+                    with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+                    and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+                </p>
+            </footer>
+
+        </div>
+
+        
+    </body>
+</html>
+

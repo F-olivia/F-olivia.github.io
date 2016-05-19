@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "PostgreSQL学习系列（一）"
-description: "post的源码安装"
+description: "postgres的源码安装"
 category: "database"
 tags: [database,postgresql]
 ---
@@ -31,15 +31,18 @@ http://www.postgresql.org/
 
 2.点击download标签页，进入点击“file browser”；
 如图1：
+
 ![Alt text](/assets/blog-images/20160513102252.png)
 
 3.进入后File Browser，会看到
 如图2：
+
 ![Alt text](/assets/blog-images/20160513102915.png)
 我选择了版本 v9.5.2，然后点击进去；
 
 4.进入就是源码包，我选择了postgresql-9.5.2.tar.bz2，
 如图3：
+
 ![Alt text](/assets/blog-images/20160513103214.png)
 
 ##### PostgreSQL源码目录结构简介
